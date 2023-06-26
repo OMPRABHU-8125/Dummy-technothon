@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView } from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
-import { useAppDispatch } from '../store/hook';
-import { setUserProfile } from '../store/slice/profileSlice';
+import { useAppDispatch } from '../../store/hook';
+import { setUserProfile } from '../../store/slice/profileSlice';
 
 
 const Login = ({ navigation }) => {
@@ -44,7 +44,7 @@ const Login = ({ navigation }) => {
     return (
         <KeyboardAvoidingView style={styles.container}>
             <Image
-                source={require('../imgs/logo.png')}
+                source={require('../assets/imgs/logo.png')}
                 style={styles.logo}
             />
             <Text style={styles.text}>VES Login</Text>
@@ -70,7 +70,7 @@ const Login = ({ navigation }) => {
                     }}
                 >
                     <Image
-                        source={require('../imgs/eye.png')}
+                        source={require('../assets/imgs/eye.png')}
                         style={styles.icon}
                     />
                 </TouchableOpacity>
