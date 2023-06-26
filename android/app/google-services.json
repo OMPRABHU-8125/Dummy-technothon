@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "983810721651",
+    "project_id": "vesapp-e6a7d",
+    "storage_bucket": "vesapp-e6a7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983810721651:android:b29008b08e916eaaaae706",
+        "android_client_info": {
+          "package_name": "com.ves_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983810721651-o4qh8brda8kiakg0utgo62ji5vurdo1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxMgYpBbQXQ4h0b1CYkAXc0AmIUaslieE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983810721651-o4qh8brda8kiakg0utgo62ji5vurdo1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
