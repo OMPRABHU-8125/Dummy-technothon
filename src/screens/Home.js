@@ -9,12 +9,58 @@ import {
     ImageBackground,
     TouchableOpacity
 } from 'react-native';
-import { useAppSelector } from '../store/hook';
+import { useAppSelector } from '../../store/hook';
+
+const Card = ({ title }) => {
+    return (
+        <View style={styles.card1}>
+            <Text style={styles.title}>{title}</Text>
+        </View>
+    );
+};
 
 const Home = ({ navigation }) => {
 
     const user = useAppSelector(state => state.profile.data);
     const [apiData, setData] = useState([]);
+    //     Alumni and Mentorship
+    //     Attendance
+    // Events Update
+    // Enquiry Management / FAQs / Feedback
+    //     Fees
+    //     PhotoGallery
+    const modules = [
+        {
+            id: 1,
+            title: 'Alumni and Mentorship'
+        },
+        {
+            id: 2,
+            title: 'Attendance'
+        },
+        {
+            id: 3,
+            title: 'Events Update'
+        },
+        {
+            id: 4,
+            title: 'Enquiry Management'
+        },
+        {
+            id: 5,
+            title: 'Fees'
+        },
+        {
+            id: 6,
+            title: 'Photo Gallery'
+        },
+        {
+            id: 7,
+            title: 'About Us'
+        },
+    ]
+
+
 
 
     useEffect(() => {
@@ -32,10 +78,17 @@ const Home = ({ navigation }) => {
     //         })
     // }
 
+    const renderCard = ({ item }) => {
+        return (
+            <TouchableOpacity>
+                <Card title={item.title} />
+            </TouchableOpacity>
+        )
+    };
     return (
         <View style={styles.body}>
             <ImageBackground
-                source={require("../imgs/campus.png")}
+                source={require("../assets/imgs/campus.png")}
                 style={styles.image}
             >
                 <Text style={styles.heading}>
@@ -53,24 +106,12 @@ const Home = ({ navigation }) => {
             </ImageBackground>
             <View style={styles.body}>
                 <View style={styles.main}>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Name</Text>
-                        <Text style={styles.description}>{user.firstName} {user.lastName}</Text>
-                    </View>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Email</Text>
-                        <Text style={styles.description}>{user.email}</Text>
-                    </View>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Contact No</Text>
-                        <Text style={styles.description}>{user.phoneNo}</Text>
-                    </View>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Gender</Text>
-                        <Text style={styles.description}>{user.gender}</Text>
-                    </View>
-
-
+                    <FlatList
+                        data={modules}
+                        renderItem={renderCard}
+                        keyExtractor={(item) => item.id}
+                        contentContainerStyle={styles.flatlistContent}
+                    />
                 </View>
             </View>
         </View>
@@ -188,14 +229,35 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginLeft: 27,
         marginRight: 10,
-        paddingHorizontal: 10,
-        paddingTop: 5,
-        marginTop: 10
+        marginTop: 10,
+        paddingTop: 7,
+        paddingHorizontal: 12
     },
 
     buttonText: {
-        color: '#F0F0F0'
-    }
+        color: '#F0F0F0',
+        textAlign: 'center'
+    },
+    flatlistContent: {
+        paddingVertical: 20,
+    },
+    card1: {
+        backgroundColor: '#3a5a40',
+        padding: 16,
+        marginVertical: 8,
+        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        elevation: 3,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 8,
+        color: '#edf2f4'
+    },
 });
 
 
