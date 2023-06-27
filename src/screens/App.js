@@ -6,8 +6,8 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
-import Attendance from "./Attendance";
-import DailyAttendance from "./DailyAttendance";
+import Attendance from "./attendance/Attendance";
+import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";

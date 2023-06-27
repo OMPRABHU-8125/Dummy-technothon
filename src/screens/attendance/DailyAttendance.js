@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native';
-import { useAppSelector } from '../../store/hook';
+import { useAppSelector } from '../../../store/hook';
 import firestore from '@react-native-firebase/firestore';
 import DropDownPicker from 'react-native-dropdown-picker';
 
