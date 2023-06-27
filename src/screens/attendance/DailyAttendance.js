@@ -15,7 +15,7 @@ import styles from './DailyAttendance.styles';
 const DailyAttendance = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
     const [subjects, setSubjects] = useState([]);
-    const [subject, setSubject] = useState(null)
+    const [selectedSubject, setSelectedSubject] = useState(null);
     const [open, setOpen] = useState(false);
     const [students, setStudents] = useState([]);
 
@@ -59,7 +59,7 @@ const DailyAttendance = ({ navigation }) => {
     }
 
     const handleClick = (text) => () => {
-        if (subject != null) {
+        if (selectedSubject != null) {
             console.log(`${students[currentIndex]} is ${text} in ${subject}`)
             if (currentIndex < students.length)
                 handleNext();
@@ -82,10 +82,10 @@ const DailyAttendance = ({ navigation }) => {
                     placeholder='Subjects'
                     dropDownDirection="BOTTOM"
                     open={open}
-                    value={subject}
+                    value={selectedSubject}
                     items={subjects}
                     setOpen={setOpen}
-                    setValue={setSubject}
+                    setValue={setSelectedSubject}
                     setItems={setSubjects}
                     containerStyle={{ width: '70%' }}
                 />
