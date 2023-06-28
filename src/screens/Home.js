@@ -34,7 +34,7 @@ const Home = ({ navigation }) => {
     const modules = [
         {
             id: 1,
-            title: 'Alumni and Mentorship'
+            title: 'Alumni and Mentorship',
         },
         {
             id: 2,
@@ -85,12 +85,28 @@ const Home = ({ navigation }) => {
     
     const renderCard = ({ item }) => {
         return (
+<<<<<<< HEAD
             <TouchableOpacity onPress={()=>{
                 if (item.title == 'About Us'){
                 navigation.navigate("AboutUs")}
             }}>
+=======
+            <TouchableOpacity
+                onPress={() => {
+                    if (item.title == 'Attendance') {
+                        if (user.loginType == 'Teacher') {
+                            navigation.navigate("Attendance")
+                        }
+
+                        else {
+                            Alert.alert("Warning", "You are not allowed to access this feature")
+                        }
+                    }
+                }}
+            >
+>>>>>>> 22c0b48af47a90bd3262270ace23cfb11b28d5ed
                 <Card title={item.title} />
-            </TouchableOpacity>
+            </TouchableOpacity >
         )
     };
     return (
