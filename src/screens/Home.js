@@ -80,7 +80,11 @@ const Home = ({ navigation }) => {
 
     const renderCard = ({ item }) => {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress={() => {
+                navigation.navigate('EventUpdate')
+            }}
+            >
                 <Card title={item.title} />
             </TouchableOpacity>
         )

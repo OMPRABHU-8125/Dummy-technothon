@@ -6,6 +6,7 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
+import EventUpdate from "./EventUpdate";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
@@ -31,6 +32,11 @@ const App = () => {
                     <stack.Screen
                         name='SignUp'
                         component={SignUp}
+                        options={{ headerShown: false }}
+                    />
+                     <stack.Screen
+                        name='EventUpdate'
+                        component={EventUpdate}
                         options={{ headerShown: false }}
                     />
                 </stack.Navigator>
