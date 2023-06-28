@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Linking, ScrollView, TouchableOpacity } from 'react-native';
-import style from './Aboutus.style';
+import styles from './Aboutus.style';
 
   
 
