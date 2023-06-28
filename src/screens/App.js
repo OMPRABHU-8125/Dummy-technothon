@@ -6,7 +6,7 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
-import EventUpdate from "./EventUpdate";
+import EventUpdate from "./EventUpdate/EventUpdate";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
