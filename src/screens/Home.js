@@ -10,6 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
+import Enquiry from './EnquiryManagement';
 
 const Card = ({ title }) => {
     return (
@@ -29,6 +30,7 @@ const Home = ({ navigation }) => {
     // Enquiry Management / FAQs / Feedback
     //     Fees
     //     PhotoGallery
+
     const modules = [
         {
             id: 1,
@@ -80,7 +82,11 @@ const Home = ({ navigation }) => {
 
     const renderCard = ({ item }) => {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{
+                if(item.title=='Enquiry Management'){
+                    navigation.navigate('Queries/Feedback')
+                }
+            }}>
                 <Card title={item.title} />
             </TouchableOpacity>
         )
@@ -160,7 +166,7 @@ const styles = StyleSheet.create({
 
     smallText: {
         color: 'white',
-        fontSize: 10,
+        fontSize: 9,
     },
 
     image: {

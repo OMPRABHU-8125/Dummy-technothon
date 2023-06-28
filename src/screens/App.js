@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "../../store";
+import  Enquiry, { Feedback, Query } from "./EnquiryManagement";
 
 const stack = createNativeStackNavigator();
 
@@ -33,6 +34,21 @@ const App = () => {
                         component={SignUp}
                         options={{ headerShown: false }}
                     />
+                    <stack.Screen
+                        name='Queries/Feedback'
+                        component={Enquiry}
+                        options={{ headerShown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Query'
+                        component={Query}
+                        options={{ headerShown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Feedback'
+                        component={Feedback}
+                        options={{ headerShown: true }}>
+                    </stack.Screen>
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>
