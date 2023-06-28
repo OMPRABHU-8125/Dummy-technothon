@@ -3,17 +3,14 @@ import { SafeAreaView, Text, TextInput, TouchableOpacity, View, Alert, StyleShee
 import firestore from '@react-native-firebase/firestore';
 
 const Enquiry = ({ navigation }) => {
-    const go = () => {
-        navigation.navigate('Query');
-    }
-    const go1 = () => {
-        navigation.navigate('Feedback');
-    }
+    
 
     return (
         <SafeAreaView style={styles.container}>
             <View>
-                <TouchableOpacity onPress={go} style={{
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("Query");}}
+                    style={{
                     backgroundColor: '#E7B909',
                     borderRadius: 8,
                     padding: 16,
@@ -35,7 +32,9 @@ const Enquiry = ({ navigation }) => {
                         borderColor: 'black'
                     }}>Post a Query</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={go1} style={{
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("Feedback");}}
+                    style={{
                     backgroundColor: '#E7B909',
                     borderRadius: 8,
                     padding: 16,
@@ -168,6 +167,8 @@ export const Feedback = () => {
                     value={feedbackDescription}
                     onChangeText={handleFeedbackChange}
                     placeholderTextColor="white"
+                    multiline
+            numberOfLines={6}
                 />
                 <TouchableOpacity
                     onPress={submitData}

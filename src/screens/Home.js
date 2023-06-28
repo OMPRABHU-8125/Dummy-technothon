@@ -10,7 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
-import Enquiry from './EnquiryManagement';
+
 
 
 const Card = ({ title }) => {
