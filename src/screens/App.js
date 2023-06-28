@@ -6,6 +6,7 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
+import AboutUs from "./AboutUs";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
@@ -25,17 +26,27 @@ const App = () => {
                         component={Login}
                         options={{ headerShown: false }}
                     />
+                    
+                    
                     <stack.Screen
                         name='Home'
                         component={Home}
                         options={{ headerShown: false }}
                     />
+                     
+                    
                     <stack.Screen
                         name='SignUp'
                         component={SignUp}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
+                        name='AboutUs'
+                        component={AboutUs}
+                        options={{ headerShown: true }}
+                    />
+                    
+                       <stack.Screen
                         name='Attendance'
                         component={Attendance}
                         options={{ headerShown: false }}
