@@ -91,6 +91,9 @@ const Home = ({ navigation }) => {
                             Alert.alert("Warning", "You are not allowed to access this feature")
                         }
                     }
+                    if(item.title=='EventUpdate'){
+                        navigation.navigate("EventUpdate")
+                    }
                 }}
             >
                 <Card title={item.title} />
