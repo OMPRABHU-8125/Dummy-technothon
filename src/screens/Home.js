@@ -80,8 +80,14 @@ const Home = ({ navigation }) => {
 
     const renderCard = ({ item }) => {
         return (
-            <TouchableOpacity>
+            
+            <TouchableOpacity onPress = {() => {
+                if(item.title=='Photo Gallery')
+                navigation.navigate('Gallery');
+                }}
+                >
                 <Card title={item.title} />
+
             </TouchableOpacity>
         )
     };
