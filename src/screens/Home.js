@@ -85,12 +85,7 @@ const Home = ({ navigation }) => {
     
     const renderCard = ({ item }) => {
         return (
-<<<<<<< HEAD
-            <TouchableOpacity onPress={()=>{
-                if (item.title == 'About Us'){
-                navigation.navigate("AboutUs")}
-            }}>
-=======
+
             <TouchableOpacity
                 onPress={() => {
                     if (item.title == 'Attendance') {
@@ -102,9 +97,11 @@ const Home = ({ navigation }) => {
                             Alert.alert("Warning", "You are not allowed to access this feature")
                         }
                     }
+                    else if(item.title =='About Us')
+                    navigation.navigate("AboutUs")
                 }}
             >
->>>>>>> 22c0b48af47a90bd3262270ace23cfb11b28d5ed
+
                 <Card title={item.title} />
             </TouchableOpacity >
         )

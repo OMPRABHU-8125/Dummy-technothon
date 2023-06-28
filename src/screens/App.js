@@ -46,7 +46,7 @@ const App = () => {
                         options={{ headerShown: true }}
                     />
                     
-                       <Stack.Screen
+                       <stack.Screen
                         name='Attendance'
                         component={Attendance}
                         options={{ headerShown: false }}
