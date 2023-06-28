@@ -97,6 +97,9 @@ const Home = ({ navigation }) => {
                             Alert.alert("Warning", "You are not allowed to access this feature")
                         }
                     }
+                     else if(item.title=='Events Update'){
+                        navigation.navigate("EventUpdate")
+                    }
                     else if(item.title =='About Us')
                     navigation.navigate("AboutUs")
                 }}

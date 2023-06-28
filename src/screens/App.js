@@ -6,6 +6,7 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
+import EventUpdate from "./EventUpdate/EventUpdate";
 import AboutUs from "./AboutUs";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
@@ -40,6 +41,11 @@ const App = () => {
                         component={SignUp}
                         options={{ headerShown: false }}
                     />
+                     <stack.Screen
+                        name='EventUpdate'
+                        component={EventUpdate}
+                        options={{ headerShown: false }}
+                        />
                     <stack.Screen
                         name='AboutUs'
                         component={AboutUs}
