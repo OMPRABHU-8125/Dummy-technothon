@@ -60,7 +60,7 @@ const DailyAttendance = ({ navigation }) => {
 
     const handleClick = (text) => () => {
         if (selectedSubject != null) {
-            console.log(`${students[currentIndex]} is ${text} in ${subject}`)
+            console.log(`${students[currentIndex]} is ${text} in ${selectedSubject}`)
             if (currentIndex < students.length)
                 handleNext();
         }
