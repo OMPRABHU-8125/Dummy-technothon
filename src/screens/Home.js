@@ -12,6 +12,7 @@ import {
 import { useAppSelector } from '../../store/hook';
 
 
+
 const Card = ({ title }) => {
     return (
         <View style={styles.card1}>
@@ -102,6 +103,8 @@ const Home = ({ navigation }) => {
                     }
                     else if(item.title =='About Us')
                     navigation.navigate("AboutUs")
+                    else if(item.title=='Enquiry Management')
+                    navigation.navigate("Queries/Feedback")
                 }}
             >
 
@@ -185,7 +188,7 @@ const styles = StyleSheet.create({
 
     smallText: {
         color: 'white',
-        fontSize: 10,
+        fontSize: 9,
     },
 
     image: {
