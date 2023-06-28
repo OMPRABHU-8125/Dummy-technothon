@@ -12,6 +12,7 @@ import {
 import { useAppSelector } from '../../store/hook';
 import Enquiry from './EnquiryManagement';
 
+
 const Card = ({ title }) => {
     return (
         <View style={styles.card1}>
@@ -21,7 +22,7 @@ const Card = ({ title }) => {
 };
 
 const Home = ({ navigation }) => {
-
+    
     const user = useAppSelector(state => state.profile.data);
     const [apiData, setData] = useState([]);
     //     Alumni and Mentorship
@@ -30,11 +31,11 @@ const Home = ({ navigation }) => {
     // Enquiry Management / FAQs / Feedback
     //     Fees
     //     PhotoGallery
-
+   
     const modules = [
         {
             id: 1,
-            title: 'Alumni and Mentorship'
+            title: 'Alumni and Mentorship',
         },
         {
             id: 2,
@@ -58,13 +59,15 @@ const Home = ({ navigation }) => {
         },
         {
             id: 7,
-            title: 'About Us'
+           
+             title:"About Us"
+             
         },
     ]
+    
+    
 
-
-
-
+   
     useEffect(() => {
         console.log(user)
     }, []);
@@ -79,16 +82,34 @@ const Home = ({ navigation }) => {
     //             Alert.alert("Warning")
     //         })
     // }
-
+   
+    
     const renderCard = ({ item }) => {
         return (
-            <TouchableOpacity onPress={()=>{
-                if(item.title=='Enquiry Management'){
-                    navigation.navigate('Queries/Feedback')
-                }
-            }}>
+
+            <TouchableOpacity
+                onPress={() => {
+                    if (item.title == 'Attendance') {
+                        if (user.loginType == 'Teacher') {
+                            navigation.navigate("Attendance")
+                        }
+
+                        else {
+                            Alert.alert("Warning", "You are not allowed to access this feature")
+                        }
+                    }
+                     else if(item.title=='Events Update'){
+                        navigation.navigate("EventUpdate")
+                    }
+                    else if(item.title =='About Us')
+                    navigation.navigate("AboutUs")
+                    else if(item.title=='Enquiry Management')
+                    navigation.navigate("Queries/Feedback")
+                }}
+            >
+
                 <Card title={item.title} />
-            </TouchableOpacity>
+            </TouchableOpacity >
         )
     };
     return (
@@ -120,6 +141,7 @@ const Home = ({ navigation }) => {
                     />
                 </View>
             </View>
+            
         </View>
     )
 }
@@ -269,3 +291,8 @@ const styles = StyleSheet.create({
 
 
 export default Home;
+
+
+
+  
+  
