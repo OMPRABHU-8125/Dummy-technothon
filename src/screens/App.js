@@ -14,6 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 import  Enquiry, { Feedback, Query } from "./EnquiryManagement";
+import EventUpdate from "./EventUpdate/EventUpdate";
 
 const stack = createNativeStackNavigator();
 
@@ -52,6 +53,11 @@ const App = () => {
                         name='DailyAttendance'
                         component={DailyAttendance}
                         options={{ headerShown: false }}
+                    />
+                    <stack.Screen
+                        name='EventUpdate'
+                        component={EventUpdate}
+                        options={{ headerShown: true }}
                     />
                     <stack.Screen
                         name='Queries/Feedback'
