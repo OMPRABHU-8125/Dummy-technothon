@@ -6,6 +6,7 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
+import AboutUs from "./AboutUs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
@@ -23,16 +24,27 @@ const App = () => {
                         component={Login}
                         options={{ headerShown: false }}
                     />
+                    
+                    
                     <stack.Screen
                         name='Home'
                         component={Home}
                         options={{ headerShown: false }}
                     />
+                     
+                    
                     <stack.Screen
                         name='SignUp'
                         component={SignUp}
                         options={{ headerShown: false }}
                     />
+                    <stack.Screen
+                        name='AboutUs'
+                        component={AboutUs}
+                        options={{ headerShown: true }}
+                    />
+                    
+
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>

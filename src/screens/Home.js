@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
 
+
 const Card = ({ title }) => {
     return (
         <View style={styles.card1}>
@@ -20,7 +21,7 @@ const Card = ({ title }) => {
 };
 
 const Home = ({ navigation }) => {
-
+    
     const user = useAppSelector(state => state.profile.data);
     const [apiData, setData] = useState([]);
     //     Alumni and Mentorship
@@ -29,6 +30,7 @@ const Home = ({ navigation }) => {
     // Enquiry Management / FAQs / Feedback
     //     Fees
     //     PhotoGallery
+   
     const modules = [
         {
             id: 1,
@@ -56,13 +58,15 @@ const Home = ({ navigation }) => {
         },
         {
             id: 7,
-            title: 'About Us'
+           
+             title:"About Us"
+             
         },
     ]
+    
+    
 
-
-
-
+   
     useEffect(() => {
         console.log(user)
     }, []);
@@ -77,10 +81,14 @@ const Home = ({ navigation }) => {
     //             Alert.alert("Warning")
     //         })
     // }
-
+   
+    
     const renderCard = ({ item }) => {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{
+                if (item.title == 'About Us'){
+                navigation.navigate("AboutUs")}
+            }}>
                 <Card title={item.title} />
             </TouchableOpacity>
         )
@@ -114,6 +122,7 @@ const Home = ({ navigation }) => {
                     />
                 </View>
             </View>
+            
         </View>
     )
 }
@@ -263,3 +272,8 @@ const styles = StyleSheet.create({
 
 
 export default Home;
+
+
+
+  
+  
