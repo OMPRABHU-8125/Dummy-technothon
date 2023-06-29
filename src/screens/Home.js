@@ -45,7 +45,7 @@ const modules = [
     {
         id: 5,
         title: 'Fees',
-        login: ['Parent']
+        login: ['Student']
     },
     {
         id: 6,
@@ -115,6 +115,8 @@ const Home = ({ navigation }) => {
                         navigation.navigate("Queries/Feedback")
                     else if (item.title == 'Alumni and Mentorship')
                         navigation.navigate("Alumni")
+                    else if (item.title == 'Fees')
+                        navigation.navigate("Fees")
                 }}
             >
 

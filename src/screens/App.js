@@ -16,6 +16,7 @@ import { store } from "../../store";
 import Alumni from "./alumni/Alumni";
 import Enquiry, { Feedback, Query } from "./EnquiryManagement";
 import EventUpdate from "./EventUpdate/EventUpdate";
+import Fees from "./fees/Fees";
 
 const stack = createNativeStackNavigator();
 
@@ -79,6 +80,11 @@ const App = () => {
                         name='Feedback'
                         component={Feedback}
                         options={{ headerShown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Fees'
+                        component={Fees}
+                        options={{ headershown: true }}>
                     </stack.Screen>
                 </stack.Navigator>
             </NavigationContainer>
