@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
         height: 50,
         width: '95%',
         backgroundColor: 'rgb(145,41,40)',
-        // backgroundColor:'white',
+
         borderRadius: 25,
     },
 
@@ -27,16 +27,11 @@ export const styles = StyleSheet.create({
 
     header: {
         height: 40,
-        marginBottom: 10, // Increase marginBottom for spacing
+        marginBottom: 10,
         borderBottomColor: 'black',
         borderBottomWidth: 1,
         justifyContent: 'center',
         paddingLeft: 10,
     },
-    //   header:{
-    //     height:40,
-    //     marginBottom:1,
-    //     borderBottomColor:'black',
-    //     borderBottomWidth:1,
-    //   }
+
 });
