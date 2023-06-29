@@ -45,7 +45,7 @@ const modules = [
     {
         id: 5,
         title: 'Fees',
-        login: ['Student']
+        login: ['Parent']
     },
     {
         id: 6,
