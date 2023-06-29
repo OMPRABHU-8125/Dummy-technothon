@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -7,7 +7,7 @@ import {
     StyleSheet,
     Alert,
     ImageBackground,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
 
@@ -19,52 +19,48 @@ const Card = ({ title }) => {
     );
 };
 
-const Home = ({ navigation }) => {
+const modules = [
+    {
+        id: 1,
+        title: 'Alumni and Mentorship',
+    },
+    {
+        id: 2,
+        title: 'Attendance',
+    },
+    {
+        id: 3,
+        title: 'Events Update',
+    },
+    {
+        id: 4,
+        title: 'Enquiry Management',
+    },
+    {
+        id: 5,
+        title: 'Fees',
+    },
+    {
+        id: 6,
+        title: 'Photo Gallery',
+    },
+    {
+        id: 7,
+        title: 'About Us',
+    },
+];
 
+const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
-    const [apiData, setData] = useState([]);
     //     Alumni and Mentorship
     //     Attendance
     // Events Update
     // Enquiry Management / FAQs / Feedback
     //     Fees
     //     PhotoGallery
-    const modules = [
-        {
-            id: 1,
-            title: 'Alumni and Mentorship'
-        },
-        {
-            id: 2,
-            title: 'Attendance'
-        },
-        {
-            id: 3,
-            title: 'Events Update'
-        },
-        {
-            id: 4,
-            title: 'Enquiry Management'
-        },
-        {
-            id: 5,
-            title: 'Fees'
-        },
-        {
-            id: 6,
-            title: 'Photo Gallery'
-        },
-        {
-            id: 7,
-            title: 'About Us'
-        },
-    ]
-
-
-
 
     useEffect(() => {
-        console.log(user)
+        console.log(user);
     }, []);
 
     // const getData = () => {
@@ -80,27 +76,28 @@ const Home = ({ navigation }) => {
 
     const renderCard = ({ item }) => {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    if (item.title == 'Alumni and Mentorship') {
+                        navigation.navigate('Alumni');
+                    }
+                }}>
                 <Card title={item.title} />
             </TouchableOpacity>
-        )
+        );
     };
     return (
         <View style={styles.body}>
             <ImageBackground
-                source={require("../assets/imgs/campus.png")}
-                style={styles.image}
-            >
-                <Text style={styles.heading}>
-                    Welcome {user.firstName}
-                </Text>
+                source={require('../assets/imgs/campus.png')}
+                style={styles.image}>
+                <Text style={styles.heading}>Welcome {user.firstName}</Text>
 
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        navigation.navigate('Login')
-                    }}
-                >
+                        navigation.navigate('Login');
+                    }}>
                     <Text style={styles.smallText}>Logout</Text>
                 </TouchableOpacity>
             </ImageBackground>
@@ -109,14 +106,14 @@ const Home = ({ navigation }) => {
                     <FlatList
                         data={modules}
                         renderItem={renderCard}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={item => item.id}
                         contentContainerStyle={styles.flatlistContent}
                     />
                 </View>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     body: {
@@ -125,14 +122,14 @@ const styles = StyleSheet.create({
     },
 
     main: {
-        margin: 20
+        margin: 20,
     },
 
     title: {
         fontSize: 25,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: 'white'
+        color: 'white',
     },
 
     description: {
@@ -150,24 +147,24 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 4,
         elevation: 2,
-        width: '80%'
+        width: '80%',
     },
 
     container: {
         flexDirection: 'column',
-        flex: 1
+        flex: 1,
     },
 
     smallText: {
         color: 'white',
-        fontSize: 10,
+        fontSize: 9.5,
     },
 
     image: {
         width: 400,
         height: 200,
         resizeMode: 'stretch',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
 
     inner: {
@@ -175,13 +172,13 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 20,
         borderWidth: 1,
-        borderRadius: 10
+        borderRadius: 10,
     },
 
     logo: {
         width: 100,
         height: 100,
-        margin: 20
+        margin: 20,
     },
 
     text: {
@@ -193,33 +190,33 @@ const styles = StyleSheet.create({
 
     heading: {
         color: '#700000',
-        fontSize: 33
+        fontSize: 33,
     },
 
     input: {
         width: 300,
         borderWidth: 1,
         borderColor: '#555',
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
         marginTop: 130,
         marginBottom: 10,
         textAlign: 'center',
         fontSize: 20,
         borderRadius: 10,
-        color: 'black'
+        color: 'black',
     },
 
     input1: {
         width: 300,
         borderWidth: 1,
         borderColor: '#555',
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
         marginTop: 10,
         marginBottom: 10,
         textAlign: 'center',
         fontSize: 20,
         borderRadius: 10,
-        color: 'black'
+        color: 'black',
     },
 
     button: {
@@ -231,12 +228,12 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
         paddingTop: 7,
-        paddingHorizontal: 12
+        paddingHorizontal: 12,
     },
 
     buttonText: {
         color: '#F0F0F0',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     flatlistContent: {
         paddingVertical: 20,
@@ -256,10 +253,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: '#edf2f4'
+        color: '#edf2f4',
     },
 });
-
-
 
 export default Home;

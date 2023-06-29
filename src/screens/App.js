@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "../../store";
+import Alumni from "./alumni/Alumni";
 
 const stack = createNativeStackNavigator();
 
@@ -31,6 +32,11 @@ const App = () => {
                     <stack.Screen
                         name='SignUp'
                         component={SignUp}
+                        options={{ headerShown: false }}
+                    />
+                    <stack.Screen
+                        name='Alumni'
+                        component={Alumni}
                         options={{ headerShown: false }}
                     />
                 </stack.Navigator>
