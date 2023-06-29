@@ -12,13 +12,13 @@ import firestore from '@react-native-firebase/firestore';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const SignUp = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [gender, setGender] = useState('');
-    const [phoneNo, setContactNo] = useState('');
-    const [loginType, setLoginType] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+    const [FirstName, setFirstName] = useState('');
+    const [LastName, setLastName] = useState('');
+    const [Gender, setGender] = useState('');
+    const [PhoneNo, setContactNo] = useState('');
+    const [LoginType, setLoginType] = useState('');
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
     const [items, setItems] = useState([
@@ -35,13 +35,13 @@ const SignUp = ({ navigation }) => {
         // Perform signup logic here
         // Create a user document in the Firestore database with the entered details
         const user = {
-            email,
-            password,
-            firstName,
-            lastName,
-            gender,
-            phoneNo,
-            loginType
+            Email,
+            Password,
+            FirstName,
+            LastName,
+            Gender,
+            PhoneNo,
+            LoginType
         };
 
         // Save the user document to the Firestore database
@@ -83,26 +83,26 @@ const SignUp = ({ navigation }) => {
             <TextInput
                 style={styles.input}
                 placeholder="Email"
-                value={email}
+                value={Email}
                 onChangeText={setEmail}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
                 secureTextEntry
-                value={password}
+                value={Password}
                 onChangeText={setPassword}
             />
             <TextInput
                 style={styles.input}
                 placeholder="First Name"
-                value={firstName}
+                value={FirstName}
                 onChangeText={setFirstName}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Last Name"
-                value={lastName}
+                value={LastName}
                 onChangeText={setLastName}
             />
             <DropDownPicker
@@ -111,7 +111,7 @@ const SignUp = ({ navigation }) => {
                 placeholder='Select your gender'
                 dropDownDirection="TOP"
                 open={open}
-                value={gender}
+                value={Gender}
                 items={items}
                 setOpen={setOpen}
                 setValue={setGender}
@@ -120,7 +120,7 @@ const SignUp = ({ navigation }) => {
             <TextInput
                 style={styles.input}
                 placeholder="Contact Number"
-                value={phoneNo}
+                value={PhoneNo}
                 onChangeText={setContactNo}
             />
 
@@ -129,7 +129,7 @@ const SignUp = ({ navigation }) => {
                 textStyle={{ color: '#C7C7CD' }}
                 placeholder='Select your login type'
                 open={open1}
-                value={loginType}
+                value={LoginType}
                 items={logins}
                 setOpen={setOpen1}
                 setValue={setLoginType}
