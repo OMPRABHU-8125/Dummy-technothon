@@ -10,10 +10,7 @@ const imageHeight = (windowWidth * 2100) / 800;
 const styles = StyleSheet.create({
 
  
-    container: {
-      paddingTop: 20,
-      paddingBottom: 40,
-    },
+    container: {},
     content: {
       paddingTop: 20,
       paddingBottom: 40,
