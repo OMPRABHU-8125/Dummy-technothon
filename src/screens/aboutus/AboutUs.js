@@ -107,7 +107,7 @@ const AboutUs = () => {
         </View>
         
       
-        <View style={{flexDirection: 'row', justifyContent: 'center',}} >
+        <View style={{flexDirection: 'row', justifyContent: 'center'}} >
       <TouchableOpacity onPress={() => handleImagePress('https://www.instagram.com/vespolytechnic_0004/')}>
         
         <Image
