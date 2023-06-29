@@ -17,13 +17,18 @@ const Fees = () => {
 
     const showFee = async () => {
         try {
-            const studentQuery = await firestore().collection('Users')
+            const parentQuery = await firestore()
+                .collection('Users')
                 .where('email', '==', email)
+                .get();
+            const parent = parentQuery.docs[0].data().child;
+            const studentQuery = await firestore()
+                .collection('Users')
+                .where('email', '==', parent)
                 .get();
             const student = studentQuery.docs[0].data();
             setStudentData(student);
             setFeeReamin(72000 - student.fees);
-            // }
         } catch (error) {
             console.error('Error retrieving student data:', error);
         }
