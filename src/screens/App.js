@@ -10,7 +10,6 @@ import EventUpdate from "./EventUpdate/EventUpdate";
 import Detail from "./EventUpdate/Detail";
 import AddEvent from "./EventUpdate/AddEvent";
 import CompletedEvent from "./EventUpdate/CompletedEvent";
-import AboutUs from "./AboutUs";
 import AboutUs from "./aboutus/AboutUs";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
