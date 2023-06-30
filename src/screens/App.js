@@ -7,6 +7,8 @@ import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
 import EventUpdate from "./EventUpdate/EventUpdate";
+import Detail from "./EventUpdate/Detail";
+import AddEvent from "./EventUpdate/AddEvent";
 import AboutUs from "./AboutUs";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
@@ -14,6 +16,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "../../store";
+import CompletedEvent from "./EventUpdate/CompletedEvent";
 
 const stack = createNativeStackNavigator();
 
@@ -62,6 +65,22 @@ const App = () => {
                         component={DailyAttendance}
                         options={{ headerShown: false }}
                     />
+                    <stack.Screen
+                        name='Detail'
+                        component={Detail}
+                        options={{ headerShown: false }}
+                    />
+                     <stack.Screen
+                        name='AddEvent'
+                        component={AddEvent}
+                        options={{ headerShown: false }}
+                    />
+                    <stack.Screen
+                        name='CompletedEvent'
+                        component={CompletedEvent}
+                        options={{ headerShown: false }}
+                    />
+
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>
