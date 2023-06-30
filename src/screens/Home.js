@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -7,9 +7,10 @@ import {
     StyleSheet,
     Alert,
     ImageBackground,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
+
 
 
 const Card = ({ title }) => {
@@ -20,69 +21,77 @@ const Card = ({ title }) => {
     );
 };
 
-const Home = ({ navigation }) => {
-    
-    const user = useAppSelector(state => state.profile.data);
-    const [apiData, setData] = useState([]);
-    //     Alumni and Mentorship
-    //     Attendance
-    // Events Update
-    // Enquiry Management / FAQs / Feedback
-    //     Fees
-    //     PhotoGallery
-   
-    const modules = [
-        {
-            id: 1,
-            title: 'Alumni and Mentorship',
-        },
-        {
-            id: 2,
-            title: 'Attendance'
-        },
-        {
-            id: 3,
-            title: 'Events Update'
-        },
-        {
-            id: 4,
-            title: 'Enquiry Management'
-        },
-        {
-            id: 5,
-            title: 'Fees'
-        },
-        {
-            id: 6,
-            title: 'Photo Gallery'
-        },
-        {
-            id: 7,
-           
-             title:"About Us"
-             
-        },
-    ]
-    
-    
+const modules = [
+    {
+        id: 1,
+        title: 'Alumni and Mentorship',
+        login: ['Student', 'Teacher']
+    },
+    {
+        id: 2,
+        title: 'Attendance',
+        login: ['Student', 'Parent', 'Teacher']
+    },
+    {
+        id: 3,
+        title: 'Events Update',
+        login: ['Student']
+    },
+    {
+        id: 4,
+        title: 'Enquiry Management',
+        login: ['Student', 'Parent', 'Teacher']
+    },
+    {
+        id: 5,
+        title: 'Fees',
+        login: ['Parent']
+    },
+    {
+        id: 6,
+        title: 'Photo Gallery',
+        login: ['Student', 'Teacher']
+    },
+    {
+        id: 7,
+        title: "About Us",
+        login: ['Student', 'Parent',]
+    },
+    {
+        id: 8,
+        title: 'FAQs',
+        login: ['Student', 'Parent', 'Teacher']
+    },
+    {
+        id: 9,
+        title: 'Faculty Load',
+        login: ['Teacher']
+    },
+    {
+        id: 10,
+        title: 'Holiday Calender',
+        login: ['Student', 'Teacher']
+    },
+    {
+        id: 11,
+        title: 'Stationary Supply Hub',
+        login: ['Student', 'Parent']
+    },
 
-   
+]
+
+
+
+const Home = ({ navigation }) => {
+    const user = useAppSelector(state => state.profile.data);
+    const [data, setData] = useState([]);
+
+
     useEffect(() => {
-        console.log(user)
+        const filtered = modules.filter(module => module.login.includes(user.loginType));
+        setData(filtered);
     }, []);
 
-    // const getData = () => {
-    //     fetch('https://myjsons.com/v/39e41248')
-    //         .then(data => data.json())
-    //         .then(response => {
-    //             setData(response)
-    //         })
-    //         .catch(error => {
-    //             Alert.alert("Warning")
-    //         })
-    // }
-   
-    
     const renderCard = ({ item }) => {
         return (
 
@@ -97,11 +106,17 @@ const Home = ({ navigation }) => {
                             Alert.alert("Warning", "You are not allowed to access this feature")
                         }
                     }
-                     else if(item.title=='Events Update'){
+                    else if (item.title == 'Events Update') {
                         navigation.navigate("EventUpdate")
                     }
-                    else if(item.title =='About Us')
-                    navigation.navigate("AboutUs")
+                    else if (item.title == 'About Us')
+                        navigation.navigate("AboutUs")
+                    else if (item.title == 'Enquiry Management')
+                        navigation.navigate("Queries/Feedback")
+                    else if (item.title == 'Alumni and Mentorship')
+                        navigation.navigate("Alumni")
+                    else if (item.title == 'Fees')
+                        navigation.navigate("Fees")
                 }}
             >
 
@@ -112,36 +127,33 @@ const Home = ({ navigation }) => {
     return (
         <View style={styles.body}>
             <ImageBackground
-                source={require("../assets/imgs/campus.png")}
-                style={styles.image}
-            >
-                <Text style={styles.heading}>
-                    Welcome {user.firstName}
-                </Text>
+                source={require('../assets/imgs/campus.png')}
+                style={styles.image}>
+                <Text style={styles.heading}>Welcome {user.firstName}</Text>
 
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        navigation.navigate('Login')
-                    }}
-                >
+                        navigation.navigate('Login');
+                    }}>
                     <Text style={styles.smallText}>Logout</Text>
                 </TouchableOpacity>
             </ImageBackground>
             <View style={styles.body}>
                 <View style={styles.main}>
                     <FlatList
-                        data={modules}
+                        data={data}
                         renderItem={renderCard}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={item => item.id}
                         contentContainerStyle={styles.flatlistContent}
                     />
                 </View>
             </View>
-            
+
         </View>
-    )
-}
+    );
+};
+
 
 const styles = StyleSheet.create({
     body: {
@@ -150,14 +162,14 @@ const styles = StyleSheet.create({
     },
 
     main: {
-        margin: 20
+        margin: 20,
     },
 
     title: {
         fontSize: 25,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: 'white'
+        color: 'white',
     },
 
     description: {
@@ -175,24 +187,24 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 4,
         elevation: 2,
-        width: '80%'
+        width: '80%',
     },
 
     container: {
         flexDirection: 'column',
-        flex: 1
+        flex: 1,
     },
 
     smallText: {
         color: 'white',
-        fontSize: 10,
+        fontSize: 9,
     },
 
     image: {
         width: 400,
         height: 200,
         resizeMode: 'stretch',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
 
     inner: {
@@ -200,13 +212,13 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 20,
         borderWidth: 1,
-        borderRadius: 10
+        borderRadius: 10,
     },
 
     logo: {
         width: 100,
         height: 100,
-        margin: 20
+        margin: 20,
     },
 
     text: {
@@ -218,33 +230,33 @@ const styles = StyleSheet.create({
 
     heading: {
         color: '#700000',
-        fontSize: 33
+        fontSize: 33,
     },
 
     input: {
         width: 300,
         borderWidth: 1,
         borderColor: '#555',
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
         marginTop: 130,
         marginBottom: 10,
         textAlign: 'center',
         fontSize: 20,
         borderRadius: 10,
-        color: 'black'
+        color: 'black',
     },
 
     input1: {
         width: 300,
         borderWidth: 1,
         borderColor: '#555',
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
         marginTop: 10,
         marginBottom: 10,
         textAlign: 'center',
         fontSize: 20,
         borderRadius: 10,
-        color: 'black'
+        color: 'black',
     },
 
     button: {
@@ -256,12 +268,12 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
         paddingTop: 7,
-        paddingHorizontal: 12
+        paddingHorizontal: 12,
     },
 
     buttonText: {
         color: '#F0F0F0',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     flatlistContent: {
         paddingVertical: 20,
@@ -281,15 +293,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: '#edf2f4'
+        color: '#edf2f4',
     },
 });
 
 
 
 export default Home;
-
-
-
-  
-  
