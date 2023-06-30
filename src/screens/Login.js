@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useAppDispatch } from '../../store/hook';
 import { setUserProfile } from '../../store/slice/profileSlice';
@@ -12,9 +13,18 @@ const Login = ({ navigation }) => {
 
     const dispatch = useAppDispatch();
 
+    const storeEmail = async (userType) => {
+        try {
+            await AsyncStorage.setItem('userType', userType);
+            console.log('Email stored successfully.');
+        } catch (error) {
+            console.log('Error storing email:', error);
+        }
+    };
 
 
     const handleLogin = async () => {
+
         if (!email || !password) {
             Alert.alert("Error", "Fields cannot be empty")
         }
@@ -26,12 +36,15 @@ const Login = ({ navigation }) => {
                 .where('email', '==', email)
                 .where('password', '==', password)
                 .get();
-
             if (querySnanpshot.size == 1) {
                 console.log("Logged In")
                 const user = querySnanpshot.docs[0].data();
                 dispatch(setUserProfile(user));
                 navigation.navigate('Home')
+
+                const userType = querySnanpshot.docs[0].data().loginType;
+                storeEmail(userType);
+                // await AsyncStorage.setItem("usertype", JSON.stringify(usertype))
             }
 
             else {
@@ -86,7 +99,7 @@ const Login = ({ navigation }) => {
                     navigation.navigate("SignUp");
                 }}
             >
-                <Text style={styles.lower}>Don't have an account. Create a new Account here!</Text>
+                <Text style={styles.lower}>Don't have an account/Create a new Account here!</Text>
             </TouchableOpacity>
 
         </KeyboardAvoidingView>
@@ -98,12 +111,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#380000'
+        backgroundColor: '#fff'
     },
 
     lower: {
         fontSize: 15,
-        color: 'grey'
+        color: 'blue',
+        textDecorationLine: 'underline',
     },
 
     logo: {
@@ -138,11 +152,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 20,
         paddingHorizontal: 10,
-        color: '#FFFFFF'
+        color: '#000'
     },
 
     button: {
-        backgroundColor: 'blue',
+        backgroundColor: '#000',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,

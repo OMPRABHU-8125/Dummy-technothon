@@ -17,6 +17,7 @@ import Alumni from "./alumni/Alumni";
 import Enquiry, { Feedback, Query } from "./EnquiryManagement";
 import EventUpdate from "./EventUpdate/EventUpdate";
 import Fees from "./fees/Fees";
+import splash from "./splash";
 
 const stack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ const App = () => {
         <Provider store={store}>
             <NavigationContainer>
                 <stack.Navigator>
+                    {/* <stack.Screen
+                        name='splash'
+                        component={splash}
+                        options={{ headerShown: false }}
+                    /> */}
                     <stack.Screen
                         name='Login'
                         component={Login}
