@@ -6,18 +6,20 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
-import AboutUs from "./AboutUs";
+import AboutUs from "./aboutus/AboutUs";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "../../store";
+import Alumni from "./alumni/Alumni";
 import Enquiry, { Feedback, Query } from "./EnquiryManagement";
 import EventUpdate from "./EventUpdate/EventUpdate";
 import StationarySupply from "./stationarySupply/StationarySupply";
 import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
+import Fees from "./fees/Fees";
 
 const stack = createNativeStackNavigator();
 
@@ -39,6 +41,11 @@ const App = () => {
                     <stack.Screen
                         name='SignUp'
                         component={SignUp}
+                        options={{ headerShown: false }}
+                    />
+                    <stack.Screen
+                        name='Alumni'
+                        component={Alumni}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
@@ -91,6 +98,11 @@ const App = () => {
                         name='Cart'
                         component={Cart}
                         options={{ headerShown: false }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Fees'
+                        component={Fees}
+                        options={{ headershown: true }}>
                     </stack.Screen>
                 </stack.Navigator>
             </NavigationContainer>
