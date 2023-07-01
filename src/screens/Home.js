@@ -113,6 +113,8 @@ const Home = ({ navigation }) => {
                         navigation.navigate("AboutUs")
                     else if (item.title == 'Enquiry Management')
                         navigation.navigate("Queries/Feedback")
+                    else if (item.title == 'Stationary Supply Hub')
+                        navigation.navigate("Stationary")
                     else if (item.title == 'Alumni and Mentorship')
                         navigation.navigate("Alumni")
                     else if (item.title == 'Fees')

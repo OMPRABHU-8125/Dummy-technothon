@@ -19,6 +19,9 @@ import { Provider } from "react-redux";
 import { store } from "../../store";
 import Alumni from "./alumni/Alumni";
 import Enquiry, { Feedback, Query } from "./EnquiryManagement";
+import StationarySupply from "./stationarySupply/StationarySupply";
+import Details from "./stationarySupply/Details";
+import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 
 const stack = createNativeStackNavigator();
@@ -68,12 +71,12 @@ const App = () => {
                         component={EventUpdate}
                         options={{ headerShown: true }}
                     />
-                     <stack.Screen
+                    <stack.Screen
                         name='AddEvent'
                         component={AddEvent}
                         options={{ headerShown: true }}
                     />
-                     <stack.Screen
+                    <stack.Screen
                         name='Detail'
                         component={Detail}
                         options={{ headerShown: true }}
@@ -97,6 +100,21 @@ const App = () => {
                         name='Feedback'
                         component={Feedback}
                         options={{ headerShown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Stationary'
+                        component={StationarySupply}
+                        options={{ headerShown: false }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Details'
+                        component={Details}
+                        options={{ headerShown: false }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Cart'
+                        component={Cart}
+                        options={{ headerShown: false }}>
                     </stack.Screen>
                     <stack.Screen
                         name='Fees'
