@@ -1,4 +1,8 @@
 import { StyleSheet } from "react-native";
+import { Dimensions } from 'react-native';
+
+
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
 
@@ -22,47 +26,33 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
 
+    logoutimage: {
+        height: 22,
+        resizeMode: 'contain',
+    },
 
-    button: {
-        backgroundColor: '#fff',
-        width: 54,
-        height: 20,
-        top: 5,
-        left: 300,
-        borderRadius: 8,
-        paddingTop: 3,
-        paddingHorizontal: 12,
-        elevation: 15,
+    logoutbutton: {
+        position: 'absolute',
+        marginTop: 10,
+        marginLeft: -10,
     },
 
     card1: {
-        width: 150,
-        height: 200,
+        width: windowWidth / 2 - 20,
+        height: 100,
         backgroundColor: '#fff',
-        padding: 8,
-        margin: 2,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-
-    outercard: {
         margin: 10,
-        marginLeft: 10,
+        shadowColor: 'rgb(145, 41, 40)',
         backgroundColor: '#fff',
-        borderWidth: 2,
-        borderRadius: 10,
-        borderColor: 'rgb(145, 41, 40)',
+        elevation: 10,
     },
 
     title: {
         fontSize: 12,
         fontWeight: 'bold',
         color: 'rgb(145, 41, 40)',
-        top: 70,
-        marginTop: 20,
-        borderTopWidth: 2,
-        borderTopColor: 'rgb(145,41, 40)'
-
     },
 
     welcome: {

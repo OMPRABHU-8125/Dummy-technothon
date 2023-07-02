@@ -5,15 +5,13 @@ import {
     Text,
     FlatList,
     Alert,
-    ScrollView,
     ImageBackground,
     TouchableOpacity,
+    useWindowDimensions,
+    Image,
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
 import styles from './Home.styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-
 
 
 const Card = ({ title }) => {
@@ -93,7 +91,6 @@ const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
     const [data, setData] = useState([]);
 
-
     useEffect(() => {
         const filtered = modules.filter(module => module.login.includes(user.loginType));
         setData(filtered);
@@ -144,17 +141,14 @@ const Home = ({ navigation }) => {
             <ImageBackground
                 source={require('../assets/imgs/Swami_Vivekanand.jpg')}
                 style={styles.image}>
-
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        navigation.navigate('Login');
-                    }}>
-                    <Text style={styles.smallText}>Logout</Text>
-                </TouchableOpacity>
-
             </ImageBackground>
-
+            <TouchableOpacity
+                style={styles.logoutbutton}
+                onPress={() => {
+                    navigation.navigate('Login');
+                }}>
+                <Image source={require('../assets/imgs/logoutimage.png')} style={styles.logoutimage} />
+            </TouchableOpacity>
             <View style={styles.welcome}>
                 <Text style={styles.welcome_text}>WELCOME TO VES</Text>
             </View>
