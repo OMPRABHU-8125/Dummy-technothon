@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
-
+import {createSlice} from '@reduxjs/toolkit';
 
 // Define a type for the slice state
 // interface profile {
@@ -14,9 +13,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // Define the initial state using that type
 const initialState = {
-  data: []
-}
-
+  data: [],
+  modules: [],
+};
 
 export const profileSlice = createSlice({
   name: 'profileSlice',
@@ -24,12 +23,14 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     setUserProfile(state, action: any) {
-      state.data = action.payload
-    }
+      state.data = action.payload;
+    },
+    setModules(state, action: any) {
+      state.modules = action.payload;
+    },
   },
-})
+});
 
-export const { setUserProfile } = profileSlice.actions
+export const {setUserProfile, setModules} = profileSlice.actions;
 
-
-export default profileSlice.reducer
+export default profileSlice.reducer;

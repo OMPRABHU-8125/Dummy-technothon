@@ -13,16 +13,6 @@ const Login = ({ navigation }) => {
 
     const dispatch = useAppDispatch();
 
-    const storeEmail = async (userType) => {
-        try {
-            await AsyncStorage.setItem('userType', userType);
-            console.log('Email stored successfully.');
-        } catch (error) {
-            console.log('Error storing email:', error);
-        }
-    };
-
-
     const handleLogin = async () => {
 
         if (!email || !password) {
@@ -42,9 +32,7 @@ const Login = ({ navigation }) => {
                 dispatch(setUserProfile(user));
                 navigation.navigate('Home')
 
-                const userType = querySnanpshot.docs[0].data().loginType;
-                storeEmail(userType);
-                // await AsyncStorage.setItem("usertype", JSON.stringify(usertype))
+                await AsyncStorage.setItem("userData", JSON.stringify(user))
             }
 
             else {

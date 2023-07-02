@@ -1,9 +1,74 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image, SafeAreaView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { useAppDispatch } from '../../store/hook';
+import { setModules, setUserProfile } from '../../store/slice/profileSlice';
+import styles from './splash.style';
 
-const splash = () => {
+const modules = [
+    {
+        id: 1,
+        title: 'Alumni and Mentorship',
+        login: ['Student', 'Teacher']
+    },
+    {
+        id: 2,
+        title: 'Attendance',
+        login: ['Student', 'Parent', 'Teacher']
+    },
+    {
+        id: 3,
+        title: 'Events Update',
+        login: ['Student']
+    },
+    {
+        id: 4,
+        title: 'Enquiry Management',
+        login: ['Student', 'Parent', 'Teacher']
+    },
+    {
+        id: 5,
+        title: 'Fees',
+        login: ['Parent']
+    },
+    {
+        id: 6,
+        title: 'Photo Gallery',
+        login: ['Student', 'Teacher']
+    },
+    {
+        id: 7,
+        title: "About Us",
+        login: ['Student', 'Parent',]
+    },
+    {
+        id: 8,
+        title: 'FAQs',
+        login: ['Student', 'Parent', 'Teacher']
+    },
+    {
+        id: 9,
+        title: 'Faculty Load',
+        login: ['Teacher']
+    },
+    {
+        id: 10,
+        title: 'Holiday Calender',
+        login: ['Student', 'Teacher']
+    },
+    {
+        id: 11,
+        title: 'Stationary Supply Hub',
+        login: ['Student', 'Parent']
+    },
+
+]
+
+const Splash = () => {
+
+    const dispatch = useAppDispatch();
+
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -12,16 +77,23 @@ const splash = () => {
 
     const checkFirstTime = async () => {
         try {
-            const userType = await AsyncStorage.getItem('userType');
-            console.log(userType);
-            if (userType === null) {
+            const userData = await AsyncStorage.getItem('userData');
+            if (userData === null) {
                 setTimeout(() => {
                     navigation.navigate('Login');
-                }, 5000);
+                }, 2000);
             } else {
+                const user = JSON.parse(userData);
+                console.log(user.firstName);
+
+                dispatch(setUserProfile(user));
+                const filtered = modules.filter((module) =>
+                    module.login.includes(user.loginType));
+
+                dispatch(setModules(filtered));
                 setTimeout(() => {
-                    navigation.navigate(userType);
-                }, 5000);
+                    navigation.navigate('Home');
+                }, 2000);
             }
         } catch (error) {
             console.log('Error:', error);
@@ -29,14 +101,16 @@ const splash = () => {
     };
 
     return (
-        <View style={{ backgroundColor: 'rgb(200, 256, 256)', flex: 1, padding: 20, justifyContent: 'center' }}>
-            <Text style={{ color: 'blue', fontSize: 45, alignSelf: 'center' }}>Welcome to App</Text>
-            <Text></Text>
-            <Text style={{ color: 'blue', fontSize: 24, alignSelf: 'center' }}>Please Wait</Text>
-            <Text></Text>
-            <Text style={{ color: 'blue', fontSize: 24, alignSelf: 'center' }}>Loading...</Text>
-        </View>
+        <SafeAreaView style={styles.safeview}>
+            <View style={styles.splashview}>
+                <Image source={require('../assets/imgs/logo.png')}
+                    style={styles.logo} />
+            </View>
+            <View style={styles.loadingview}>
+                <Text style={styles.loading}>Loading...</Text>
+            </View>
+        </SafeAreaView >
     );
 };
 
-export default splash;
+export default Splash;
