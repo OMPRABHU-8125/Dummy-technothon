@@ -11,6 +11,7 @@ import Detail from "./EventUpdate/Detail";
 import AddEvent from "./EventUpdate/AddEvent";
 import CompletedEvent from "./EventUpdate/CompletedEvent";
 import AboutUs from "./aboutus/AboutUs";
+import Facultyload from "./facultyload/Facultyload";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
@@ -135,6 +136,11 @@ const App = () => {
                         options={{ headerShown: true }}>
                     </stack.Screen>
                     <stack.Screen
+                        name='Facultyload'
+                        component={Facultyload}
+                        options={{ headerShown: true }}>
+                         </stack.Screen>
+                     <stack.Screen    
                         name='Stationary'
                         component={StationarySupply}
                         options={{ headerShown: false }}>
@@ -167,6 +173,7 @@ const App = () => {
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>
+
     )
 }
 
