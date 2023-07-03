@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useAppDispatch } from '../../store/hook';
 import { setUserProfile } from '../../store/slice/profileSlice';
-
+import styles from './Login.style';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -47,6 +47,7 @@ const Login = ({ navigation }) => {
                 source={require('../assets/imgs/logo.png')}
                 style={styles.logo}
             />
+            <Text></Text>
             <Text style={styles.text}>VES Login</Text>
             <TextInput
                 style={styles.input}
@@ -75,86 +76,24 @@ const Login = ({ navigation }) => {
                     />
                 </TouchableOpacity>
             </View>
+            <Text></Text>
             <TouchableOpacity
                 style={styles.button}
                 onPress={handleLogin}
             >
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
-
+            <Text></Text>
             <TouchableOpacity
                 onPress={() => {
                     navigation.navigate("SignUp");
                 }}
             >
-                <Text style={styles.lower}>Don't have an account/Create a new Account here!</Text>
+                <Text style={styles.lower}>Don't have an account Signup! </Text>
             </TouchableOpacity>
 
         </KeyboardAvoidingView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff'
-    },
-
-    lower: {
-        fontSize: 15,
-        color: 'blue',
-        textDecorationLine: 'underline',
-    },
-
-    logo: {
-        width: 100,
-        height: 150,
-        resizeMode: 'stretch'
-    },
-
-    icon: {
-        width: 40,
-        height: 40,
-        position: 'absolute',
-        right: 10
-    },
-
-    text: {
-        color: '#D3D3D3',
-        fontSize: 40,
-        marginBottom: 80
-    },
-
-    bottomText: {
-        color: '#606060',
-        fontSize: 15,
-        marginTop: 20
-    },
-
-    input: {
-        width: '80%',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 20,
-        paddingHorizontal: 10,
-        color: '#000'
-    },
-
-    button: {
-        backgroundColor: '#000',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-        marginBottom: 10,
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-});
 
 export default Login;

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import DropDownPicker from 'react-native-dropdown-picker';
+import styles from './SignUp.style';
 
 const SignUp = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -32,8 +33,7 @@ const SignUp = ({ navigation }) => {
     ]);
 
     const handleSignup = () => {
-        // Perform signup logic here
-        // Create a user document in the Firestore database with the entered details
+
         const user = {
             email,
             password,
@@ -107,7 +107,7 @@ const SignUp = ({ navigation }) => {
             />
             <DropDownPicker
                 style={styles.picker}
-                textStyle={{ color: '#C7C7CD' }}
+                textStyle={{ color: '#000' }}
                 placeholder='Select your gender'
                 dropDownDirection="TOP"
                 open={open}
@@ -126,7 +126,7 @@ const SignUp = ({ navigation }) => {
 
             <DropDownPicker
                 style={styles.picker}
-                textStyle={{ color: '#C7C7CD' }}
+                textStyle={{ color: '#000' }}
                 placeholder='Select your login type'
                 open={open1}
                 value={loginType}
@@ -136,81 +136,23 @@ const SignUp = ({ navigation }) => {
                 setItems={setLogins}
             />
 
-            <View
-                style={{ flexDirection: 'row' }}
+            <Text></Text>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={handleSignup}
             >
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={handleSignup}
-                >
-                    <Text style={styles.buttonText}>SignUp</Text>
-                </TouchableOpacity>
+                <Text style={{ color: '#fff' }}>SignUp</Text>
+            </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={styles.button1}
-                    onPress={() => { navigation.navigate("Login") }}
-                >
-                    <Text style={styles.buttonText}>Go back to Log In</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+                onPress={() => { navigation.navigate("Login") }}
+            >
+                <Text style={styles.text}>Go back to Log In</Text>
+            </TouchableOpacity>
         </View>
+
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingHorizontal: 16,
-        backgroundColor: '#380000'
-    },
-
-    picker: {
-        height: 40,
-        backgroundColor: 'transparent',
-        borderColor: '#ccc',
-        borderWidth: 1,
-        borderRadius: 4,
-        paddingHorizontal: 8,
-        marginBottom: 20,
-    },
-
-    heading: {
-        color: 'white',
-        fontSize: 30,
-        marginBottom: 50
-    },
-
-    input: {
-        width: '100%',
-        height: 40,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        color: '#fff'
-    },
-
-    button: {
-        backgroundColor: 'green',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-        marginBottom: 10,
-        marginHorizontal: 20
-    },
-
-    button1: {
-        backgroundColor: 'blue',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-        marginBottom: 10,
-        marginHorizontal: 20
-    },
-
-
-});
 
 export default SignUp;

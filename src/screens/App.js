@@ -23,7 +23,8 @@ import StationarySupply from "./stationarySupply/StationarySupply";
 import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
-import splash from "./splash";
+import Splash from "./splash";
+
 
 const stack = createNativeStackNavigator();
 
@@ -33,8 +34,8 @@ const App = () => {
             <NavigationContainer>
                 <stack.Navigator>
                     <stack.Screen
-                        name='Splash'
-                        component={splash}
+                        name='splash'
+                        component={Splash}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
