@@ -6,6 +6,10 @@ import {
 import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
+import EventUpdate from "./EventUpdate/EventUpdate";
+import Detail from "./EventUpdate/Detail";
+import AddEvent from "./EventUpdate/AddEvent";
+import CompletedEvent from "./EventUpdate/CompletedEvent";
 import AboutUs from "./aboutus/AboutUs";
 import Facultyload from "./facultyload/Facultyload";
 import Attendance from "./attendance/Attendance";
@@ -14,8 +18,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "../../store";
+import Alumni from "./alumni/Alumni";
 import Enquiry, { Feedback, Query } from "./EnquiryManagement";
-import EventUpdate from "./EventUpdate/EventUpdate";
+import StationarySupply from "./stationarySupply/StationarySupply";
+import Details from "./stationarySupply/Details";
+import Cart from "./stationarySupply/Cart";
+import Fees from "./fees/Fees";
 
 const stack = createNativeStackNavigator();
 
@@ -40,11 +48,15 @@ const App = () => {
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
+                        name='Alumni'
+                        component={Alumni}
+                        options={{ headerShown: false }}
+                    />
+                    <stack.Screen
                         name='AboutUs'
                         component={AboutUs}
                         options={{ headerShown: true }}
                     />
-
                     <stack.Screen
                         name='Attendance'
                         component={Attendance}
@@ -58,6 +70,21 @@ const App = () => {
                     <stack.Screen
                         name='EventUpdate'
                         component={EventUpdate}
+                        options={{ headerShown: true }}
+                    />
+                    <stack.Screen
+                        name='AddEvent'
+                        component={AddEvent}
+                        options={{ headerShown: true }}
+                    />
+                    <stack.Screen
+                        name='Detail'
+                        component={Detail}
+                        options={{ headerShown: true }}
+                    />
+                    <stack.Screen
+                        name='CompletedEvent'
+                        component={CompletedEvent}
                         options={{ headerShown: true }}
                     />
                     <stack.Screen
@@ -79,6 +106,24 @@ const App = () => {
                         name='Facultyload'
                         component={Facultyload}
                         options={{ headerShown: true }}>
+                        name='Stationary'
+                        component={StationarySupply}
+                        options={{ headerShown: false }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Details'
+                        component={Details}
+                        options={{ headerShown: false }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Cart'
+                        component={Cart}
+                        options={{ headerShown: false }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Fees'
+                        component={Fees}
+                        options={{ headershown: true }}>
                     </stack.Screen>
                 </stack.Navigator>
             </NavigationContainer>
