@@ -25,6 +25,7 @@ import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import Splash from "./splash";
 
+import FAQ from "./FAQs/faqs";
 
 const stack = createNativeStackNavigator();
 
@@ -126,6 +127,11 @@ const App = () => {
                     <stack.Screen
                         name='Fees'
                         component={Fees}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='FAQ'
+                        component={FAQ}
                         options={{ headershown: true }}>
                     </stack.Screen>
                 </stack.Navigator>

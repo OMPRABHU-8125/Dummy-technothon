@@ -67,6 +67,8 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'Fees')
                         navigation.navigate("Fees")
 
+                    else if (item.title == 'FAQs')
+                        navigation.navigate("FAQ")
                 }
 
                 }
