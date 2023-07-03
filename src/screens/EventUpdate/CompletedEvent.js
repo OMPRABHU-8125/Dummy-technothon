@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { View, Text, FlatList, Image, TouchableOpacity, } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Style from "./EventUpdate.styles";
-const CompletedEvent = () => {
+const CompletedEvent = ({navigation}) => {
     const [mydata, setmydata] = useState([])
     useEffect(() => {
         getDatabase()
