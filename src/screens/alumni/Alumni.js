@@ -46,7 +46,7 @@ const Alumni = () => {
                                         data={alumniData}
                                         renderItem={renderItem}
                                         keyExtractor={(item) => item.id}
-                                        numColumns={1}
+                                        numColumns={2}
                                         contentContainerStyle={styles.container}
                                 />
                         </View>
