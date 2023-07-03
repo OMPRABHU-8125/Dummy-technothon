@@ -17,6 +17,7 @@ import Alumni from "./alumni/Alumni";
 import Enquiry, { Feedback, Query } from "./EnquiryManagement";
 import EventUpdate from "./EventUpdate/EventUpdate";
 import Fees from "./fees/Fees";
+import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 
 const stack = createNativeStackNavigator();
 
@@ -86,6 +87,11 @@ const App = () => {
                         component={Fees}
                         options={{ headershown: true }}>
                     </stack.Screen>
+					<stack.Screen
+                        name='HolidayCalendar'
+                        component={HolidayCalendar}
+                        options={{ headerShown: true }}
+                    />
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>
