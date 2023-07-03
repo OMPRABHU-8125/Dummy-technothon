@@ -128,7 +128,11 @@ const Home = ({ navigation }) => {
                         navigation.navigate("Fees")
 					else if (item.title == 'Holiday Calender')
                         navigation.navigate("HolidayCalendar")
-                }}
+                    else if (item.title == 'FAQs')
+                        navigation.navigate("FAQ")
+                }
+
+                }
             >
 
                 <Card title={item.title} />

@@ -24,6 +24,8 @@ import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
+import FAQ from "./FAQs/faqs";
+
 
 const stack = createNativeStackNavigator();
 
@@ -127,6 +129,11 @@ const App = () => {
                         component={HolidayCalendar}
                         options={{ headerShown: true }}
                     />
+                    <stack.Screen
+                        name='FAQ'
+                        component={FAQ}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>
