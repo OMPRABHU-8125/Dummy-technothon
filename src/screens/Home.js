@@ -77,7 +77,9 @@ const modules = [
         id: 11,
         title: 'Stationary Supply Hub',
         login: ['Student', 'Parent']
+    
     },
+    
 
 ]
 
@@ -115,6 +117,8 @@ const Home = ({ navigation }) => {
                         navigation.navigate("AboutUs")
                     else if (item.title == 'Enquiry Management')
                         navigation.navigate("Queries/Feedback")
+                    else if (item.title == 'Faculty Load') 
+                    navigation.navigate("Facultyload")     
                 }}
             >
 

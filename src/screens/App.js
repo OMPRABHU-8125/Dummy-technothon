@@ -7,6 +7,7 @@ import Login from "./Login";
 import Home from "./Home";
 import SignUp from "./SignUp";
 import AboutUs from "./aboutus/AboutUs";
+import Facultyload from "./facultyload/Facultyload";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
@@ -74,9 +75,15 @@ const App = () => {
                         component={Feedback}
                         options={{ headerShown: true }}>
                     </stack.Screen>
+                    <stack.Screen
+                        name='Facultyload'
+                        component={Facultyload}
+                        options={{ headerShown: true }}>
+                    </stack.Screen>
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>
+
     )
 }
 
