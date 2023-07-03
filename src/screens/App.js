@@ -15,6 +15,7 @@ import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 import Alumni from "./alumni/Alumni";
@@ -25,10 +26,39 @@ import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
-
+import Profile from "./bottomTab/profile";
+import Notifications from "./bottomTab/notifications";
+import ContactUs from "./bottomTab/contactUs";
 
 const stack = createNativeStackNavigator();
+const tab = createBottomTabNavigator();
 
+const MyHome = () => {
+    return (
+        <tab.Navigator>
+            <tab.Screen
+                name='Home'
+                component={Home}
+                options={{ headerShown: false }}
+            />
+            <tab.Screen
+                name='Notifications'
+                component={Notifications}
+                options={{ headerShown: true }}
+            />
+            <tab.Screen
+                name='ContactUs'
+                component={ContactUs}
+                options={{ headerShown: false }}
+            />
+            <tab.Screen
+                name='Profile'
+                component={Profile}
+                options={{ headerShown: true }}
+            />
+        </tab.Navigator>
+    )
+}
 const App = () => {
     return (
         <Provider store={store}>
@@ -40,8 +70,8 @@ const App = () => {
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
-                        name='Home'
-                        component={Home}
+                        name='HomeScreen'
+                        component={MyHome}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
