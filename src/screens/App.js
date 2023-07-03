@@ -106,6 +106,8 @@ const App = () => {
                         name='Facultyload'
                         component={Facultyload}
                         options={{ headerShown: true }}>
+                         </stack.Screen>
+                     <stack.Screen    
                         name='Stationary'
                         component={StationarySupply}
                         options={{ headerShown: false }}>
