@@ -129,10 +129,6 @@ const Home = ({ navigation }) => {
 					else if (item.title == 'Holiday Calender')
                         navigation.navigate("HolidayCalendar")
                 }}
-
-                
-
-                
             >
 
                 <Card title={item.title} />
