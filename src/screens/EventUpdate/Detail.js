@@ -50,9 +50,6 @@ const Detail = ({ route }) => {
     }
     return (
         <View>
-            <View style={Style.view}>
-            <Text style={Style.text}>Detail</Text>
-            </View>
             <FlatList
                 data={data}
                 renderItem={renderItems}

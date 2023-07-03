@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import styles from './faq.styles';
+import styles from './faqs.styles';
 
 const FAQ = () => {
   

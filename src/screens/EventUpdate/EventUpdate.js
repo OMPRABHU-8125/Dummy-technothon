@@ -40,9 +40,10 @@ const EventUpdate = ({ navigation }) => {
                             style={Style.image} />
                     </View>
                     <View style={Style.renderView}>
-                        <View style={Style.titleView}>
+                        {/* <View style={Style.titleView}>
                             <Text style={Style.titleText}> {item.Title} </Text>
-                        </View>
+                        </View> */}
+                        <Text style={Style.titleText}> {item.Title} </Text>
                         <View style={Style.descView}>
                             <Text style={Style.descText}> {item.Desc} </Text>
                             <TouchableOpacity
@@ -60,9 +61,9 @@ const EventUpdate = ({ navigation }) => {
 
     return (
         <View style={Style.mainView}>
-            <View style={Style.view}>
+            {/* <View style={Style.view}>
                 <Text style={Style.text}>Events!!</Text>
-            </View>
+            </View> */}
 
             <FlatList
                 data={mydata}
