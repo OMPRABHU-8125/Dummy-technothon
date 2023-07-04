@@ -83,6 +83,7 @@ const modules = [
         login: ['Student', 'Parent'],
     },
 
+
 ]
 
 
@@ -119,18 +120,29 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'Enquiry Management') {
                         navigation.navigate("Queries/Feedback")
                     }
-                    else if (item.title == 'Stationary Supply Hub')
+                    else if (item.title == 'Faculty Load') {
+                        navigation.navigate("Facultyload")
+                    }
+                    else if (item.title == 'Stationary Supply Hub') {
                         navigation.navigate("Stationary")
-                    else if (item.title == 'Alumni and Mentorship')
+                    }
+                    else if (item.title == 'Alumni and Mentorship') {
                         navigation.navigate("Alumni")
-
-                    else if (item.title == 'Fees')
+                    }
+                    else if (item.title == 'Fees') {
                         navigation.navigate("Fees")
-
+                    }
+                    else if (item.title == 'Holiday Calender') {
+                        navigation.navigate("HolidayCalendar")
+                    }
+                    else if (item.title == 'FAQs') {
+                        navigation.navigate("FAQ")
+                    }
                 }
 
-                }
-            >
+                }>
+
+
 
                 <Card title={item.title} />
             </TouchableOpacity >
