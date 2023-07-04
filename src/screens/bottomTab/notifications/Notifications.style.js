@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 25,
         paddingTop: 20,
-        //backgroundColor: '#a82c2c',
     },
 
     card: {
@@ -16,7 +15,6 @@ const styles = StyleSheet.create({
     },
 
     heading: {
-        //margin:20,
         color: 'black',
         fontSize: 27,
         marginBottom: 10,
