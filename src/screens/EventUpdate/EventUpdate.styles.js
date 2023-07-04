@@ -4,7 +4,8 @@ const Style = StyleSheet.create({
     renderView: {
         padding: 10,
         margin: 20,
-        elevation: 5,
+        elevation: 10,
+        shadowColor:'rgb(145, 41, 40)',
         flex: 1,
         borderTopLeftRadius: 20,
         borderBottomRightRadius: 20,
