@@ -78,8 +78,8 @@ const App = () => {
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
-                        name='HomeScreen'
-                        component={MyHome}
+                        name='Home'
+                        component={Home}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
