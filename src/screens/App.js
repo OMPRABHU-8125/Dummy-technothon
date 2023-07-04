@@ -11,10 +11,12 @@ import Detail from "./EventUpdate/Detail";
 import AddEvent from "./EventUpdate/AddEvent";
 import CompletedEvent from "./EventUpdate/CompletedEvent";
 import AboutUs from "./aboutus/AboutUs";
+import Facultyload from "./facultyload/Facultyload";
 import Attendance from "./attendance/Attendance";
 import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 import Alumni from "./alumni/Alumni";
@@ -25,10 +27,41 @@ import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import Splash from "./splash";
 
+import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
+import Profile from "./bottomTab/profile";
+import Notifications from "./bottomTab/notifications";
+import ContactUs from "./bottomTab/contactUs";
 
 const stack = createNativeStackNavigator();
+const tab = createBottomTabNavigator();
 
+const MyHome = () => {
+    return (
+        <tab.Navigator>
+            <tab.Screen
+                name='Home'
+                component={Home}
+                options={{ headerShown: false }}
+            />
+            <tab.Screen
+                name='Notifications'
+                component={Notifications}
+                options={{ headerShown: true }}
+            />
+            <tab.Screen
+                name='ContactUs'
+                component={ContactUs}
+                options={{ headerShown: false }}
+            />
+            <tab.Screen
+                name='Profile'
+                component={Profile}
+                options={{ headerShown: true }}
+            />
+        </tab.Navigator>
+    )
+}
 const App = () => {
     return (
         <Provider store={store}>
@@ -45,8 +78,8 @@ const App = () => {
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
-                        name='Home'
-                        component={Home}
+                        name='HomeScreen'
+                        component={MyHome}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
@@ -110,6 +143,11 @@ const App = () => {
                         options={{ headerShown: true }}>
                     </stack.Screen>
                     <stack.Screen
+                        name='Facultyload'
+                        component={Facultyload}
+                        options={{ headerShown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
                         name='Stationary'
                         component={StationarySupply}
                         options={{ headerShown: false }}>
@@ -130,6 +168,11 @@ const App = () => {
                         options={{ headershown: true }}>
                     </stack.Screen>
                     <stack.Screen
+                        name='HolidayCalendar'
+                        component={HolidayCalendar}
+                        options={{ headerShown: true }}
+                    />
+                    <stack.Screen
                         name='FAQ'
                         component={FAQ}
                         options={{ headershown: true }}>
@@ -137,6 +180,7 @@ const App = () => {
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>
+
     )
 }
 
