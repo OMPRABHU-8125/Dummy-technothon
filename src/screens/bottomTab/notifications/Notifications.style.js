@@ -5,19 +5,18 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 25,
         paddingTop: 20,
-        backgroundColor: '#a82c2c',
+        //backgroundColor: '#a82c2c',
     },
 
     card: {
-        borderColor: 'black',
-        borderWidth: 1,
-        paddingBottom: 20,
-        paddingHorizontal: 10,
-        backgroundColor: '#fef7d7',
-        borderRadius: 10
+        shadowColor:'rgb(145, 41, 40)',
+        elevation:10,
+        borderRadius:10,
+        padding:20,
     },
 
     heading: {
+        //margin:20,
         color: 'black',
         fontSize: 27,
         marginBottom: 10,
