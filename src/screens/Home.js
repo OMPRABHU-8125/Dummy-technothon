@@ -87,7 +87,7 @@ const modules = [
         id: 12,
         title: 'Fitness And Health',
         login: ['Student', 'Parent', 'Teacher'],
-    }
+    },
 
 
 ]
