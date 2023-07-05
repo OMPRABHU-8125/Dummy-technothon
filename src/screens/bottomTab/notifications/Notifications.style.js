@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
-
+import {  black, blue, desctext, shadowcolor, white } from '../../utils/color';
+ import { cartborderradius, elevationsize } from '../../utils/cart';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -8,14 +9,15 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        shadowColor:'rgb(145, 41, 40)',
-        elevation:10,
-        borderRadius:10,
-        padding:20,
+        shadowColor:shadowcolor,
+        backgroundColor:white,
+        elevation:elevationsize,
+        borderRadius:cartborderradius,
+        padding:10,
     },
 
     heading: {
-        color: 'black',
+        color:black,
         fontSize: 27,
         marginBottom: 10,
         fontWeight: '600'
@@ -23,16 +25,16 @@ const styles = StyleSheet.create({
 
     desc: {
         fontSize: 15,
-        color: 'black'
+        color:black
     },
 
     link: {
-        color: 'blue',
+        color:blue,
         fontSize: 13,
         marginTop: 7
     },
     date: {
-        color: 'grey',
+        color: desctext,
         textAlign: 'right',
         marginTop: 10
     }
