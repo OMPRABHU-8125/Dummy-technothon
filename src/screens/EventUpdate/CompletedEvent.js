@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { View, Text, FlatList, Image, TouchableOpacity, } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Style from "./EventUpdate.styles";
-const CompletedEvent = () => {
+const CompletedEvent = ({navigation}) => {
     const [mydata, setmydata] = useState([])
     useEffect(() => {
         getDatabase()
@@ -30,9 +30,7 @@ const CompletedEvent = () => {
                             style={Style.image} />
                     </View>
                     <View style={Style.renderView}>
-                        <View style={Style.titleView}>
-                            <Text style={Style.titleText}> {item.Title} </Text>
-                        </View>
+                        <Text style={Style.titleText}> {item.Title} </Text>
                         <View style={Style.descView}>
                             <Text style={Style.descText}> {item.Desc} </Text>
                             <TouchableOpacity
@@ -49,10 +47,6 @@ const CompletedEvent = () => {
     }
     return (
         <View style={Style.mainView}>
-            <View style={Style.view}>
-                <Text style={Style.text}>Completed Events!!</Text>
-            </View>
-
             <FlatList
                 data={mydata}
                 renderItem={renderItems}

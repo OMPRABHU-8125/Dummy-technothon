@@ -57,7 +57,7 @@ const AddEvent = () => {
             />
             <TextInput
                 style={Style.textInput}
-                placeholder="Enter title"
+                placeholder="Enter title with year"
                 value={Title}
                 onChangeText={setTitle}
             />
