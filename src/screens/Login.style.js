@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         position: 'absolute',
-        right: 10
+        right: 10,
     },
 
     text: {

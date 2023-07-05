@@ -1,14 +1,11 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
+
+    safeView: {
+        flex: 1
+    },
     container: {
         padding: 10,
-        margin: 8,
-        marginTop: 15,
-        paddingTop: 15,
-        borderColor: '#800000',
-        borderWidth: 2,
-        borderRadius: 20,
-
     },
     itemContainer: {
         backgroundColor: '#fff',
@@ -21,8 +18,6 @@ const styles = StyleSheet.create({
         marginRight: 5,
         elevation: 8,
         width: '100%',
-        borderTopColor: '#800000',
-        borderTopWidth: 8,
     },
     image: {
         width: "100%",
@@ -30,13 +25,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         borderColor: '#fff',
-
-    },
-    heading: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#fff',
-
     },
 
     description: {

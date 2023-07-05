@@ -25,6 +25,8 @@ import StationarySupply from "./stationarySupply/StationarySupply";
 import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
+import Splash from "./splash";
+
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
@@ -67,13 +69,18 @@ const App = () => {
             <NavigationContainer>
                 <stack.Navigator>
                     <stack.Screen
+                        name='splash'
+                        component={Splash}
+                        options={{ headerShown: false }}
+                    />
+                    <stack.Screen
                         name='Login'
                         component={Login}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
-                        name='HomeScreen'
-                        component={MyHome}
+                        name='Home'
+                        component={Home}
                         options={{ headerShown: false }}
                     />
                     <stack.Screen
@@ -140,8 +147,8 @@ const App = () => {
                         name='Facultyload'
                         component={Facultyload}
                         options={{ headerShown: true }}>
-                         </stack.Screen>
-                     <stack.Screen    
+                    </stack.Screen>
+                    <stack.Screen
                         name='Stationary'
                         component={StationarySupply}
                         options={{ headerShown: false }}>
@@ -161,7 +168,7 @@ const App = () => {
                         component={Fees}
                         options={{ headershown: true }}>
                     </stack.Screen>
-					<stack.Screen
+                    <stack.Screen
                         name='HolidayCalendar'
                         component={HolidayCalendar}
                         options={{ headerShown: true }}

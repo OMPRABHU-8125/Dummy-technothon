@@ -11,6 +11,7 @@ import {
     Image,
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './Home.styles';
 
 
@@ -90,17 +91,13 @@ const modules = [
 
 
 ]
-
-
-
 const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
-    const [data, setData] = useState([]);
+    const data = useAppSelector(state => state.profile.modules);
 
     useEffect(() => {
-        const filtered = modules.filter(module => module.login.includes(user.loginType));
-        setData(filtered);
-    }, []);
+        console.log(user);
+    }, [])
 
     const renderCard = ({ item }) => {
         return (

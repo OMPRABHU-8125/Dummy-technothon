@@ -4,22 +4,16 @@ const Style = StyleSheet.create({
     renderView: {
         padding: 10,
         margin: 20,
-        elevation: 5,
+        elevation: 10,
+        shadowColor:'rgb(145, 41, 40)',
         flex: 1,
         borderTopLeftRadius: 20,
         borderBottomRightRadius: 20,
         overflow: 'visible',
     },
-    titleView: {
-        alignSelf: 'center',
-        backgroundColor: '#A80000',
-        width: 320,
-        borderTopLeftRadius: 20,
-        borderBottomRightRadius: 20
-    },
     titleText: {
         fontSize: 40,
-        color: 'rgb(255, 255, 225)'
+        color: 'black'
     },
     descView: {
         padding: 10,
@@ -54,10 +48,6 @@ const Style = StyleSheet.create({
         borderRadius:10,
         padding:10
     },
-    view:{
-        backgroundColor:'#A80000',
-        marginBottom:10
-    }
 })
 
 export default Style;

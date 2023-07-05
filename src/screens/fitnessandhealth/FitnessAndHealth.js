@@ -53,25 +53,19 @@ const FitnessAndHealth = () => {
                 Every year on 21st June, we celebrate International Yoga Day with our students and staff.
               </Text>
               <Image
-                source={{ uri: 'https://ves.ac.in/polytechnic/wp-content/uploads/2023/06/IMG20230621101549-400x300.jpg' }}
+                source={{ uri: 'https://vesit.ves.ac.in/storage/about/VKG_0484.jpg' }}
                 style={styles.image}
               />
               <Image
                 source={{ uri: 'https://vesit.ves.ac.in/storage/about/VKG_0447.jpg' }}
                 style={styles.image}
               />
-              <Image
-                source={{ uri: 'https://ves.ac.in/polytechnic/wp-content/uploads/2023/06/IMG20230621102925-400x300.jpg' }}
-                style={styles.image}
-              />
+              
               <Image
                 source={{ uri: 'https://vesit.ves.ac.in/storage/about/DSCN3389.jpg' }}
                 style={styles.image}
               />
-              <Image
-                source={{ uri: 'https://ves.ac.in/svhs/wp-content/uploads/2022/11/Picture2-400x300.jpg' }}
-                style={styles.image}
-              />
+              
             </View>
           )}
         </View>
@@ -128,10 +122,7 @@ const FitnessAndHealth = () => {
                 source={{ uri: 'https://vesim.ves.ac.in/images/bagallery/gallery-50/thumbnail/category-1/csr-health-2019-1.jpg' }}
                 style={styles.image}
               />
-              <Image
-                source={{ uri: 'https://vesim.ves.ac.in/images/bagallery/gallery-50/thumbnail/category-1/csr-health-2019-1.jpg' }}
-                style={styles.image}
-              />
+             
             </View>
           )}
         </View>
