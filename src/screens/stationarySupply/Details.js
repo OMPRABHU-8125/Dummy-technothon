@@ -89,11 +89,11 @@ const Details = ({ route, navigation }) => {
           <Text style={styles.productPrice}>{data.prodPrice} Rs</Text>
           <Text style={styles.productDescription}>{data.prodDescription}</Text>
           <View style={styles.qtyContainer}>
-            <TouchableOpacity onPress={handleDecrease} style={styles.qtyButtonDel}>
+            <TouchableOpacity onPress={handleDecrease} style={styles.qtyButton}>
               <Text style={styles.qtyButtonText}>-</Text>
             </TouchableOpacity>
             <Text style={styles.quantityText}>{quantity}</Text>
-            <TouchableOpacity onPress={handleIncrease} style={styles.qtyButtonAdd}>
+            <TouchableOpacity onPress={handleIncrease} style={styles.qtyButton}>
               <Text style={styles.qtyButtonText}>+</Text>
             </TouchableOpacity>
           </View>

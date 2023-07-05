@@ -30,6 +30,8 @@ import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
 import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
+import Checkout from "./stationarySupply/Checkout";
+import Orders from "./stationarySupply/Orders";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -139,8 +141,8 @@ const App = () => {
                         name='Facultyload'
                         component={Facultyload}
                         options={{ headerShown: true }}>
-                         </stack.Screen>
-                     <stack.Screen    
+                    </stack.Screen>
+                    <stack.Screen
                         name='Stationary'
                         component={StationarySupply}
                         options={{ headerShown: false }}>
@@ -160,7 +162,7 @@ const App = () => {
                         component={Fees}
                         options={{ headershown: true }}>
                     </stack.Screen>
-					<stack.Screen
+                    <stack.Screen
                         name='HolidayCalendar'
                         component={HolidayCalendar}
                         options={{ headerShown: true }}
@@ -168,6 +170,16 @@ const App = () => {
                     <stack.Screen
                         name='FAQ'
                         component={FAQ}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Checkout'
+                        component={Checkout}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Orders'
+                        component={Orders}
                         options={{ headershown: true }}>
                     </stack.Screen>
                 </stack.Navigator>

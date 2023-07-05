@@ -39,7 +39,10 @@ const StationarySupply = ({ navigation }) => {
 
     const renderProductItem = ({ item }) => (
         <TouchableOpacity
-            style={styles.productContainer}
+            style={[
+                styles.productContainer,
+                item.prodID % 2 === 0 ? styles.fullWidthItem : styles.halfWidthItem
+            ]}
             onPress={() => navigation.navigate('Details', { data: item })}
         >
             <Image style={styles.productImage} source={{ uri: item.prodImg }} />
@@ -79,6 +82,12 @@ const StationarySupply = ({ navigation }) => {
                 contentContainerStyle={styles.productList}
                 style={{ marginTop: 40 }}
             />
+
+            <TouchableOpacity style={styles.button}
+                onPress={() => navigation.navigate('Orders')}
+            >
+                <Text style={styles.buttonText}>View your orders</Text>
+            </TouchableOpacity>
         </View>
     );
 };

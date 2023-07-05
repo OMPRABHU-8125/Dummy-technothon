@@ -60,27 +60,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    qtyButtonAdd: {
-        backgroundColor: 'green',
+    qtyButton: {
+        backgroundColor: 'white',
         paddingHorizontal: 16,
         paddingVertical: 8,
         marginHorizontal: 8,
         marginBottom: 10,
         marginTop: 10,
-        borderRadius: 50
+        borderRadius: 50,
+        borderColor: 'black',
+        borderWidth: 1
     },
-    qtyButtonDel: {
-        backgroundColor: 'red',
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        marginHorizontal: 8,
-        marginBottom: 10,
-        marginTop: 10,
-        borderRadius: 50
-    },
+
     qtyButtonText: {
-        color: '#ffffff',
-        fontSize: 16,
+        color: 'black',
+        fontSize: 20,
         fontWeight: 'bold',
     },
     quantityText: {
