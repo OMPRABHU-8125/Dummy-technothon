@@ -55,7 +55,7 @@ const Notifications = () => {
     }, [])
 
     return (
-        <View>
+        <View style={{flex:1}}>
             <FlatList
                 data={notifications}
                 renderItem={renderCard}
