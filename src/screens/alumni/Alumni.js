@@ -39,14 +39,13 @@ const Alumni = () => {
         );
 
         return (
-                <SafeAreaView>
+                <SafeAreaView style={styles.safeView}>
                         <View>
-                                <Text style={styles.heading}>SpotLight Alumni</Text>
                                 <FlatList
                                         data={alumniData}
                                         renderItem={renderItem}
                                         keyExtractor={(item) => item.id}
-                                        numColumns={1}
+                                        numColumns={2}
                                         contentContainerStyle={styles.container}
                                 />
                         </View>
