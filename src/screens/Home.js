@@ -82,6 +82,11 @@ const modules = [
         title: 'Stationary Supply Hub',
         login: ['Student', 'Parent'],
     },
+    {
+        id: 12,
+        title: 'Fitness And Health',
+        login: ['Student', 'Parent', 'Teacher'],
+    }
 
 
 ]
@@ -137,6 +142,9 @@ const Home = ({ navigation }) => {
                     }
                     else if (item.title == 'FAQs') {
                         navigation.navigate("FAQ")
+                    }
+                    else if (item.title == 'Fitness And Health'){
+                         navigation.navigate("FitnessAndHealth")
                     }
                 }
 
