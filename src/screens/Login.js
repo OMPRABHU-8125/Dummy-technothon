@@ -30,7 +30,9 @@ const Login = ({ navigation }) => {
                 console.log("Logged In")
                 const user = querySnanpshot.docs[0].data();
                 dispatch(setUserProfile(user));
-                navigation.navigate('HomeScreen')
+                navigation.navigate('Home')
+
+                await AsyncStorage.setItem("userData", JSON.stringify(user))
             }
 
             else {
