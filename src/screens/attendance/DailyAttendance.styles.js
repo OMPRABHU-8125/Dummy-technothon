@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import { black, blue, green, lightgray, red, shadowcolor, titletext, white } from "../utils/color";
+import { elevationsize } from "../utils/constant";
 
 const styles = StyleSheet.create({
     container: {
@@ -10,14 +12,14 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: 'bold',
         marginBottom: 15,
-        color: 'black'
+        color: black
     },
     label: {
         fontSize: 16,
         fontWeight: 'bold',
         marginRight: 8,
         marginTop: 10,
-        color: 'rgb(145, 41, 40)'
+        color: titletext
     },
     card: {
         width: 300,
@@ -30,16 +32,16 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: 'black'
+        color: black
     },
     heading1: {
         fontSize: 35,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: 'rgb(145, 41, 40)'
+        color: titletext
     },
     buttonP: {
-        backgroundColor: 'green',
+        backgroundColor: green,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     buttonA: {
-        backgroundColor: 'red',
+        backgroundColor: red,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     buttonG: {
-        backgroundColor: 'blue',
+        backgroundColor: blue,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
@@ -63,19 +65,19 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     buttonText: {
-        color: 'white',
+        color:white,
         fontSize: 16,
         fontWeight: 'bold',
     },
     picker: {
         height: 40,
-        backgroundColor: 'white',
-        borderColor: '#ccc',
+        backgroundColor:white,
+        borderColor: lightgray,
         borderWidth: 1,
         borderRadius: 4,
         marginBottom: 20,
-        elevation:10,
-        shadowColor:'rgb(145, 41, 40)'
+        elevation:elevationsize,
+        shadowColor:shadowcolor
     },
 });
 

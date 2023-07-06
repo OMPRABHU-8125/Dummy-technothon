@@ -32,20 +32,17 @@ const EventUpdate = ({ navigation }) => {
         const firestoreTimestamp = item.Eventdate;
         const firestoreDate = firestoreTimestamp && firestoreTimestamp.toDate ? firestoreTimestamp.toDate() : null;
         const currentDate = new Date();
+        const formatted = firestoreDate.toLocaleDateString()
         if (firestoreDate && firestoreDate.getTime() > currentDate.getTime()||item.Eventdate>currentDate.getTime()) {
             return (
                 <View>
-                    <View>
-                        <Image source={{ uri: item.Image }}
-                            style={Style.image} />
-                    </View>
                     <View style={Style.renderView}>
-                        {/* <View style={Style.titleView}>
-                            <Text style={Style.titleText}> {item.Title} </Text>
-                        </View> */}
-                        <Text style={Style.titleText}> {item.Title} </Text>
+                        <Text style={Style.titleText}> {item.Title} </Text>    
+                    <Image source={{ uri: item.Image }}
+                            style={Style.image} />
                         <View style={Style.descView}>
                             <Text style={Style.descText}> {item.Desc} </Text>
+                            <Text style={Style.date}>{formatted}</Text>
                             <TouchableOpacity
                                 onPress={() => navigation.navigate('Detail', { itemTitle: item.Title })}>
                                 <Text>Detail</Text>
@@ -61,10 +58,6 @@ const EventUpdate = ({ navigation }) => {
 
     return (
         <View style={Style.mainView}>
-            {/* <View style={Style.view}>
-                <Text style={Style.text}>Events!!</Text>
-            </View> */}
-
             <FlatList
                 data={mydata}
                 renderItem={renderItems}
