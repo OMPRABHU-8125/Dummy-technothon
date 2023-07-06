@@ -40,7 +40,7 @@ const Detail = ({ route }) => {
                     <View style={Style.descView}>
                         <Text style={Style.descText}> {item.Desc} </Text>
                         <Text style={Style.descText}> {item.Detail} </Text>
-                        <Text style={{textAlign:'right'}}>{formatted}</Text>
+                        <Text style={Style.date}>{formatted}</Text>
                     </View>
                 </View>
             </View>

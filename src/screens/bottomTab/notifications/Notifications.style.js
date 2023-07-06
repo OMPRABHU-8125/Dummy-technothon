@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import {  black, blue, desctext, shadowcolor, white } from '../../utils/color';
- import { cartborderradius, elevationsize } from '../../utils/cart';
+ import { cartborderradius, elevationsize } from '../../utils/constant';
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { black, shadowcolor, titletext, white } from "../utils/color";
-import { elevationsize } from "../utils/cart";
+import { elevationsize } from "../utils/constant";
 
 const Style = StyleSheet.create({
     renderView: {
@@ -53,6 +53,9 @@ const Style = StyleSheet.create({
         margin:10,
         borderRadius:10,
         padding:10
+    },
+    date:{
+        textAlign:'right'
     },
 })
 

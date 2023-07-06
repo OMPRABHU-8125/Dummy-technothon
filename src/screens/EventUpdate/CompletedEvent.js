@@ -32,7 +32,7 @@ const CompletedEvent = ({navigation}) => {
                             style={Style.image} />
                         <View style={Style.descView}>
                             <Text style={Style.descText}> {item.Desc} </Text>
-                            <Text style={{textAlign:'right'}}>{formatted}</Text>
+                            <Text style={Style.date}>{formatted}</Text>
                             <TouchableOpacity
                                 onPress={() => navigation.navigate('Detail', { itemTitle: item.Title })}>
                                 <Text>Detail</Text>

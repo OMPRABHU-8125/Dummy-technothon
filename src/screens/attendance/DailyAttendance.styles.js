@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { black, blue, green, lightgray, red, shadowcolor, titletext, white } from "../utils/color";
-import { elevationsize } from "../utils/cart";
+import { elevationsize } from "../utils/constant";
 
 const styles = StyleSheet.create({
     container: {

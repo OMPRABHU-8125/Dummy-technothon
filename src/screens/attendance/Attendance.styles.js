@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
 import {  desctext, shadowcolor, titletext,black, white } from '../utils/color';
-import { cartborderradius, elevationsize } from '../utils/cart';
+import { cartborderradius, elevationsize } from '../utils/constant';
 
 const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
