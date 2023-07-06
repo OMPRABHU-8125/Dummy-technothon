@@ -32,6 +32,7 @@ import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
 import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
+import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -177,6 +178,11 @@ const App = () => {
                         component={FAQ}
                         options={{ headershown: true }}>
                     </stack.Screen>
+                    <stack.Screen
+                        name='FitnessAndHealth'
+                        component={FitnessAndHealth}
+                        options={{ headerShown: true }}
+                    />
                 </stack.Navigator>
             </NavigationContainer>
         </Provider>

@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import styles from './Home.styles';
 
 
@@ -24,7 +23,6 @@ const Card = ({ title }) => {
         </View>
     );
 };
-
 
 const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
@@ -70,6 +68,9 @@ const Home = ({ navigation }) => {
                     }
                     else if (item.title == 'FAQs') {
                         navigation.navigate("FAQ")
+                    }
+                    else if (item.title == 'Fitness And Health'){
+                         navigation.navigate("FitnessAndHealth")
                     }
                 }
 
