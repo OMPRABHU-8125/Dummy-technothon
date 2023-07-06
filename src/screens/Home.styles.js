@@ -3,15 +3,12 @@ import { Dimensions } from 'react-native';
 
 
 const windowWidth = Dimensions.get("window").width;
+const windowheight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
 
     view: {
-        flex: 1
-    },
-
-    inner: {
-        margin: 20,
+        flex: 1,
     },
 
     smallText: {
@@ -25,16 +22,9 @@ const styles = StyleSheet.create({
         height: 280,
         resizeMode: 'contain',
     },
-
-    logoutimage: {
-        height: 22,
-        resizeMode: 'contain',
-    },
-
-    logoutbutton: {
-        position: 'absolute',
-        marginTop: 10,
-        marginLeft: -10,
+    contentContainer: {
+        height: windowheight - 90,
+        flexGrow: 1,
     },
 
     card1: {
