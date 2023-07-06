@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
     View,
@@ -7,7 +7,6 @@ import {
     Alert,
     ImageBackground,
     TouchableOpacity,
-    useWindowDimensions,
     Image,
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
@@ -95,10 +94,6 @@ const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
     const data = useAppSelector(state => state.profile.modules);
 
-    useEffect(() => {
-        console.log(user);
-    }, [])
-
     const renderCard = ({ item }) => {
         return (
             <TouchableOpacity
@@ -161,8 +156,9 @@ const Home = ({ navigation }) => {
             </ImageBackground>
             <TouchableOpacity
                 style={styles.logoutbutton}
-                onPress={() => {
+                onPress={async () => {
                     navigation.navigate('Login');
+                    await AsyncStorage.removeItem('userData');
                 }}>
                 <Image source={require('../assets/imgs/logoutimage.png')} style={styles.logoutimage} />
             </TouchableOpacity>
