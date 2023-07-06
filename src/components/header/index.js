@@ -16,8 +16,13 @@ const CustomHeader = ({ title, navigation }) => {
                     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
                     style={styles.Homecontainer}
                 >
-                    <MaterialIcon name="home" size={30} color="black" />
-                    {/* <Text style={styles.rightTitle}>{title}</Text> */}
+                    <TouchableOpacity onPress={async () => {
+                        navigation.navigate('Home');
+                    }}
+                    >
+                        <MaterialIcon name="home" size={30} color="black" />
+                    </TouchableOpacity>
+
                     <TouchableOpacity onPress={async () => {
                         navigation.navigate('Login');
                         await AsyncStorage.removeItem("userData");
