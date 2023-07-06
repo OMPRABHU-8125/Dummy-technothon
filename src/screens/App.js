@@ -1,7 +1,7 @@
 import React from "react";
 import {
     View,
-    Text
+    Text,
 } from 'react-native';
 import Login from "./Login";
 import Home from "./Home";
@@ -33,6 +33,7 @@ import Profile from "./bottomTab/profile";
 import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import ImageGrid from "./photoGallery";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -181,6 +182,11 @@ const App = () => {
                     <stack.Screen
                         name='FitnessAndHealth'
                         component={FitnessAndHealth}
+                        options={{ headerShown: true }}
+                    />
+                    <stack.Screen
+                        name='PhotoGallery'
+                        component={ImageGrid}
                         options={{ headerShown: true }}
                     />
                 </stack.Navigator>
