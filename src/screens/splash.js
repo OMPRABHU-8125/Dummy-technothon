@@ -5,65 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch } from '../../store/hook';
 import { setModules, setUserProfile } from '../../store/slice/profileSlice';
 import styles from './splash.style';
+import modules from './Modules';
 
-const modules = [
-    {
-        id: 1,
-        title: 'Alumni and Mentorship',
-        login: ['Student', 'Teacher']
-    },
-    {
-        id: 2,
-        title: 'Attendance',
-        login: ['Student', 'Parent', 'Teacher']
-    },
-    {
-        id: 3,
-        title: 'Events Update',
-        login: ['Student']
-    },
-    {
-        id: 4,
-        title: 'Enquiry Management',
-        login: ['Student', 'Parent', 'Teacher']
-    },
-    {
-        id: 5,
-        title: 'Fees',
-        login: ['Parent']
-    },
-    {
-        id: 6,
-        title: 'Photo Gallery',
-        login: ['Student', 'Teacher']
-    },
-    {
-        id: 7,
-        title: "About Us",
-        login: ['Student', 'Parent',]
-    },
-    {
-        id: 8,
-        title: 'FAQs',
-        login: ['Student', 'Parent', 'Teacher']
-    },
-    {
-        id: 9,
-        title: 'Faculty Load',
-        login: ['Teacher']
-    },
-    {
-        id: 10,
-        title: 'Holiday Calender',
-        login: ['Student', 'Teacher']
-    },
-    {
-        id: 11,
-        title: 'Stationary Supply Hub',
-        login: ['Student', 'Parent']
-    },
-
-]
 
 const Splash = () => {
 
@@ -78,23 +21,25 @@ const Splash = () => {
     const checkFirstTime = async () => {
         try {
             const userData = await AsyncStorage.getItem('userData');
-            if (userData === null) {
-                setTimeout(() => {
-                    navigation.navigate('Login');
-                }, 2000);
-            } else {
-                const user = JSON.parse(userData);
-                console.log(user.firstName);
+            const user = JSON.parse(userData);
+            dispatch(setUserProfile(user));
 
-                dispatch(setUserProfile(user));
+            if (userData == null) {
+                setTimeout(() => {
+                    navigation.navigate("Login", { modules: modules });
+                }, 2000)
+            } else {
                 const filtered = modules.filter((module) =>
                     module.login.includes(user.loginType));
 
                 dispatch(setModules(filtered));
+
                 setTimeout(() => {
-                    navigation.navigate('Home');
-                }, 2000);
+                    navigation.navigate("HomeScreen",);
+                }, 1000);
             }
+
+
         } catch (error) {
             console.log('Error:', error);
         }
@@ -114,3 +59,4 @@ const Splash = () => {
 };
 
 export default Splash;
+
