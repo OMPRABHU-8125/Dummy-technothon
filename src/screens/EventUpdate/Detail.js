@@ -29,19 +29,18 @@ const Detail = ({ route }) => {
         fetchData();
     }, []);
     const renderItems = ({ item }) => {
+        const date=item.Eventdate.toDate()
+        const formatted = date.toLocaleDateString()
         return (
             <View>
-                <View>
+                <View style={Style.renderView}>
+                        <Text style={Style.titleText}> {item.Title} </Text>
                     <Image source={{ uri: item.Image }}
                         style={Style.image} />
-                </View>
-                <View style={Style.renderView}>
-                    <View style={Style.titleView}>
-                        <Text style={Style.titleText}> {item.Title} </Text>
-                    </View>
                     <View style={Style.descView}>
                         <Text style={Style.descText}> {item.Desc} </Text>
                         <Text style={Style.descText}> {item.Detail} </Text>
+                        <Text style={Style.date}>{formatted}</Text>
                     </View>
                 </View>
             </View>
@@ -50,9 +49,6 @@ const Detail = ({ route }) => {
     }
     return (
         <View>
-            <View style={Style.view}>
-            <Text style={Style.text}>Detail</Text>
-            </View>
             <FlatList
                 data={data}
                 renderItem={renderItems}

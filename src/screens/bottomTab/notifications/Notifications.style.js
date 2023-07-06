@@ -1,24 +1,23 @@
 import { StyleSheet } from 'react-native'
-
+import {  black, blue, desctext, shadowcolor, white } from '../../utils/color';
+ import { cartborderradius, elevationsize } from '../../utils/constant';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 25,
         paddingTop: 20,
-        backgroundColor: '#a82c2c',
     },
 
     card: {
-        borderColor: 'black',
-        borderWidth: 1,
-        paddingBottom: 20,
-        paddingHorizontal: 10,
-        backgroundColor: '#fef7d7',
-        borderRadius: 10
+        shadowColor:shadowcolor,
+        backgroundColor:white,
+        elevation:elevationsize,
+        borderRadius:cartborderradius,
+        padding:10,
     },
 
     heading: {
-        color: 'black',
+        color:black,
         fontSize: 27,
         marginBottom: 10,
         fontWeight: '600'
@@ -26,16 +25,16 @@ const styles = StyleSheet.create({
 
     desc: {
         fontSize: 15,
-        color: 'black'
+        color:black
     },
 
     link: {
-        color: 'blue',
+        color:blue,
         fontSize: 13,
         marginTop: 7
     },
     date: {
-        color: 'grey',
+        color: desctext,
         textAlign: 'right',
         marginTop: 10
     }

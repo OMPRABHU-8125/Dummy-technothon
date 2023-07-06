@@ -1,11 +1,14 @@
 import { StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
+import {  desctext, shadowcolor, titletext,black, white } from '../utils/color';
+import { cartborderradius, elevationsize } from '../utils/constant';
 
+const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
     container: {
         height: '100%',
         flexDirection: 'row',
         justifyContent: 'center',
-        backgroundColor: '#fef7d7',
         paddingTop: 20
     },
     imageBackground: {
@@ -13,9 +16,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
-    },
-    main: {
-        backgroundColor: '#a82c2c',
     },
     image: {
         width: 200,
@@ -26,42 +26,31 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 35,
         fontWeight: 'bold',
-        color: '#fbe682',
+        color:black,
         marginBottom: 16,
         marginLeft: 10,
         marginTop: 10
     },
     clickable: {
-        width: 150,
-        height: 200,
-        backgroundColor: 'white',
-        borderRadius: 8,
+        width: windowWidth / 2 - 20,
+        height: '20%',
+        backgroundColor:white,
+        borderRadius: cartborderradius,
         marginVertical: 10,
         marginHorizontal: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        backgroundColor: '#2a9d8f'
+        shadowColor:shadowcolor,
+        elevation:elevationsize,
+        flex:1
     },
     cardTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: '#000000'
+        color: titletext
     },
     cardText: {
         fontSize: 16,
-        color: '#495057',
-    },
-
-    body: {
-        backgroundColor: 'black',
-        flex: 1
+        color: desctext,
     }
 });
 

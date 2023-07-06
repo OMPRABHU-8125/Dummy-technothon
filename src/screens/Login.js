@@ -3,8 +3,9 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, Keyb
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useAppDispatch } from '../../store/hook';
-import { setUserProfile } from '../../store/slice/profileSlice';
+import { setUserProfile, setModules } from '../../store/slice/profileSlice';
 import styles from './Login.style';
+import modules from './Modules';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -30,7 +31,14 @@ const Login = ({ navigation }) => {
                 console.log("Logged In")
                 const user = querySnanpshot.docs[0].data();
                 dispatch(setUserProfile(user));
+                const filtered = modules.filter((module) =>
+                    module.login.includes(user.loginType));
+
+                dispatch(setModules(filtered));
+
                 navigation.navigate('HomeScreen')
+
+                await AsyncStorage.setItem("userData", JSON.stringify(user))
             }
 
             else {

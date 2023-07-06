@@ -25,6 +25,8 @@ import StationarySupply from "./stationarySupply/StationarySupply";
 import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
+import Splash from "./splash";
+
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
@@ -32,6 +34,7 @@ import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
 import Checkout from "./stationarySupply/Checkout";
 import Orders from "./stationarySupply/Orders";
+import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -67,6 +70,11 @@ const App = () => {
         <Provider store={store}>
             <NavigationContainer>
                 <stack.Navigator>
+                    <stack.Screen
+                        name='splash'
+                        component={Splash}
+                        options={{ headerShown: false }}
+                    />
                     <stack.Screen
                         name='Login'
                         component={Login}
@@ -181,6 +189,12 @@ const App = () => {
                         name='Orders'
                         component={Orders}
                         options={{ headershown: true }}>
+                    </stack.Screen>
+
+                    <stack.Screen
+                        name='FitnessAndHealth'
+                        component={FitnessAndHealth}
+                        options={{ headerShown: true }}>
                     </stack.Screen>
                 </stack.Navigator>
             </NavigationContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
     View,
@@ -7,10 +7,10 @@ import {
     Alert,
     ImageBackground,
     TouchableOpacity,
-    useWindowDimensions,
     Image,
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './Home.styles';
 
 
@@ -24,78 +24,9 @@ const Card = ({ title }) => {
     );
 };
 
-const modules = [
-    {
-        id: 1,
-        title: 'Alumni and Mentorship',
-        login: ['Student', 'Teacher'],
-
-    },
-    {
-        id: 2,
-        title: 'Attendance',
-        login: ['Student', 'Parent', 'Teacher'],
-
-    },
-    {
-        id: 3,
-        title: 'Events Update',
-        login: ['Student'],
-    },
-    {
-        id: 4,
-        title: 'Enquiry Management',
-        login: ['Student', 'Parent', 'Teacher'],
-    },
-    {
-        id: 5,
-        title: 'Fees',
-        login: ['Parent'],
-    },
-    {
-        id: 6,
-        title: 'Photo Gallery',
-        login: ['Student', 'Teacher'],
-    },
-    {
-        id: 7,
-        title: "About Us",
-        login: ['Student', 'Parent',],
-    },
-    {
-        id: 8,
-        title: 'FAQs',
-        login: ['Student', 'Parent', 'Teacher'],
-    },
-    {
-        id: 9,
-        title: 'Faculty Load',
-        login: ['Teacher'],
-    },
-    {
-        id: 10,
-        title: 'Holiday Calender',
-        login: ['Student', 'Teacher'],
-    },
-    {
-        id: 11,
-        title: 'Stationary Supply Hub',
-        login: ['Student', 'Parent'],
-    },
-
-
-]
-
-
-
 const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const filtered = modules.filter(module => module.login.includes(user.loginType));
-        setData(filtered);
-    }, []);
+    const data = useAppSelector(state => state.profile.modules);
 
     const renderCard = ({ item }) => {
         return (
@@ -138,6 +69,9 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'FAQs') {
                         navigation.navigate("FAQ")
                     }
+                    else if (item.title == 'Fitness And Health'){
+                         navigation.navigate("FitnessAndHealth")
+                    }
                 }
 
                 }>
@@ -156,8 +90,9 @@ const Home = ({ navigation }) => {
             </ImageBackground>
             <TouchableOpacity
                 style={styles.logoutbutton}
-                onPress={() => {
+                onPress={async () => {
                     navigation.navigate('Login');
+                    await AsyncStorage.removeItem('userData');
                 }}>
                 <Image source={require('../assets/imgs/logoutimage.png')} style={styles.logoutimage} />
             </TouchableOpacity>
