@@ -12,7 +12,7 @@ import {
 import { useAppSelector } from '../../store/hook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './Home.styles';
-import Modules from './Modules';
+
 
 const Card = ({ title }) => {
     return (
