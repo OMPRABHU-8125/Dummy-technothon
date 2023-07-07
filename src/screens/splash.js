@@ -35,7 +35,7 @@ const Splash = () => {
                 dispatch(setModules(filtered));
 
                 setTimeout(() => {
-                    navigation.navigate("HomeScreen",);
+                    navigation.navigate("HomeScreen");
                 }, 1000);
             }
 

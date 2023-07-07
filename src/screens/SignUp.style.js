@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import * as COLOR from '../utils/color'
 
 const styles = StyleSheet.create({
     container: {
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     heading: {
         color: 'rgb(145,41,40)',
         fontSize: 35,
-        marginBottom: 50,
+        marginBottom: 30,
         fontWeight: 'bold',
     },
 
@@ -31,6 +32,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#000',
         marginBottom: 15,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+    },
+
+    inputCaptcha: {
+        width: '50%',
+        height: 35,
+        borderWidth: 1,
+        borderColor: '#000',
+        marginLeft: 30,
         paddingHorizontal: 10,
         borderRadius: 10,
     },
@@ -55,6 +66,24 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
 
+    captchaText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginVertical: 16,
+        color: COLOR.grey,
+        textDecorationLine: 'line-through'
+    },
+
+    captchaContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 30
+    },
+
+    icon: {
+        marginLeft: 20
+    }
 
 });
 
