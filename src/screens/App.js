@@ -26,6 +26,7 @@ import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import Splash from "./splash";
+
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
