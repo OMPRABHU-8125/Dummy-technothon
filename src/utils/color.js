@@ -7,4 +7,6 @@ const blue = 'blue'
 const green = 'green'
 const red = 'red'
 const lightgray = '#ccc'
-export { shadowcolor, desctext, white, titletext, black, blue, green, red, lightgray }
+const maroon = 'rgb(145, 41, 40)'
+const grey = 'grey'
+export { shadowcolor, desctext, white, titletext, black, blue, green, red, lightgray, maroon, grey }
