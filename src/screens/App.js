@@ -35,7 +35,7 @@ import ContactUs from "./bottomTab/contactUs";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import * as colors from "./utils/color";
+import * as colors from "../utils/color";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();

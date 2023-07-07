@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { black, blue, green, lightgray, red, shadowcolor, titletext, white } from "../utils/color";
-import { elevationsize } from "../utils/constant";
+import { black, blue, green, lightgray, red, shadowcolor, titletext, white } from "../../utils/color";
+import { elevationsize } from "../../utils/constant";
 
 const styles = StyleSheet.create({
     container: {
@@ -65,19 +65,19 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     buttonText: {
-        color:white,
+        color: white,
         fontSize: 16,
         fontWeight: 'bold',
     },
     picker: {
         height: 40,
-        backgroundColor:white,
+        backgroundColor: white,
         borderColor: lightgray,
         borderWidth: 1,
         borderRadius: 4,
         marginBottom: 20,
-        elevation:elevationsize,
-        shadowColor:shadowcolor
+        elevation: elevationsize,
+        shadowColor: shadowcolor
     },
 });
 
