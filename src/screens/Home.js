@@ -91,14 +91,7 @@ const Home = ({ navigation }) => {
                 source={require('../assets/imgs/Swami_Vivekanand.jpg')}
                 style={styles.image}>
             </ImageBackground>
-            <TouchableOpacity
-                style={styles.logoutbutton}
-                onPress={async () => {
-                    navigation.navigate('Login');
-                    await AsyncStorage.removeItem('userData');
-                }}>
-                <Image source={require('../assets/imgs/logoutimage.png')} style={styles.logoutimage} />
-            </TouchableOpacity>
+
             <View style={styles.welcome}>
                 <Text style={styles.welcome_text}>WELCOME TO VES</Text>
             </View>
@@ -107,8 +100,10 @@ const Home = ({ navigation }) => {
                 renderItem={renderCard}
                 keyExtractor={item => item.id}
                 numColumns={2}
+                contentContainerStyle={styles.contentContainer}
             />
         </View>
+
     );
 };
 

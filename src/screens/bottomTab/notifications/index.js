@@ -51,11 +51,10 @@ const Notifications = () => {
 
     useEffect(() => {
         getData();
-        console.log(notifications)
     }, [])
 
     return (
-        <View style={{flex:1}}>
+        <View style={styles.main}>
             <FlatList
                 data={notifications}
                 renderItem={renderCard}
