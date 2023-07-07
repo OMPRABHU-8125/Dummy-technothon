@@ -26,13 +26,13 @@ import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import Splash from "./splash";
-
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
 import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import Placement from "./placement/Placement";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -181,6 +181,11 @@ const App = () => {
                     <stack.Screen
                         name='FitnessAndHealth'
                         component={FitnessAndHealth}
+                        options={{ headerShown: true }}
+                    />
+                    <stack.Screen
+                        name='Placement'
+                        component={Placement}
                         options={{ headerShown: true }}
                     />
                 </stack.Navigator>
