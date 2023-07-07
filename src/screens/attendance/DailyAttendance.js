@@ -51,7 +51,7 @@ const DailyAttendance = ({ navigation }) => {
                 .where('loginType', '==', 'Student')
                 .get();
 
-            const studentsList = snapshot.docs.map((doc) => doc.data().firstName);
+            const studentsList = snapshot.docs.map((doc) => doc.data().firstName + ' ' + doc.data().lastName);
             setStudents(studentsList)
         } catch (error) {
 
@@ -60,7 +60,15 @@ const DailyAttendance = ({ navigation }) => {
 
     const handleClick = (text) => () => {
         if (selectedSubject != null) {
-            console.log(`${students[currentIndex]} is ${text} in ${selectedSubject}`)
+            const attendance = {
+                name: students[currentIndex],
+                date: new Date().toISOString().split('T')[0],
+                attendance: text,
+                subject: selectedSubject
+            }
+
+            firestore().collection('Attendance').add(attendance)
+            console.log(attendance)
             if (currentIndex < students.length)
                 handleNext();
         }
