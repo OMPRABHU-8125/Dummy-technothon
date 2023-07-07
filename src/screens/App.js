@@ -34,14 +34,44 @@ import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
 import Checkout from "./stationarySupply/Checkout";
 import Orders from "./stationarySupply/Orders";
+import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as colors from "../utils/color";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const MyHome = () => {
     return (
-        <tab.Navigator>
+        <tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: () => {
+                    let iconName;
+                    if (route.name === 'Home') {
+                        iconName = 'home';
+                    } else if (route.name === 'Profile') {
+                        iconName = 'account-circle';
+                    } else if (route.name === 'Notifications') {
+                        iconName = 'notifications-active';
+                    } else if (route.name === 'ContactUs') {
+                        iconName = 'email';
+                    }
+
+                    return <Icon name={iconName} size={26} color={colors.white} />;
+                },
+                tabBarLabelStyle: {
+                    fontWeight: 'bold',
+                    fontSize: 12,
+                    color: 'white'
+                },
+                tabBarActiveBackgroundColor: 'rgb(160,80,15)',
+                tabBarStyle: {
+                    position: 'absolute',
+                    backgroundColor: 'rgb(145,40,41)',
+                },
+            })}
+        >
             <tab.Screen
                 name='Home'
                 component={Home}
@@ -50,7 +80,7 @@ const MyHome = () => {
             <tab.Screen
                 name='Notifications'
                 component={Notifications}
-                options={{ headerShown: true }}
+                options={{ headerShown: false }}
             />
             <tab.Screen
                 name='ContactUs'
@@ -60,7 +90,7 @@ const MyHome = () => {
             <tab.Screen
                 name='Profile'
                 component={Profile}
-                options={{ headerShown: true }}
+                options={{ headerShown: false }}
             />
         </tab.Navigator>
     )
@@ -83,7 +113,10 @@ const App = () => {
                     <stack.Screen
                         name='HomeScreen'
                         component={MyHome}
-                        options={{ headerShown: false }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Home" />,
+                        })}
                     />
                     <stack.Screen
                         name='SignUp'
@@ -93,92 +126,146 @@ const App = () => {
                     <stack.Screen
                         name='Alumni'
                         component={Alumni}
-                        options={{ headerShown: false }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Alumni" />
+                        })}
                     />
                     <stack.Screen
                         name='AboutUs'
                         component={AboutUs}
-                        options={{ headerShown: true }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="About Us" />
+                        })}
                     />
                     <stack.Screen
                         name='Attendance'
                         component={Attendance}
-                        options={{ headerShown: false }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Attendance" />
+                        })}
                     />
                     <stack.Screen
                         name='DailyAttendance'
                         component={DailyAttendance}
-                        options={{ headerShown: false }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Daily Attendance" />
+                        })}
                     />
                     <stack.Screen
                         name='EventUpdate'
                         component={EventUpdate}
-                        options={{ headerShown: true }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Event Updates" />
+                        })}
                     />
                     <stack.Screen
                         name='AddEvent'
                         component={AddEvent}
-                        options={{ headerShown: true }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Add Events" />
+                        })}
                     />
                     <stack.Screen
                         name='Detail'
                         component={Detail}
-                        options={{ headerShown: true }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Details" />
+                        })}
                     />
                     <stack.Screen
                         name='CompletedEvent'
                         component={CompletedEvent}
-                        options={{ headerShown: true }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Completed Events" />
+                        })}
                     />
                     <stack.Screen
                         name='Queries/Feedback'
                         component={Enquiry}
-                        options={{ headerShown: false }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Queries/Feedback" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Query'
                         component={Query}
-                        options={{ headerShown: true }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Query" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Feedback'
                         component={Feedback}
-                        options={{ headerShown: true }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Feedback" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Facultyload'
                         component={Facultyload}
-                        options={{ headerShown: true }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Faculty Load" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Stationary'
                         component={StationarySupply}
-                        options={{ headerShown: false }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Stationary Supply Hub" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Details'
                         component={Details}
-                        options={{ headerShown: false }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Details" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Cart'
                         component={Cart}
-                        options={{ headerShown: false }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Cart" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Fees'
                         component={Fees}
-                        options={{ headershown: true }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Fees" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='HolidayCalendar'
                         component={HolidayCalendar}
-                        options={{ headerShown: true }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Holiday Calendar" />
+                        })}
                     />
                     <stack.Screen
                         name='FAQ'
                         component={FAQ}
-                        options={{ headershown: true }}>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="FAQs" />
+                        })}>
                     </stack.Screen>
                     <stack.Screen
                         name='Checkout'
@@ -194,11 +281,14 @@ const App = () => {
                     <stack.Screen
                         name='FitnessAndHealth'
                         component={FitnessAndHealth}
-                        options={{ headerShown: true }}>
-                    </stack.Screen>
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Fitness And Health" />
+                        })}
+                    />
                 </stack.Navigator>
             </NavigationContainer>
-        </Provider>
+        </Provider >
 
     )
 }

@@ -9,6 +9,7 @@ import {
 import styles from './StationarySupply.styles';
 import firestore from '@react-native-firebase/firestore';
 import { useAppSelector } from '../../../store/hook';
+import Icons from 'react-native-vector-icons/MaterialIcons'
 
 const StationarySupply = ({ navigation }) => {
 
@@ -61,17 +62,18 @@ const StationarySupply = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.heading}>VES Stationary Supply Hub</Text>
+            <View style={styles.headingview}>
+                <Text style={styles.heading}>Products</Text>
                 <TouchableOpacity
                     onPress={() =>
                         navigation.navigate("Cart")}
+                    style={styles.cart}
                 >
-                    <Image
-                        source={require('../../assets/imgs/cart.png')}
-                        style={styles.cart}
-                    />
-                    <Text style={styles.badge}>{cartItems}</Text>
+                    <View>
+                        <Icons name='shopping-cart' size={30} color='black' style={styles.carticon} />
+                        <Text style={styles.badge}>{cartItems}</Text>
+                    </View>
+
                 </TouchableOpacity>
             </View>
             <FlatList
@@ -80,7 +82,6 @@ const StationarySupply = ({ navigation }) => {
                 keyExtractor={(item) => item.prodId.toString()}
                 numColumns={2}
                 contentContainerStyle={styles.productList}
-                style={{ marginTop: 40 }}
             />
 
             <TouchableOpacity style={styles.button}

@@ -12,6 +12,7 @@ import {
 import styles from './Details.styles';
 import cartSlice, { addItemToCart } from '../../../store/slice/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hook';
+import Icons from 'react-native-vector-icons/MaterialIcons'
 
 const Details = ({ route, navigation }) => {
   const [quantity, setQuantity] = useState(1);
@@ -63,21 +64,19 @@ const Details = ({ route, navigation }) => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.mainview}>
+      <View style={styles.headingview}>
+        <Text style={styles.heading}>About product</Text>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Cart")}
+          style={styles.cart}
+        >
+          <Icons name='shopping-cart' size={30} color='black' style={styles.carticon} />
+          <Text style={styles.badge}>{cartItems}</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.container}>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.heading}>VES Stationary Supply Hub</Text>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Cart")}
-          >
-            <Image
-              source={require('../../assets/imgs/cart.png')}
-              style={styles.cart}
-            />
-            <Text style={styles.badge}>{cartItems}</Text>
-          </TouchableOpacity>
-        </View>
         <View style={styles.box}>
           <Image
             source={{ uri: data.prodImg }}
@@ -89,12 +88,14 @@ const Details = ({ route, navigation }) => {
           <Text style={styles.productPrice}>{data.prodPrice} Rs</Text>
           <Text style={styles.productDescription}>{data.prodDescription}</Text>
           <View style={styles.qtyContainer}>
-            <TouchableOpacity onPress={handleDecrease} style={styles.qtyButton}>
-              <Text style={styles.qtyButtonText}>-</Text>
+            <TouchableOpacity onPress={handleDecrease} style={styles.qtyButtonDel}>
+              {/* <Text style={styles.qtyButtonText}>-</Text> */}
+              <Icons name='delete-outline' size={30} color='black' />
             </TouchableOpacity>
             <Text style={styles.quantityText}>{quantity}</Text>
-            <TouchableOpacity onPress={handleIncrease} style={styles.qtyButton}>
-              <Text style={styles.qtyButtonText}>+</Text>
+            <TouchableOpacity onPress={handleIncrease} style={styles.qtyButtonAdd}>
+              {/* <Text style={styles.qtyButtonText}>+</Text> */}
+              <Icons name='add' size={30} color='black' />
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.buttonContainer} onPress={handleAdd}>
