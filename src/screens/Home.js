@@ -76,8 +76,6 @@ const Home = ({ navigation }) => {
 
                 }>
 
-
-
                 <Card title={item.title} />
             </TouchableOpacity >
         )

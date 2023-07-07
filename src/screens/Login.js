@@ -6,6 +6,10 @@ import { useAppDispatch } from '../../store/hook';
 import { setUserProfile, setModules } from '../../store/slice/profileSlice';
 import styles from './Login.style';
 import modules from './Modules';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import { black } from '../utils/color';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -55,14 +59,21 @@ const Login = ({ navigation }) => {
             />
             <Text></Text>
             <Text style={styles.text}>VES Login</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                placeholderTextColor={'grey'}
-            />
             <View style={{ flexDirection: 'row' }}>
+                {/* <View > */}
+                <FontAwesome name={'user-circle-o'} size={20} color={black} style={styles.usericon} />
+                {/* </View> */}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                    placeholderTextColor={'grey'}
+                />
+            </View>
+
+            <View style={{ flexDirection: 'row' }}>
+                <Fontisto name={'locked'} size={20} color={black} style={styles.lockicon} />
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
@@ -71,15 +82,11 @@ const Login = ({ navigation }) => {
                     onChangeText={setPassword}
                     placeholderTextColor={'grey'}
                 />
-                <TouchableOpacity
-                    onPress={() => {
-                        setVisible(!visible);
-                    }}
-                >
-                    <Image
-                        source={require('../assets/imgs/eye.png')}
-                        style={styles.icon}
-                    />
+
+                <TouchableOpacity style={styles.eyeicon} onPress={() => {
+                    setVisible(!visible);
+                }}>
+                    <MaterialIcons name={visible ? 'visibility' : 'visibility-off'} size={25} color={black} />
                 </TouchableOpacity>
             </View>
             <Text></Text>
