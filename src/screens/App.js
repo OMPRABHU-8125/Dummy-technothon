@@ -34,6 +34,7 @@ import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import Placement from "./placement/Placement";
 import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as colors from "../utils/color";
@@ -281,6 +282,11 @@ const App = () => {
                             headerShown: true,
                             header: () => <CustomHeader navigation={navigation} title="Photo Gallery" />
                         })}
+                    />
+                    <stack.Screen
+                        name='Placement'
+                        component={Placement}
+                        options={{ headerShown: true }}
                     />
                 </stack.Navigator>
             </NavigationContainer>
