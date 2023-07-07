@@ -72,6 +72,9 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'Fitness And Health') {
                         navigation.navigate("FitnessAndHealth")
                     }
+                    else if (item.title == 'Photo Gallery') {
+                        navigation.navigate("PhotoGallery")
+                    }
                 }
 
                 }>
