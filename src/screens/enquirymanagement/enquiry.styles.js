@@ -1,18 +1,18 @@
 import { StyleSheet } from "react-native";
-
+import { black, maroon, white } from '../../utils/color';
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
-      backgroundColor: 'white',
+      backgroundColor: white,
     },
     content: {
       borderWidth: 1,
-      borderColor: 'black',
+      borderColor: black,
       padding: 10,
       marginVertical: 5,
-      color: 'black',
+      color: black,
       borderRadius: 10,
     },
     sectionContainer: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     heading: {
       fontSize: 16,
-      color: 'black',
+      color: black,
       marginRight:10,
       marginVertical:10,
     },
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
       right: 10,
     },
     queryTypeContainer: {
-     borderBlockColor: 'black',
+     borderBlockColor: black,
      borderWidth: 1,
       padding: 10,
       marginTop: 10,
@@ -46,19 +46,19 @@ const styles = StyleSheet.create({
     queryType: {
       fontSize: 16,
       marginVertical: 5,
-      color: 'black',
+      color: black,
     },
     input: {
       borderWidth: 1,
-      borderColor: 'black',
+      borderColor: black,
       padding: 10,
       marginVertical: 5,
       height: 120,
-      color: 'black',
+      color: black,
       borderRadius: 10,
     },
     button: {
-      backgroundColor: 'rgb(145,41, 40)',
+      backgroundColor: maroon,
       padding: 10,
       marginVertical: 10,
       borderRadius: 5,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
     },
     buttonText: {
-      color: 'white',
+      color: white,
       fontSize: 16,
       fontWeight: 'bold',
     },
