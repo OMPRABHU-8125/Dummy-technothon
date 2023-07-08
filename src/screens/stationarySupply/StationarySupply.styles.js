@@ -1,10 +1,30 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     heading: {
         fontSize: 24,
         fontWeight: 'bold',
         color: 'black',
+    },
+    fullWidthItem: {
+        width: screenWidth,
+    },
+
+    halfWidthItem: {
+        maxWidth: (screenWidth / 2) - 30,
+    },
+
+    button: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     container: {
         flex: 1,

@@ -32,6 +32,8 @@ import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
 import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
+import Checkout from "./stationarySupply/Checkout";
+import Orders from "./stationarySupply/Orders";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
 import Placement from "./placement/Placement";
@@ -267,6 +269,17 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="FAQs" />
                         })}>
                     </stack.Screen>
+                    <stack.Screen
+                        name='Checkout'
+                        component={Checkout}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Orders'
+                        component={Orders}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
+
                     <stack.Screen
                         name='FitnessAndHealth'
                         component={FitnessAndHealth}
