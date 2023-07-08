@@ -9,5 +9,6 @@ const green = 'green'
 const red = 'red'
 const lightgray = '#cdcdcd'
 const gray = 'gray'
-export { shadowcolor, desctext, white, titletext, black, blue, green, red, lightgray, maroon, gray };
+const yellow = '#faeb16'
+export { shadowcolor, desctext, white, titletext, black, blue, green, red, lightgray, maroon, gray, yellow };
 
