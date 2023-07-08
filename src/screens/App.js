@@ -37,7 +37,7 @@ import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
 import Placement from "./placement/Placement";
 import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import * as colors from "../utils/color";
+import { white } from "../utils/color"
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -58,7 +58,7 @@ const MyHome = () => {
                         iconName = 'email';
                     }
 
-                    return <Icon name={iconName} size={26} color={colors.white} />;
+                    return <Icon name={iconName} size={26} color={white} />;
                 },
                 tabBarLabelStyle: {
                     fontWeight: 'bold',

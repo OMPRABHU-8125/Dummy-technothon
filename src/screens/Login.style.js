@@ -1,16 +1,17 @@
 import { StyleSheet } from "react-native";
+import { black, blue, gray, maroon, white } from "../utils/color";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgb(255,259,400)'
+        backgroundColor: white,
     },
 
     lower: {
         fontSize: 15,
-        color: 'blue',
+        color: blue,
         textDecorationLine: 'underline',
     },
 
@@ -28,30 +29,43 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'rgb(145, 41, 40)',
+        color: maroon,
         fontSize: 40,
         marginBottom: 80
     },
 
-    bottomText: {
-        color: '#606060',
-        fontSize: 15,
-        marginTop: 20
-    },
 
     input: {
         width: '80%',
         height: 40,
-        borderColor: 'gray',
+        borderColor: gray,
         borderWidth: 1,
         marginBottom: 20,
-        paddingHorizontal: 10,
-        color: '#000',
-        borderRadius: 10
+        paddingLeft: 35,
+        color: black,
+        borderRadius: 10,
+    },
+    usericon: {
+        position: 'absolute',
+        left: 1,
+        padding: 10
+    },
+    lockicon: {
+        position: 'absolute',
+        left: 1,
+        padding: 10,
+    },
+    eyeicon: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        right: 1,
+        marginVertical: 5,
+        marginHorizontal: 10,
     },
 
     button: {
-        backgroundColor: '#000',
+        backgroundColor: black,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
@@ -59,7 +73,7 @@ const styles = StyleSheet.create({
         elevation: 10,
     },
     buttonText: {
-        color: 'white',
+        color: white,
         fontSize: 16,
         fontWeight: 'bold',
     },
