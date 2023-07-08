@@ -1,7 +1,7 @@
 import React from "react";
 import {
     View,
-    Text
+    Text,
 } from 'react-native';
 import Login from "./Login";
 import Home from "./Home";
@@ -32,10 +32,14 @@ import FAQ from "./FAQs/faqs";
 import Profile from "./bottomTab/profile";
 import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
+import Checkout from "./stationarySupply/Checkout";
+import Orders from "./stationarySupply/Orders";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import Placement from "./placement/Placement";
+import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import * as colors from "../utils/color";
+import { white } from "../utils/color"
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -56,7 +60,7 @@ const MyHome = () => {
                         iconName = 'email';
                     }
 
-                    return <Icon name={iconName} size={26} color={colors.white} />;
+                    return <Icon name={iconName} size={26} color={white} />;
                 },
                 tabBarLabelStyle: {
                     fontWeight: 'bold',
@@ -266,12 +270,36 @@ const App = () => {
                         })}>
                     </stack.Screen>
                     <stack.Screen
+                        name='Checkout'
+                        component={Checkout}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
+                    <stack.Screen
+                        name='Orders'
+                        component={Orders}
+                        options={{ headershown: true }}>
+                    </stack.Screen>
+
+                    <stack.Screen
                         name='FitnessAndHealth'
                         component={FitnessAndHealth}
                         options={({ navigation }) => ({
                             headerShown: true,
                             header: () => <CustomHeader navigation={navigation} title="Fitness And Health" />
                         })}
+                    />
+                    <stack.Screen
+                        name='PhotoGallery'
+                        component={ImageGrid}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Photo Gallery" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='Placement'
+                        component={Placement}
+                        options={{ headerShown: true }}
                     />
                 </stack.Navigator>
             </NavigationContainer>

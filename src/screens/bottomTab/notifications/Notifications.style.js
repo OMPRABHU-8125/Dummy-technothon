@@ -5,11 +5,8 @@ import { cartborderradius, elevationsize } from '../../../utils/constant';
 const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
-    main: {
-        height: windowHeight - 90
-    },
+
     container: {
-        flex: 1,
         paddingHorizontal: 25,
         paddingTop: 20,
     },
@@ -19,7 +16,7 @@ const styles = StyleSheet.create({
         backgroundColor: white,
         elevation: elevationsize,
         borderRadius: cartborderradius,
-        padding: 10,
+        padding: 20,
     },
 
     heading: {

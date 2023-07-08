@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { black, shadowcolor, titletext, white } from "../../utils/color";
-import { elevationsize } from "../../utils/constant";
+import { shadowcolor, white, titletext, black } from "../../utils/color";
+import { elevationsize } from "../../utils/constant"
 
 const Style = StyleSheet.create({
     renderView: {
@@ -12,7 +12,7 @@ const Style = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderBottomRightRadius: 20,
         overflow: 'visible',
-        backgroundColor: white
+        backgroundColor: white,
     },
     titleText: {
         fontSize: 40,
