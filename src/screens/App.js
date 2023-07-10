@@ -312,33 +312,45 @@ const App = () => {
                     <stack.Screen
                         name='DigitalAcademy'
                         component={DigitalAcademy}
-                        options={{ headerShown: false }}
-                    />
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Digital Academy" />
+                        })}                    />
                     <stack.Screen
                         name='Marketing'
                         component={Marketing}
-                        options={{ headerShown: false }}
-                    />
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Digital Marketing" />
+                        })}                    />
                     <stack.Screen
                         name='Technology'
                         component={Technology}
-                        options={{ headerShown: false }}
-                    />
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Digital and Technology" />
+                        })}                    />
                      <stack.Screen
                         name='Skill'
                         component={Skill}
-                        options={{ headerShown: false }}
-                    />
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Skill Development" />
+                        })}                    />
                      <stack.Screen
                         name='Pharmacy'
                         component={Pharmacy}
-                        options={{ headerShown: false }}
-                    />
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Pharmacy and Science" />
+                        })}                    />
                      <stack.Screen
                         name='Management'
                         component={Management}
-                        options={{ headerShown: false }}
-                    />
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Management" />
+                        })}                    />
                 </stack.Navigator>
             </NavigationContainer>
         </Provider >
