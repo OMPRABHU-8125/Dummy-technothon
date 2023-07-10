@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { elevationsize } from "../utils/constant";
-import { black, blue, shadowcolor, titletext, white } from "../utils/color";
+import { elevationsize } from "../../utils/constant";
+import { black, blue, shadowcolor, titletext, white } from "../../utils/color";
 
 const windowWidth = Dimensions.get('window').width
 

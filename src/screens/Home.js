@@ -69,17 +69,21 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'FAQs') {
                         navigation.navigate("FAQ")
                     }
-                    else if (item.title == 'Fitness And Health'){
-                         navigation.navigate("FitnessAndHealth")
+                    else if (item.title == 'Fitness And Health') {
+                        navigation.navigate("FitnessAndHealth")
                     }
                     else if (item.title == 'Digital Academy'){
                         navigation.navigate("DigitalAcademy")
+                    }
+                    else if (item.title == 'Photo Gallery') {
+                        navigation.navigate("PhotoGallery")
+                    }
+                    else if (item.title == 'Placement'){
+                        navigation.navigate("Placement")
                    }
                 }
 
                 }>
-
-
 
                 <Card title={item.title} />
             </TouchableOpacity >
@@ -91,14 +95,7 @@ const Home = ({ navigation }) => {
                 source={require('../assets/imgs/Swami_Vivekanand.jpg')}
                 style={styles.image}>
             </ImageBackground>
-            <TouchableOpacity
-                style={styles.logoutbutton}
-                onPress={async () => {
-                    navigation.navigate('Login');
-                    await AsyncStorage.removeItem('userData');
-                }}>
-                <Image source={require('../assets/imgs/logoutimage.png')} style={styles.logoutimage} />
-            </TouchableOpacity>
+
             <View style={styles.welcome}>
                 <Text style={styles.welcome_text}>WELCOME TO VES</Text>
             </View>
@@ -107,8 +104,10 @@ const Home = ({ navigation }) => {
                 renderItem={renderCard}
                 keyExtractor={item => item.id}
                 numColumns={2}
+                contentContainerStyle={styles.contentContainer}
             />
         </View>
+
     );
 };
 

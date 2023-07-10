@@ -9,6 +9,7 @@ import {
 import { useAppSelector, useAppDispatch } from '../../../store/hook';
 import styles from './Cart.styles';
 import { removeItemFromCart } from '../../../store/slice/cartSlice';
+import Checkout from './Checkout';
 
 const Cart = ({ navigation }) => {
     const items = useAppSelector(state => state.cart.items)
@@ -67,7 +68,10 @@ const Cart = ({ navigation }) => {
                         <Text style={styles.bottomText}>Total payable amount:</Text>
                         <Text style={styles.bottomText}>{total} Rs</Text>
                     </View>
-                    <TouchableOpacity style={styles.checkoutButton}>
+                    <TouchableOpacity
+                        style={styles.checkoutButton}
+                        onPress={() => navigation.navigate('Checkout', { total: total })}
+                    >
                         <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
                     </TouchableOpacity>
 
