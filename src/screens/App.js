@@ -123,7 +123,10 @@ const App = () => {
                     <stack.Screen
                         name='SignUp'
                         component={SignUp}
-                        options={{ headerShown: false }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="SignUp" />,
+                        })}
                     />
                     <stack.Screen
                         name='Alumni'
