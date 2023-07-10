@@ -43,7 +43,7 @@ const Blog = ({ navigation }) => {
                 id: doc.id,
                 ...doc.data(),
             }));
-            const sortedDocuments = fetchedDocuments.sort((a, b) => a.postedOn.toDate() - b.postedOn.toDate());
+            const sortedDocuments = fetchedDocuments.sort((a, b) => b.postedOn.toDate() - a.postedOn.toDate());
 
             setBlogData(sortedDocuments);
 
