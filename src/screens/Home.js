@@ -75,9 +75,12 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'Photo Gallery') {
                         navigation.navigate("PhotoGallery")
                     }
-                    else if (item.title == 'Placement'){
+                    else if (item.title == 'Placement') {
                         navigation.navigate("Placement")
-                   }
+                    }
+                    else if (item.title == 'Blog') {
+                        navigation.navigate("Blog")
+                    }
                 }
 
                 }>
