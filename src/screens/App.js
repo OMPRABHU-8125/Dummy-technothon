@@ -17,6 +17,7 @@ import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 import Alumni from "./alumni/Alumni";
@@ -33,6 +34,13 @@ import Profile from "./bottomTab/profile";
 import Notifications from "./bottomTab/notifications";
 import ContactUs from "./bottomTab/contactUs";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import DigitalAcademy from "./digitalAcademy/DigitalAcademy";
+import Marketing from "./digitalAcademy/Marketing";
+import Technology from "./digitalAcademy/Technology";
+import Skill from "./digitalAcademy/Skill";
+import Pharmacy from "./digitalAcademy/Pharmacy";
+import Management from "./digitalAcademy/Management";
+
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -182,6 +190,36 @@ const App = () => {
                         name='FitnessAndHealth'
                         component={FitnessAndHealth}
                         options={{ headerShown: true }}
+                    />
+                    <stack.Screen
+                        name='DigitalAcademy'
+                        component={DigitalAcademy}
+                        options={{ headerShown: false }}
+                    />
+                    <stack.Screen
+                        name='Marketing'
+                        component={Marketing}
+                        options={{ headerShown: false }}
+                    />
+                    <stack.Screen
+                        name='Technology'
+                        component={Technology}
+                        options={{ headerShown: false }}
+                    />
+                     <stack.Screen
+                        name='Skill'
+                        component={Skill}
+                        options={{ headerShown: false }}
+                    />
+                     <stack.Screen
+                        name='Pharmacy'
+                        component={Pharmacy}
+                        options={{ headerShown: false }}
+                    />
+                     <stack.Screen
+                        name='Management'
+                        component={Management}
+                        options={{ headerShown: false }}
                     />
                 </stack.Navigator>
             </NavigationContainer>

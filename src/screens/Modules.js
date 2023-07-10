@@ -59,6 +59,11 @@ const modules = [
         title: 'Fitness And Health',
         login: ['Student', 'Parent', 'Teacher']
     },
+    {
+        id:13,
+        title:'Digital Academy',
+        login:['Student']
+    },
 ]
 
 export default modules;
