@@ -40,6 +40,7 @@ import Placement from "./placement/Placement";
 import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { white } from "../utils/color"
+import Blog from "./blog";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -299,7 +300,18 @@ const App = () => {
                     <stack.Screen
                         name='Placement'
                         component={Placement}
-                        options={{ headerShown: true }}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Placement" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='Blog'
+                        component={Blog}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="VES Blog" />
+                        })}
                     />
                 </stack.Navigator>
             </NavigationContainer>
