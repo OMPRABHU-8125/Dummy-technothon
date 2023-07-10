@@ -40,6 +40,7 @@ import Placement from "./placement/Placement";
 import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { white } from "../utils/color"
+import Calendar from "./holidayCalendar/HolidayCalendar";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -254,11 +255,11 @@ const App = () => {
                         })}>
                     </stack.Screen>
                     <stack.Screen
-                        name='HolidayCalendar'
-                        component={HolidayCalendar}
+                        name='Calendar'
+                        component={Calendar}
                         options={({ navigation }) => ({
                             headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="Holiday Calendar" />
+                            header: () => <CustomHeader navigation={navigation} title="Calendar" />
                         })}
                     />
                     <stack.Screen

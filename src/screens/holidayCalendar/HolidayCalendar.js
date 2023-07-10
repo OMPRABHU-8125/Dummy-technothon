@@ -1,134 +1,151 @@
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
-import firebase from '@react-native-firebase/app';
-//import styles from './HolidayCalendar.Styles'
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import ModalDropdown from "react-native-modal-dropdown";
+import styles from "./HolidayCalendar.Styles";
+import Icon from "react-native-vector-icons/Ionicons";
+import { black } from "../../utils/color";
 
-const HolidayCalendar= () => {
-  const [holidays, setHolidays] = useState([]);
+const Calendar = () => {
+  const currentDate = new Date();
+  const [year, setYear] = useState(currentDate.getFullYear());
+  const [month, setMonth] = useState(currentDate.getMonth());
 
-  useEffect(() => {
-    const fetchHolidays = async () => {
-      try {
-        const snapshot = await firebase.firestore().collection('Holidays').get();
-        const holidayData = snapshot.docs.map(doc => doc.data());
-        const sortedHolidays = holidayData.sort((a, b) => Date.parse(a.id) - Date.parse(b.id));
-        setHolidays(sortedHolidays);
-      } catch (error) {
-        console.log('Error fetching holidays: ', error);
-      }
-    };
+  const daysInWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const monthsOfYear = [
+    "January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December"
+  ];
+  // Indian Festivals aahet
+  const indianFestivals = [
+    { day: 14, month: 1, name: "Makar Sankranti" },
+    { day: 21, month: 3, name: "Holi" },
+    { day: 2, month: 4, name: "Ram Navami" },
+    { day: 14, month: 4, name: "Baisakhi" },
+    { day: 16, month: 8, name: "Ganesh Chaturthi" },
+    { day: 2, month: 10, name: "Gandhi Jayanti" },
+    { day: 4, month: 10, name: "Navaratri" },
+    { day: 14, month: 10, name: "Dussehra" },
+    { day: 4, month: 11, name: "Diwali" },
+    { day: 25, month: 12, name: "Christmas" },
+  ];
 
-    fetchHolidays();
-  }, []);
+  const getDaysInMonth = (year, month) => {
+    return new Date(year, month + 1, 0).getDate();
+  };
 
-  const renderHolidayItem = ({ item }) => (
-    <View style={styles.row}>
-      <View style={styles.column}>
-        <Text style={styles.date}>{item.date}</Text>
+  const handlePreviousMonth = () => {
+    setMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
+  };
+
+  const handleNextMonth = () => {
+    setMonth((prevMonth) => (prevMonth === 11 ? 0 : prevMonth + 1));
+  };
+
+  const handleYearChange = (index, value) => {
+    setYear(parseInt(value));
+  };
+
+  const renderWeekdays = () => {
+    return (
+      <View style={styles.weekdays}>
+        {daysInWeek.map((weekday, index) => (
+          <Text key={index} style={styles.weekday}>{weekday}</Text>
+        ))}
       </View>
-      <View style={styles.column}>
-        <Text style={styles.holiday}>{item.holiday}</Text>
+    );
+  };
+
+  const renderCalendarDays = () => {
+    const totalDays = getDaysInMonth(year, month);
+    const firstDay = new Date(year, month, 1).getDay();
+
+    const calendarDays = Array.from({ length: totalDays }, (_, index) => index + 1);
+    return (
+      <View style={styles.calendarDays}>
+        {Array(firstDay)
+          .fill(null)
+          .map((_, index) => (
+            <Text key={`empty-${index}`} style={styles.emptyDay}></Text>
+          ))}
+        {calendarDays.map((day) => {
+          const isFestivalDay = indianFestivals.some(
+            (festival) => festival.day === day && festival.month === month + 1
+          );
+          return (
+            <Text
+              key={day}
+              style={[
+                styles.day,
+                new Date(year, month, day).getDay() === 0 ? styles.sunday : null,
+                isFestivalDay ? styles.festivalDay : null,
+              ]}
+            >
+              {day}
+            </Text>
+          );
+        })}
       </View>
-    </View>
-  );
+    );
+  };
+
+  const renderFestivalList = () => {
+    const festivalsInMonth = indianFestivals.filter(
+      (festival) => festival.month === month + 1
+    );
+
+    return (
+      <View style={styles.festivalList}>
+        <Text style={styles.festivalTitle}>Festivals in {monthsOfYear[month]}</Text>
+        {festivalsInMonth.map((festival, index) => (
+          <View key={index} style={styles.festivalCard}>
+            <Text style={styles.festivalDate}>{festival.day}/{festival.month}</Text>
+            <Text style={styles.festivalName}>{festival.name}</Text>
+          </View>
+        ))
+        }
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Text style={styles.header1}>Date</Text>
-        <Text style={styles.header2}>Holiday</Text>
+      <View style={styles.header}>
+        <View style={styles.buttonview}>
+          <TouchableOpacity onPress={handlePreviousMonth}>
+            <Text style={styles.button}>
+              <Icon name="md-chevron-back-circle-outline" size={28}></Icon>
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.month}>{monthsOfYear[month]}</Text>
+        <ModalDropdown
+          options={[
+            "2000", "2001", "2002", "2003", "2004", "2005", "2006",
+            "2007", "2008", "2009", "2010", "2011", "2012", "2013",
+            "2014", "2015", "2016", "2017", "2018", "2019", "2020",
+            "2021", "2022", "2023",
+          ]}
+          defaultValue={String(year)}
+          onSelect={handleYearChange}
+          textStyle={styles.dropdownText}
+          dropdownStyle={styles.dropdownStyle}
+        />
+        <View style={styles.buttonview}>
+          <TouchableOpacity onPress={handleNextMonth}>
+            <Text style={styles.button}>
+              <Icon name="md-chevron-forward-circle-outline" size={28} ></Icon>
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <FlatList
-        data={holidays}
-        keyExtractor={item => item.id}
-        renderItem={renderHolidayItem}
-      />
+      <View style={styles.flatlist}>
+        {renderWeekdays()}
+        {renderCalendarDays()}
+        {renderFestivalList()}
+      </View>
+
     </View>
   );
 };
-const styles = StyleSheet.create({
-    
-  header1:
-{
-  paddingVertical: 10,
-paddingHorizontal: 33,
-  borderWidth: 1,
-  color: 'black', 
-  fontWeight: 'bold', 
-   margin:20,
-   width:120,
-   height:60,
-   alignItems:'center',
-   justifyContent:'center',
-   margin:30,
-   backgroundColor:'#4bf542',
-   fontSize:30
-},
 
-header2:
-{
-  padding: 15, 
-  borderWidth: 1,
-  color: 'black', 
-  fontWeight: 'bold', 
-   margin:5,
-   width:130,
-   height:60,
-   alignItems:'center',
-   justifyContent:'center',
-   margin:30,
-   backgroundColor:'#4bf542',
-   fontSize:27
-
-},
-container: {
-flex: 3,
-padding: 10,
-backgroundColor: '#a82c2c',
-
-},
-row: {
-flexDirection: 'row',
-alignItems: 'center',
-justifyContent: 'space-between',
-paddingVertical: 5,
-paddingHorizontal: 10,
-borderBottomWidth: 1,
-borderBottomColor: '#ccc',
-},
-
-date:
-{
-  padding: 10, 
-  borderWidth: 1,
-  color: 'black', 
-  fontWeight: 'bold', 
-   margin:20,
-   width:120,
-   height:50,
-   alignItems:'center',
-   justifyContent:'center',
-   margin:30,
-   backgroundColor:'#168fc7',
-   fontSize:20
-},
-holiday:
-{
-padding: 10, 
-borderWidth: 1,
-color: 'black', 
-fontWeight: 'bold', 
- margin:5,
- width:130,
- height:60,
- alignItems:'center',
- justifyContent:'center',
- margin:30,
- backgroundColor:'#42f5b0',
- fontSize:20,
- fontFamily:'Roboto'
-},
-}
-)
-
-export default HolidayCalendar;
+export default Calendar;
