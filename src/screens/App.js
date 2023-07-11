@@ -17,7 +17,6 @@ import DailyAttendance from "./attendance/DailyAttendance";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 import Alumni from "./alumni/Alumni";
@@ -38,7 +37,7 @@ import Orders from "./stationarySupply/Orders";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
 import DigitalAcademy from "./digitalAcademy/DigitalAcademy";
-import Marketing from "./digitalAcademy/Marketing";
+import KnowMore from "./digitalAcademy/Detail";
 import Technology from "./digitalAcademy/Technology";
 import Skill from "./digitalAcademy/Skill";
 import Pharmacy from "./digitalAcademy/Pharmacy";
@@ -317,39 +316,11 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="Digital Academy" />
                         })}                    />
                     <stack.Screen
-                        name='Marketing'
-                        component={Marketing}
+                        name='KnowMore'
+                        component={KnowMore}
                         options={({ navigation }) => ({
                             headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="Digital Marketing" />
-                        })}                    />
-                    <stack.Screen
-                        name='Technology'
-                        component={Technology}
-                        options={({ navigation }) => ({
-                            headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="Digital and Technology" />
-                        })}                    />
-                     <stack.Screen
-                        name='Skill'
-                        component={Skill}
-                        options={({ navigation }) => ({
-                            headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="Skill Development" />
-                        })}                    />
-                     <stack.Screen
-                        name='Pharmacy'
-                        component={Pharmacy}
-                        options={({ navigation }) => ({
-                            headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="Pharmacy and Science" />
-                        })}                    />
-                     <stack.Screen
-                        name='Management'
-                        component={Management}
-                        options={({ navigation }) => ({
-                            headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="Management" />
+                            header: () => <CustomHeader navigation={navigation} title="Know More" />
                         })}                    />
                 </stack.Navigator>
             </NavigationContainer>

@@ -6,7 +6,7 @@ const windowWidth = Dimensions.get('window').width
 
 const Style = StyleSheet.create({
     image: {
-        width: windowWidth,
+        width: '100%',
         height: 130,
         resizeMode: 'cover',
     },
@@ -20,7 +20,8 @@ const Style = StyleSheet.create({
         flexDirection: 'row',
     },
     im: {
-        width: windowWidth / 2 - 10,
+        flex:1,
+        width: windowWidth / 2 -5,
         height: 200,
         margin: 4,
         resizeMode: 'contain',
