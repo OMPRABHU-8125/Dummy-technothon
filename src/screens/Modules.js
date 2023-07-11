@@ -70,7 +70,7 @@ const modules = [
         login: ['Student', 'Parent']
     },
     {
-        id: 14,
+        id: 15,
         title: 'Blog',
         login: ['Student', 'Parent', 'Teacher']
     },
