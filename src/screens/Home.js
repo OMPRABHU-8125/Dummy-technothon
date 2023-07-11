@@ -64,7 +64,7 @@ const Home = ({ navigation }) => {
                         navigation.navigate("Fees")
                     }
                     else if (item.title == 'Holiday Calender') {
-                        navigation.navigate("HolidayCalendar")
+                        navigation.navigate("Calendar")
                     }
                     else if (item.title == 'FAQs') {
                         navigation.navigate("FAQ")
@@ -78,9 +78,12 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'Photo Gallery') {
                         navigation.navigate("PhotoGallery")
                     }
-                    else if (item.title == 'Placement'){
+                    else if (item.title == 'Placement') {
                         navigation.navigate("Placement")
-                   }
+                    }
+                    else if (item.title == 'Blog') {
+                        navigation.navigate("Blog")
+                    }
                 }
 
                 }>
