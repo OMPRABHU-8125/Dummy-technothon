@@ -79,62 +79,125 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        margin: 16,
-    },
-
-    modal: {
-        flex: 1,
-        alignItems: 'center',
-        padding: 20
+        marginTop: 10,
+        marginRight: 9
     },
 
     modalContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        alignItems: 'flex - start',
+        backgroundColor: 'white',
+        padding: 30
     },
     modalContent: {
-        backgroundColor: COLORS.white,
+        backgroundColor: 'white',
         padding: 20,
         borderRadius: 10,
         width: '80%',
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
     },
     modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
-        color: COLORS.black
     },
+    commentInput: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 10,
+    },
+    commentButton: {
+        backgroundColor: COLORS.PRIMARY,
+        color: 'white',
+        textAlign: 'center',
+        padding: 10,
+        borderRadius: 5,
+    },
+    commentContainer: {
+        alignContent: 'flex-start',
+        marginBottom: 10,
+        borderWidth: 1,
+        padding: 10,
+        elevation: 1
+    },
+    commentText: {
+        fontSize: 16,
+        color: 'black',
+        marginLeft: 20
+    },
+    commentDate: {
+        fontSize: 12,
+        color: 'gray',
+        alignSelf: 'flex-end'
+    },
+
+    commentTag: {
+        fontSize: 12,
+        color: 'gray',
+    },
+
+    selectedPostContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+
+    commentHeading: {
+        color: COLORS.black,
+        fontSize: 20,
+        marginBottom: 40
+    },
+
+
     input: {
+        width: '83%',
         height: 40,
-        borderColor: COLORS.gray,
         borderWidth: 1,
-        marginBottom: 10,
+        borderColor: '#000',
+        marginBottom: 5,
         paddingHorizontal: 10,
+        borderRadius: 10,
     },
-    inputPost: {
-        borderColor: COLORS.gray,
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
-    },
-    submitButton: {
-        backgroundColor: COLORS.blue,
+
+    button: {
+        backgroundColor: COLORS.black,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
-        alignSelf: 'center',
+        marginBottom: 7,
+        elevation: 10,
+    },
+    buttonText: {
+        color: COLORS.white,
+        fontSize: 16,
+        justifyContent: 'center'
+    },
+
+    row: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'base-line'
+    },
+
+    button1: {
+        backgroundColor: COLORS.black,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderRadius: 5,
         marginBottom: 10,
-        marginTop: 10
+        elevation: 10,
     },
-    submitButtonText: {
-        color: 'white',
-        fontWeight: 'bold',
-    },
+
+    likeContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    }
 });
 
 export default styles;

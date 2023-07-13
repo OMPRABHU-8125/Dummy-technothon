@@ -22,10 +22,13 @@ import RadioForm, {
     RadioButtonInput,
     RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+import bcrypt from 'react-native-bcrypt';
+
 
 const SignUp = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
@@ -103,81 +106,101 @@ const SignUp = ({ navigation }) => {
         }
     };
 
-    const handleSignup = () => {
+    const handleSignup = async () => {
         if (
             !email ||
             !password ||
+            !confirmPassword ||
             !firstName ||
             !lastName ||
             !gender ||
             !phoneNo ||
             !loginType ||
             !isVerified
-        )
+        ) {
             Alert.alert('Error', 'Fields cannot be empty');
-        else {
-            if (emails.includes(email)) Alert.alert('Error', 'User already exists');
-            else {
-                const user = {
-                    email,
-                    password,
-                    firstName,
-                    lastName,
-                    gender,
-                    phoneNo,
-                    loginType,
-                    grNo,
-                    address,
-                    child: loginType === 'Parent' ? child : null,
-                };
+        } else {
+            if (password !== confirmPassword) {
+                Alert.alert('Error', 'Password does not match');
+            } else if (emails.includes(email)) {
+                Alert.alert('Error', 'User already exists');
+            } else {
+                const saltRounds = 5;
+                try {
+                    const hashedPassword = await new Promise((resolve, reject) => {
+                        bcrypt.hash(password, saltRounds, (error, hash) => {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(hash);
+                            }
+                        });
+                    });
 
-                // Save the user document to the Firestore database
-                firestore()
-                    .collection('Users')
-                    .add(user)
-                    .then(() => {
-                        Alert.alert(
-                            'Success',
-                            'User created Successfully',
-                            [
-                                {
-                                    text: 'Ok',
-                                },
-                                {
-                                    text: 'Go to Login Screen',
-                                    onPress: () => {
-                                        navigation.navigate('Login');
+                    const user = {
+                        email,
+                        password: hashedPassword,
+                        firstName,
+                        lastName,
+                        gender,
+                        phoneNo,
+                        loginType,
+                        grNo,
+                        address,
+                        child: loginType === 'Parent' ? child : null,
+                    };
+
+                    // Save the user document to the Firestore database
+                    firestore()
+                        .collection('Users')
+                        .add(user)
+                        .then(() => {
+                            Alert.alert(
+                                'Success',
+                                'User created Successfully',
+                                [
+                                    {
+                                        text: 'Ok',
                                     },
-                                },
-                            ],
-                            [
+                                    {
+                                        text: 'Go to Login Screen',
+                                        onPress: () => {
+                                            navigation.navigate('Login');
+                                        },
+                                    },
+                                ],
                                 {
                                     cancelable: true,
                                     onDismiss: () => {
-                                        setEmail('')
-                                        setPassword('')
-                                        setFirstName('')
-                                        setLastName('')
-                                        setGender('')
-                                        setContactNo('')
-                                        setLoginType('')
-                                        setAddress('')
-                                        setGrNo('')
-                                        setChild('')
-                                    }
-                                },
-                            ],
-                        );
+                                        setEmail('');
+                                        setPassword('');
+                                        setFirstName('');
+                                        setLastName('');
+                                        setGender('');
+                                        setContactNo('');
+                                        setLoginType('');
+                                        setAddress('');
+                                        setGrNo('');
+                                        setChild('');
+                                    },
+                                }
+                            );
 
-                        // Handle successful signup, such as navigating to the login screen
-                    })
-                    .catch((error) => {
-                        console.error('Error creating user:', error);
-                        // Handle error during signup
-                    });
+                            // Handle successful signup, such as navigating to the login screen
+                        })
+                        .catch((error) => {
+                            console.error('Error creating user:', error);
+                            // Handle error during signup
+                        });
+                } catch (error) {
+                    console.error('Error hashing password:', error);
+                    // Handle error during password hashing
+                }
             }
         }
     };
+
+
 
     return (
         <ScrollView style={styles.container}>
@@ -205,10 +228,8 @@ const SignUp = ({ navigation }) => {
                     secureTextEntry
                     placeholderTextColor={COLOR.gray}
                     color={COLOR.black}
-                    onEndEditing={(text) => {
-                        if (text !== password)
-                            Alert.alert("Error", "Password does not match")
-                    }}
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
                 />
                 <TextInput
                     style={styles.input}
