@@ -71,6 +71,20 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
     },
+    selectedQueryTypeText:{
+      fontSize: 16,
+      marginVertical: 5,
+      color: black,
+    },
+    QueryTypeinput: {
+      borderWidth: 1,
+      borderColor: black,
+      padding: 10,
+      marginVertical: 5,
+      height: 50,
+      color: black,
+      borderRadius: 10,
+    },
   });
 
   export default styles;
