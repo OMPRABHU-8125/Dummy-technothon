@@ -32,6 +32,7 @@ const Style = StyleSheet.create({
     image: {
         width: "100%",
         height: 200,
+        resizeMode:'contain',
         alignSelf: 'center',
         borderColor: white,
         margin: 10

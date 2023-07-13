@@ -25,21 +25,29 @@ const Splash = () => {
             dispatch(setUserProfile(user));
 
             if (userData == null) {
-                setTimeout(() => {
-                    navigation.navigate("Login", { modules: modules });
-                }, 2000)
-            } else {
-                const filtered = modules.filter((module) =>
-                    module.login.includes(user.loginType));
-
-                dispatch(setModules(filtered));
-
-                setTimeout(() => {
-                    navigation.navigate("HomeScreen");
-                }, 1000);
+                const guest = {
+                    email:null,
+                    fees: null,
+                    firstName: 'Guest',
+                    gender: null,
+                    lastName: null,
+                    loginType:'Guest',
+                    password: null,
+                    phoneNo: null
+                }
+                dispatch(setUserProfile(guest));
+                const filtered1 = modules.filter((module) =>
+                module.login.includes(guest.loginType));
+            dispatch(setModules(filtered1));
+            }else{
+            const filtered = modules.filter((module) =>
+                module.login.includes(user.loginType));
+            dispatch(setModules(filtered));
             }
-
-
+            setTimeout(() => {
+                navigation.navigate("HomeScreen");
+            }, 1000);
+            
         } catch (error) {
             console.log('Error:', error);
         }

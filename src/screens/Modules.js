@@ -2,7 +2,7 @@ const modules = [
     {
         id: 1,
         title: 'Alumni and Mentorship',
-        login: ['Student', 'Teacher']
+        login: ['Student', 'Teacher','Guest']
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ const modules = [
     {
         id: 4,
         title: 'Enquiry Management',
-        login: ['Student', 'Parent', 'Teacher']
+        login: ['Student', 'Parent', 'Teacher','Guest']
     },
     {
         id: 5,
@@ -27,17 +27,17 @@ const modules = [
     {
         id: 6,
         title: 'Photo Gallery',
-        login: ['Student', 'Teacher']
+        login: ['Student', 'Teacher','Guest']
     },
     {
         id: 7,
         title: "About Us",
-        login: ['Student', 'Parent',]
+        login: ['Student', 'Parent','Guest']
     },
     {
         id: 8,
         title: 'FAQs',
-        login: ['Student', 'Parent', 'Teacher']
+        login: ['Student', 'Parent', 'Teacher','Guest']
     },
     {
         id: 9,
