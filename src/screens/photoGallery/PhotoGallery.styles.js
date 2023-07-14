@@ -52,8 +52,7 @@ const styles = StyleSheet.create({
     },
     dropdownText: {
         fontSize: 24,
-        color: white,
-        backgroundColor: maroon
+        color: black,
 
     },
     dropdownStyle: {
