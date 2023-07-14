@@ -2,13 +2,14 @@ import { StyleSheet } from "react-native";
 import { Dimensions } from 'react-native';
 import * as COLORS from '../../utils/color';
 import * as CONST from '../../utils/constant'
+import { responsiveScreenWidth, responsiveScreenHeight, responsiveHeight, respo } from "react-native-responsive-dimensions";
 
 const windowWidth = Dimensions.get("window").width;
 const windowheight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
     card1: {
-        width: windowWidth - 20,
+        width: responsiveScreenWidth(90),
         backgroundColor: COLORS.white,
         justifyContent: 'center',
         margin: 10,
@@ -17,7 +18,21 @@ const styles = StyleSheet.create({
         elevation: 10,
         paddingHorizontal: 20,
         paddingVertical: 10,
-        borderRadius: 20
+        borderRadius: 20,
+    },
+
+    card: {
+        width: responsiveScreenWidth(85),
+        backgroundColor: COLORS.white,
+        justifyContent: 'center',
+        margin: 10,
+        shadowColor: COLORS.shadowcolor,
+        backgroundColor: COLORS.white,
+        elevation: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 20,
+        marginTop: 20
     },
 
     title: {
@@ -34,7 +49,13 @@ const styles = StyleSheet.create({
     },
 
     name: {
-        color: COLORS.gray
+        color: COLORS.gray,
+    },
+
+    likes: {
+        color: COLORS.gray,
+        marginLeft: 5,
+        marginTop: 5
     },
 
     date: {
@@ -53,7 +74,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        position: 'relative'
+        position: 'relative',
+        alignItems: 'center'
     },
 
     heading: {
@@ -64,7 +86,8 @@ const styles = StyleSheet.create({
         color: COLORS.black,
         textAlign: 'right',
         marginRight: 20,
-        fontFamily: 'sans-serif'
+        fontFamily: 'sans-serif',
+        alignSelf: 'flex-end'
     },
 
     titleContainer: {
@@ -80,7 +103,8 @@ const styles = StyleSheet.create({
 
     icon: {
         marginTop: 10,
-        marginRight: 9
+        marginRight: 9,
+        paddingHorizontal: 5
     },
 
     modalContainer: {
@@ -88,7 +112,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex - start',
         backgroundColor: 'white',
-        padding: 30
+        padding: 20,
     },
     modalContent: {
         backgroundColor: 'white',
@@ -98,8 +122,8 @@ const styles = StyleSheet.create({
     },
     closeButton: {
         position: 'absolute',
-        top: 10,
-        right: 10,
+        top: -5,
+        right: -5,
     },
     modalTitle: {
         fontSize: 18,
@@ -125,7 +149,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderWidth: 1,
         padding: 10,
-        elevation: 1
+        borderRadius: 10,
+        width: responsiveScreenWidth(85),
+        alignSelf: 'center'
     },
     commentText: {
         fontSize: 16,
@@ -156,7 +182,7 @@ const styles = StyleSheet.create({
 
 
     input: {
-        width: '83%',
+        width: responsiveScreenWidth(75),
         height: 40,
         borderWidth: 1,
         borderColor: '#000',
@@ -171,7 +197,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 5,
         marginBottom: 7,
-        elevation: 10,
+        width: responsiveScreenWidth(85),
+        alignSelf: 'center',
+        marginTop: 20
     },
     buttonText: {
         color: COLORS.white,
@@ -182,7 +210,14 @@ const styles = StyleSheet.create({
     row: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        alignItems: 'base-line'
+        alignItems: 'base-line',
+    },
+
+    rowInput: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'base-line',
+        marginTop: 20
     },
 
     button1: {
@@ -194,10 +229,6 @@ const styles = StyleSheet.create({
         elevation: 10,
     },
 
-    likeContainer: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    }
 });
 
 export default styles;

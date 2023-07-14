@@ -67,6 +67,7 @@ const Blog = ({ navigation }) => {
                 } else {
                     console.error('Document not found');
                 }
+                getData()
             } catch (error) {
                 console.error('Error adding comment:', error);
             }
@@ -118,6 +119,8 @@ const Blog = ({ navigation }) => {
                 setLikes(likes - 1);
                 setIsLiked(false);
             }
+
+            getData();
         } catch (error) {
             console.error('Error liking post:', error);
         }
@@ -148,6 +151,7 @@ const Blog = ({ navigation }) => {
                 .doc(selectedPost);
             documentRef.delete();
             Alert.alert('Success', 'Post deleted :(');
+            getData();
         } catch (error) {
             console.error('Error deleting document:', error);
         }
@@ -231,13 +235,13 @@ const Blog = ({ navigation }) => {
                                 onPress={() => handleLike(item.id)}
                             >
                                 <AnotherIcon
-                                    name={isLiked ? 'heart' : 'heart-o'}
+                                    name={item.likedBy.includes(user.email) ? 'heart' : 'heart-o'}
                                     size={20}
-                                    color={isLiked ? COLORS.red : COLORS.black}
+                                    color={item.likedBy.includes(user.email) ? COLORS.red : COLORS.black}
                                     style={styles.icon}
                                 />
                             </TouchableOpacity>
-                            <Text style={styles.name}>{item.likes}</Text>
+                            <Text style={styles.likes}>{item.likes} Likes</Text>
                         </View>
                     </View>
                 )}
@@ -251,7 +255,7 @@ const Blog = ({ navigation }) => {
                     <ScrollView>
                         {selectedPost ? (
                             <View style={styles.selectedPostContainer}>
-                                <View style={styles.card1}>
+                                <View style={styles.card}>
                                     <View style={styles.titleContainer}>
                                         <Text style={styles.title}>
                                             {selectedPost.title}
@@ -307,7 +311,7 @@ const Blog = ({ navigation }) => {
                             </View>
                         ))}
                         {textBoxVisible ? (
-                            <View style={styles.row}>
+                            <View style={styles.rowInput}>
                                 <TextInput
                                     style={styles.input}
                                     placeholder="Add a comment"
