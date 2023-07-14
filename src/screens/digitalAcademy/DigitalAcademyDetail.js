@@ -5,7 +5,7 @@ import Skill from "./Skill";
 import Pharmacy from "./Pharmacy";
 import Management from "./Management";
 
-const KnowMore = ({ route }) => {
+const DigitalAcademyDetail = ({ route }) => {
     const { itemTitle } = route.params;
         if (itemTitle == 'Marketing') {
             return<Marketing />
@@ -27,4 +27,4 @@ const KnowMore = ({ route }) => {
         }
 
 }
-export default KnowMore
+export default DigitalAcademyDetail

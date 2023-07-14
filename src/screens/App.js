@@ -37,12 +37,7 @@ import Orders from "./stationarySupply/Orders";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
 import DigitalAcademy from "./digitalAcademy/DigitalAcademy";
-import KnowMore from "./digitalAcademy/Detail";
-import Technology from "./digitalAcademy/Technology";
-import Skill from "./digitalAcademy/Skill";
-import Pharmacy from "./digitalAcademy/Pharmacy";
-import Management from "./digitalAcademy/Management";
-
+import DigitalAcademyDetail from "./digitalAcademy/DigitalAcademyDetail";
 import Placement from "./placement/Placement";
 import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -332,11 +327,11 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="Digital Academy" />
                         })}                    />
                     <stack.Screen
-                        name='KnowMore'
-                        component={KnowMore}
+                        name='DigitalAcademyDetail'
+                        component={DigitalAcademyDetail}
                         options={({ navigation }) => ({
                             headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="Know More" />
+                            header: () => <CustomHeader navigation={navigation} title="Digital Academy Detail" />
                         })}                    />
                 </stack.Navigator>
             </NavigationContainer>

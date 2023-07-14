@@ -32,7 +32,7 @@ const DigitalAcademy = ({ navigation }) => {
                 <Text style={Style.heading1}>DIGITAL MARKETING</Text>
                 <TouchableOpacity
                     style={Style.button}
-                    onPress={() => navigation.navigate('KnowMore', {itemTitle:'Marketing'})}>
+                    onPress={() => navigation.navigate('DigitalAcademyDetail', {itemTitle:'Marketing'})}>
                     <Text style={Style.heading2}>KNOW MORE</Text>
                 </TouchableOpacity>
             </View>
@@ -43,7 +43,7 @@ const DigitalAcademy = ({ navigation }) => {
                 <Text style={Style.heading1}>DIGITAL & TECHNOLOGY</Text>
                 <TouchableOpacity
                     style={Style.button}
-                    onPress={() => navigation.navigate('KnowMore', {itemTitle:'Technology',})}>
+                    onPress={() => navigation.navigate('DigitalAcademyDetail', {itemTitle:'Technology',})}>
                     <Text style={Style.heading2}>KNOW MORE</Text>
                 </TouchableOpacity>
             </View>
@@ -54,7 +54,7 @@ const DigitalAcademy = ({ navigation }) => {
                 <Text style={Style.heading1}>SKILL DEVELOPMENT</Text>
                 <TouchableOpacity
                     style={Style.button}
-                    onPress={() => navigation.navigate('KnowMore', {itemTitle:'Skill'})}>
+                    onPress={() => navigation.navigate('DigitalAcademyDetail', {itemTitle:'Skill'})}>
                     <Text style={Style.heading2}>KNOW MORE</Text>
                 </TouchableOpacity>
 
@@ -65,7 +65,7 @@ const DigitalAcademy = ({ navigation }) => {
                 <Text style={Style.heading1}>PHARMACY & SCIENCE</Text>
                 <TouchableOpacity
                     style={Style.button}
-                    onPress={() => navigation.navigate('KnowMore', {itemTitle:'Pharmacy'})}>
+                    onPress={() => navigation.navigate('DigitalAcademyDetail', {itemTitle:'Pharmacy'})}>
                     <Text style={Style.heading2}>KNOW MORE</Text>
                 </TouchableOpacity>
             </View>
@@ -76,7 +76,7 @@ const DigitalAcademy = ({ navigation }) => {
                 <Text style={Style.heading1}>MANAGEMENT</Text>
                 <TouchableOpacity
                     style={Style.button}
-                    onPress={() => navigation.navigate('KnowMore', {itemTitle:'Management'})}>
+                    onPress={() => navigation.navigate('DigitalAcademyDetail', {itemTitle:'Management'})}>
                     <Text style={Style.heading2}>KNOW MORE</Text>
                 </TouchableOpacity>
             </View>
