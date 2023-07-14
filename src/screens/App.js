@@ -42,6 +42,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { white } from "../utils/color"
 import Calendar from "./holidayCalendar/HolidayCalendar";
 import Blog from "./blog";
+import Exam from "./examSchedule";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -315,6 +316,14 @@ const App = () => {
                         options={({ navigation }) => ({
                             headerShown: true,
                             header: () => <CustomHeader navigation={navigation} title="VES Blog" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='Exam'
+                        component={Exam}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Exam Schedule" />
                         })}
                     />
                 </stack.Navigator>
