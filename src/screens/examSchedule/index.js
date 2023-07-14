@@ -217,11 +217,11 @@ const Exam = () => {
                                 "VESP", "VESIT"
                             ]}
                             style={styles.dropdown}
-                            defaultValue={institute}
+                            value={institute}
                             textStyle={styles.dropdownText}
                             dropdownStyle={styles.dropdownStyle}
                             onSelect={(index, value) => setInstitute(value)}
-                            placeholder='Select an Institute'
+                            initialScrollIndex={0}
                         />
 
                         <TouchableOpacity style={styles.addButton} onPress={handleUploadPDF}>

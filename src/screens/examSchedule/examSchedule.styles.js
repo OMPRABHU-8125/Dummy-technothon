@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
         color: COLORS.gray,
     },
     dropdownStyle: {
-        maxHeight: responsiveHeight(30),
-        width: responsiveWidth(90),
+        width: responsiveWidth(60),
         borderRadius: 4,
         elevation: 10,
     },
