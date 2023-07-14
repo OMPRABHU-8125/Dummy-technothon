@@ -19,21 +19,10 @@ import * as COLORS from '../../utils/color'
 const Blog = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data)
     const [blogData, setBlogData] = useState([]);
-    const [selectedPost, setSelectedPost] = useState('');
+    const [selectedPost, setSelectedPost] = useState([]);
     const [showFullContent, setShowFullContent] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false)
-    const [title, setTitle] = useState('')
-    const [post, setPost] = useState('')
-    const author = {
-        email: user.email,
-        name: `${user.firstName} ${user.lastName}`
-    }
-    const postedOn = firestore.Timestamp.now();
-    const [inputHeight, setInputHeight] = useState(40);
-
-    const handleContentSizeChange = (event) => {
-        setInputHeight(event.nativeEvent.contentSize.height);
-    };
+    const [comments, setComments] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
 
     const getData = async () => {
         try {
@@ -51,6 +40,19 @@ const Blog = ({ navigation }) => {
             console.log(error);
         }
     }
+
+    const openModal = async (id) => {
+        try {
+            const snapshot = await firestore().collection('Blog').get();
+            const postData = snapshot.data();
+
+            setComments(postData);
+            console.log(comments)
+            setModalVisible(true);
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    };
 
     const deleteItem = () => {
         try {
@@ -82,25 +84,6 @@ const Blog = ({ navigation }) => {
         );
     }
 
-    const submit = () => {
-        const postToAdd = {
-            title,
-            post,
-            author,
-            postedOn
-        }
-
-        try {
-            firestore()
-                .collection("Blog")
-                .add(postToAdd)
-
-            Alert.alert("Success", "Blog posted!!!!")
-        } catch (error) {
-            console.log(error)
-        }
-        setModalVisible(false)
-    }
 
     useEffect(() => {
         getData();
@@ -141,6 +124,9 @@ const Blog = ({ navigation }) => {
                     )}
                     <Text style={styles.name}>@{item.author.name}</Text>
                     <Text style={styles.date}>{item.postedOn.toDate().toLocaleDateString()}</Text>
+                    <TouchableOpacity onPress={() => openModal(item.id)}>
+                        <Text style={styles.name}>View Comments</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -158,54 +144,25 @@ const Blog = ({ navigation }) => {
                 keyExtractor={(item) => item.id}
                 renderItem={renderBlog}
             />
-            {
-                (user.loginType == 'Teacher') ?
-                    <TouchableOpacity onPress={() => setModalVisible(true)}>
-                        <Icon name='add-comment' size={40} color='black' style={styles.icon} />
+            <Modal visible={modalVisible} animationType="slide">
+                <View style={styles.modalContainer}>
+                    <TouchableOpacity
+                        style={styles.closeButton}
+                        onPress={() => setModalVisible(false)}
+                    >
+                        <Icon name="close" size={26} color="black" />
                     </TouchableOpacity>
-                    :
-                    null
-            }
-
-            <Modal
-                visible={modalVisible}
-                animationType='slide'
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible)
-                }}
-                presentationStyle='formSheet'
-            >
-                <ImageBackground
-                    style={styles.modalContainer}
-                    source={require('../../assets/imgs/bg.jpg')}
-                    resizeMode='repeat'
-                >
-                    <View style={styles.modalContent}>
-                        <Text style={styles.modalTitle}>Say whats on your mind....</Text>
-                        <TextInput
-                            placeholder="Title"
-                            placeholderTextColor={COLORS.gray}
-                            style={styles.input}
-                            color={COLORS.black}
-                            value={title}
-                            onChangeText={setTitle}
-                        />
-                        <TextInput
-                            placeholder="Post"
-                            placeholderTextColor={COLORS.gray}
-                            style={[styles.inputPost, { height: inputHeight }]}
-                            multiline={true}
-                            onContentSizeChange={handleContentSizeChange}
-                            color={COLORS.black}
-                            value={post}
-                            onChangeText={setPost}
-                        />
-
-                        <TouchableOpacity onPress={submit} style={styles.submitButton}>
-                            <Text style={styles.submitButtonText}>Submit</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ImageBackground>
+                    <FlatList
+                        data={comments}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => (
+                            <View style={styles.commentContainer}>
+                                <Text style={styles.commentText}>{item.text}</Text>
+                                <Text style={styles.commentDate}>{item.createdAt.toDate().toLocaleString()}</Text>
+                            </View>
+                        )}
+                    />
+                </View>
             </Modal>
         </View>
     );

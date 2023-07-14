@@ -69,6 +69,11 @@ const modules = [
         title: 'Blog',
         login: ['Student', 'Parent', 'Teacher']
     },
+    {
+        id: 15,
+        title: 'Chat',
+        login: ['Parent', 'Teacher', 'Student']
+    },
 ]
 
 export default modules;
