@@ -64,19 +64,32 @@ const Home = ({ navigation }) => {
                         navigation.navigate("Fees")
                     }
                     else if (item.title == 'Holiday Calender') {
-                        navigation.navigate("HolidayCalendar")
+                        navigation.navigate("Calendar")
                     }
                     else if (item.title == 'FAQs') {
                         navigation.navigate("FAQ")
                     }
-                    else if (item.title == 'Fitness And Health'){
-                         navigation.navigate("FitnessAndHealth")
+                    else if (item.title == 'Fitness And Health') {
+                        navigation.navigate("FitnessAndHealth")
+                    }
+                    else if (item.title == 'Photo Gallery') {
+                        navigation.navigate("PhotoGallery")
+                    }
+                    else if (item.title == 'Placement') {
+                        navigation.navigate("Placement")
+                    }
+                    else if (item.title == 'Blog') {
+                        navigation.navigate("Blog")
+                    }
+                    else if (item.title == 'Chat') {
+                        navigation.navigate("Chat")
+                    }
+                    else if (item.title == 'Exam Schedule') {
+                        navigation.navigate("Exam")
                     }
                 }
 
                 }>
-
-
 
                 <Card title={item.title} />
             </TouchableOpacity >
@@ -88,14 +101,7 @@ const Home = ({ navigation }) => {
                 source={require('../assets/imgs/Swami_Vivekanand.jpg')}
                 style={styles.image}>
             </ImageBackground>
-            <TouchableOpacity
-                style={styles.logoutbutton}
-                onPress={async () => {
-                    navigation.navigate('Login');
-                    await AsyncStorage.removeItem('userData');
-                }}>
-                <Image source={require('../assets/imgs/logoutimage.png')} style={styles.logoutimage} />
-            </TouchableOpacity>
+
             <View style={styles.welcome}>
                 <Text style={styles.welcome_text}>WELCOME TO VES</Text>
             </View>
@@ -104,8 +110,10 @@ const Home = ({ navigation }) => {
                 renderItem={renderCard}
                 keyExtractor={item => item.id}
                 numColumns={2}
+                contentContainerStyle={styles.contentContainer}
             />
         </View>
+
     );
 };
 

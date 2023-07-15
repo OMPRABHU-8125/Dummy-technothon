@@ -4,7 +4,8 @@ import {
     Text,
     FlatList,
     TouchableOpacity,
-    Linking
+    Linking,
+    ScrollView
 } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import styles from "./Notifications.style";
@@ -30,6 +31,7 @@ const Notifications = () => {
         const date = item.date.toDate()
         const formatted = date.toLocaleDateString()
         return (
+            // <ScrollView style={styles.main}>
             <View style={styles.container}>
                 <View style={styles.card}>
                     <Text style={styles.heading}>{item.title} </Text>
@@ -46,16 +48,16 @@ const Notifications = () => {
                     <Text style={styles.date}>{formatted}</Text>
                 </View>
             </View>
+            // </ScrollView>
         )
     }
 
     useEffect(() => {
         getData();
-        console.log(notifications)
     }, [])
 
     return (
-        <View style={{flex:1}}>
+        <View>
             <FlatList
                 data={notifications}
                 renderItem={renderCard}

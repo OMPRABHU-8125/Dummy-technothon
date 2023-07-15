@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
-import {  desctext, shadowcolor, titletext,black, white } from '../utils/color';
-import { cartborderradius, elevationsize } from '../utils/constant';
+import { white, shadowcolor, titletext, desctext, black } from '../../utils/color';
+import { cartborderradius, elevationsize } from '../../utils/constant';
 
 const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 35,
         fontWeight: 'bold',
-        color:black,
+        color: black,
         marginBottom: 16,
         marginLeft: 10,
         marginTop: 10
@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     clickable: {
         width: windowWidth / 2 - 20,
         height: '20%',
-        backgroundColor:white,
+        backgroundColor: white,
         borderRadius: cartborderradius,
         marginVertical: 10,
         marginHorizontal: 20,
-        shadowColor:shadowcolor,
-        elevation:elevationsize,
-        flex:1
+        shadowColor: shadowcolor,
+        elevation: elevationsize,
+        flex: 1
     },
     cardTitle: {
         fontSize: 18,

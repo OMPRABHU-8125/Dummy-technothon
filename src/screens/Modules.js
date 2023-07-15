@@ -59,6 +59,26 @@ const modules = [
         title: 'Fitness And Health',
         login: ['Student', 'Parent', 'Teacher']
     },
+    {
+        id: 13,
+        title: 'Placement',
+        login: ['Student', 'Parent']
+    },
+    {
+        id: 14,
+        title: 'Blog',
+        login: ['Student', 'Parent', 'Teacher']
+    },
+    {
+        id: 15,
+        title: 'Chat',
+        login: ['Parent', 'Teacher', 'Student']
+    },
+    {
+        id: 16,
+        title: 'Exam Schedule',
+        login: ['Student', 'Teacher']
+    },
 ]
 
 export default modules;

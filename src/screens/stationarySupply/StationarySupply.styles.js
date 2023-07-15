@@ -1,16 +1,34 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     heading: {
         fontSize: 24,
         fontWeight: 'bold',
         color: 'black',
-        marginTop: 18,
-        marginLeft: 22,
+    },
+    fullWidthItem: {
+        width: screenWidth,
+    },
+
+    halfWidthItem: {
+        maxWidth: (screenWidth / 2) - 30,
+    },
+
+    button: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     container: {
         flex: 1,
-        backgroundColor: '#ceddf4'
+        backgroundColor: 'white',
     },
     productList: {
         paddingHorizontal: 10,
@@ -23,9 +41,9 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
         borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#912929',
-        backgroundColor: '#fef7d7'
+        elevation: 15,
+        shadowColor: 'rgb(145,41,40)',
+        backgroundColor: 'white',
     },
     productImage: {
         width: 100,
@@ -64,31 +82,38 @@ const styles = StyleSheet.create({
         marginTop: 10,
         justifyContent: 'flex-end'
     },
-    icon: {
-        width: 20,
-        height: 20
+    headingview: {
+        margin: 2,
+        justifyContent: 'center',
+        borderBottomColor: 'black',
+        borderBottomWidth: 2,
+        borderBottomColor: 'rgb(145,41,40)',
     },
     cart: {
-        width: 28,
-        height: 28,
-        marginLeft: 10,
-        marginTop: 20
+        position: 'absolute',
+        right: 1,
+    },
+
+    carticon: {
+        zIndex: 1,
+        margin: 4,
     },
 
     badge: {
         position: 'absolute',
-        top: 5,
-        right: -8,
-        minWidth: 18,
-        height: 18,
-        borderRadius: 9,
+        right: 1,
+        top: 1,
+        zIndex: 2,
         backgroundColor: 'red',
         color: 'white',
-        fontSize: 12,
+        borderRadius: 10,
+        width: 16,
+        height: 16,
+        fontSize: 10,
         textAlign: 'center',
         overflow: 'hidden',
-        paddingHorizontal: 2,
     },
+
 })
 
 export default styles;

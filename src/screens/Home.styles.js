@@ -1,23 +1,15 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from 'react-native';
+import { white, maroon, shadowcolor } from '../utils/color';
 
 
 const windowWidth = Dimensions.get("window").width;
+const windowheight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
 
     view: {
-        flex: 1
-    },
-
-    inner: {
-        margin: 20,
-    },
-
-    smallText: {
-        color: 'blue',
-        fontSize: 9,
-        fontWeight: 'bold',
+        flex: 1,
     },
 
     image: {
@@ -25,38 +17,31 @@ const styles = StyleSheet.create({
         height: 280,
         resizeMode: 'contain',
     },
-
-    logoutimage: {
-        height: 22,
-        resizeMode: 'contain',
-    },
-
-    logoutbutton: {
-        position: 'absolute',
-        marginTop: 10,
-        marginLeft: -10,
+    contentContainer: {
+        height: windowheight + 200,
+        flexGrow: 1,
     },
 
     card1: {
         width: windowWidth / 2 - 20,
         height: 100,
-        backgroundColor: '#fff',
+        backgroundColor: white,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
-        shadowColor: 'rgb(145, 41, 40)',
-        backgroundColor: '#fff',
+        shadowColor: shadowcolor,
+        backgroundColor: white,
         elevation: 10,
     },
 
     title: {
         fontSize: 12,
         fontWeight: 'bold',
-        color: 'rgb(145, 41, 40)',
+        color: maroon,
     },
 
     welcome: {
-        backgroundColor: 'rgb(145,41, 40)',
+        backgroundColor: maroon,
         alignItems: 'center',
         justifyContent: 'center',
         height: 50,
@@ -64,7 +49,7 @@ const styles = StyleSheet.create({
 
     welcome_text: {
         fontWeight: 'bold',
-        color: '#fff',
+        color: white,
         fontSize: 25,
     },
 });
