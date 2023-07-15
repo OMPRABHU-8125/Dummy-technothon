@@ -4,6 +4,7 @@ import {
     View,
     Text,
     SectionList     ,
+    ScrollView,
     Alert,
     ImageBackground,
     TouchableOpacity,
@@ -28,13 +29,13 @@ const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
     const data = useAppSelector(state => state.profile.modules);
 
-    const sections = [{
-        title: 'Modules',
-        data: data
-    }]
+    // const sections = [{
+    //     title: 'Modules',
+    //     data: [...data]
+    // }]
     useEffect(() => {
-        console.log(data);
-        console.log(sections.data)
+        console.log(data[0]);
+       // console.log(sections.data)
     }, []);
 
     const renderCard = ({ item }) => {
@@ -101,6 +102,8 @@ const Home = ({ navigation }) => {
             </TouchableOpacity >
         );
     };
+
+    
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -112,10 +115,10 @@ const Home = ({ navigation }) => {
       </View>
 
       <SectionList
-        sections={[sections]}
+        sections={data}
         renderItem={renderCard}
         keyExtractor={(item, index) => item + index}
-        numColumns={2}
+         numColumns={2}
         contentContainerStyle={styles.contentContainer}
       />
     </View>

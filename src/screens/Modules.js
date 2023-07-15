@@ -27,11 +27,6 @@ const guestmodule=[
         id: 7,
         title: 'Blog',
     },
-    {
-        id: 15,
-        title: 'Exam Schedule',
-        login: ['Student', 'Teacher']
-    },
 ]
 
 const teachermodule=[
@@ -46,6 +41,10 @@ const teachermodule=[
     {
         id: 3,
         title: 'Holiday Calender',
+    },
+    {
+        id: 4,
+        title: 'Exam Schedule',
     },
 ]
 
@@ -69,7 +68,11 @@ const studentmodule=[
     {
         id: 5,
         title: 'Placement',
-    }
+    },
+    {
+        id: 6,
+        title: 'Exam Schedule',
+    },
 ]
 const parentmodule=[
     {

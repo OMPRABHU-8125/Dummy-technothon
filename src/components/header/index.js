@@ -44,9 +44,11 @@ const CustomHeader = ({ title, navigation }) => {
                     }} style={styles.icon}>
                         {isVisible ? (
                             <LineIcons name="power" size={26} color='rgb(145, 41, 40)'/>
-                        ) : (
-                            <LineIcons name="login" size={26} color="black" />
-                        )}
+                        ) : 
+                        (
+                            <Text style={styles.logintext}>Login</Text>
+                        )
+                        }
                     </TouchableOpacity>
                 </LinearGradient>
             );
