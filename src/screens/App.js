@@ -26,6 +26,8 @@ import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import Splash from "./splash";
+import AddJob from "./placement/AddJob";
+import JobDetails from "./placement/JobDetails";
 
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
@@ -309,6 +311,23 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="Placement" />
                         })}
                     />
+                    <stack.Screen
+                        name='JobDetails'
+                        component={JobDetails}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="JobDetails" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='AddJob'
+                        component={AddJob}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="AddJob" />
+                        })}
+                    />
+                    
                     <stack.Screen
                         name='Blog'
                         component={Blog}
