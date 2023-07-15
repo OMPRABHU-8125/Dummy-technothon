@@ -13,13 +13,15 @@ const CustomHeader = ({ title, navigation }) => {
     const user = useAppSelector(state => state.profile.data);
     useEffect(() => {
         checkUser();
-    }, [])
+    }, [user]);
 
     const checkUser = () => {
-        if (user.loginType != 'Guest') {
-            setIsVisible(true)
+        if (user.loginType !== 'Guest') {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
         }
-    }
+    };
 
     const renderHeader = () => {
         if (title === 'Home') {

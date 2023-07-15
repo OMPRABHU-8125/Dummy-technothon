@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {
     View,
     Text,
-    FlatList,
+    SectionList     ,
     Alert,
     ImageBackground,
     TouchableOpacity,
@@ -27,6 +27,15 @@ const Card = ({ title }) => {
 const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
     const data = useAppSelector(state => state.profile.modules);
+
+    const sections = [{
+        title: 'Modules',
+        data: data
+    }]
+    useEffect(() => {
+        console.log(data);
+        console.log(sections.data)
+    }, []);
 
     const renderCard = ({ item }) => {
         return (
@@ -87,28 +96,27 @@ const Home = ({ navigation }) => {
 
                 <Card title={item.title} />
             </TouchableOpacity >
-        )
+        );
     };
-    return (
-        <View style={styles.view}>
-            <ImageBackground
-                source={require('../assets/imgs/Swami_Vivekanand.jpg')}
-                style={styles.image}>
-            </ImageBackground>
+  return (
+    <View style={styles.view}>
+      <ImageBackground
+        source={require('../assets/imgs/Swami_Vivekanand.jpg')}
+        style={styles.image}></ImageBackground>
 
-            <View style={styles.welcome}>
-                <Text style={styles.welcome_text}>WELCOME TO VES</Text>
-            </View>
-            <FlatList
-                data={data}
-                renderItem={renderCard}
-                keyExtractor={item => item.id}
-                numColumns={2}
-                contentContainerStyle={styles.contentContainer}
-            />
-        </View>
+      <View style={styles.welcome}>
+        <Text style={styles.welcome_text}>WELCOME TO VES</Text>
+      </View>
 
-    );
+      <SectionList
+        sections={[sections]}
+        renderItem={renderCard}
+        keyExtractor={(item, index) => item + index}
+        numColumns={2}
+        contentContainerStyle={styles.contentContainer}
+      />
+    </View>
+  );
 };
 
 export default Home;

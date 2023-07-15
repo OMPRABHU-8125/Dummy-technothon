@@ -53,7 +53,7 @@ const MyHome = () => {
 
     useEffect(() => {
         checkUser();
-    }, [])
+    }, [user])
 
     const checkUser = () => {
         if (user.loginType != 'Guest') {

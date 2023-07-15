@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../store/hook';
 import { setModules, setUserProfile } from '../../store/slice/profileSlice';
 import styles from './splash.style';
 import modules from './Modules';
-
+import { parentmodule,guestmodule,studentmodule,teachermodule } from './Modules';
 
 const Splash = () => {
 
@@ -33,16 +33,21 @@ const Splash = () => {
                     lastName: null,
                     loginType:'Guest',
                     password: null,
-                    phoneNo: null
+                    phoneNo: null,
                 }
                 dispatch(setUserProfile(guest));
-                const filtered1 = modules.filter((module) =>
-                module.login.includes(guest.loginType));
-            dispatch(setModules(filtered1));
-            }else{
-            const filtered = modules.filter((module) =>
-                module.login.includes(user.loginType));
-            dispatch(setModules(filtered));
+                dispatch(setModules([guestmodule]));
+            }
+            else{
+                if(user.loginType=='Student'){
+                    dispatch(setModules([studentmodule,guestmodule]));
+                }
+                else if(user.loginType=='Teacher'){
+                    dispatch(setModules([teachermodule,guestmodule]));
+                }
+                else if(user.loginType=='Parent'){
+                    dispatch(setModules([parentmodule,guestmodule]));
+                }   
             }
             setTimeout(() => {
                 navigation.navigate("HomeScreen");
