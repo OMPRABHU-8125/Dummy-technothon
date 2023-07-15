@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     contentContainer: {
-        height: windowheight + 80,
+        height: windowheight + 200,
         flexGrow: 1,
     },
 
