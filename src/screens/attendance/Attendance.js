@@ -31,13 +31,13 @@ const Attendance = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.clickable}
                     onPress={() => {
-                        Alert.alert("Error", " Developement in Progress")
+                        navigation.navigate('ViewAttendance')
                     }}
                 >
                     <View>
                         <View style={{ padding: 10 }}>
-                            <Text style={styles.cardTitle}>Monthly Attendance</Text>
-                            <Text style={styles.cardText}>View the monthly attendance of students</Text>
+                            <Text style={styles.cardTitle}>View Attendance</Text>
+                            <Text style={styles.cardText}>View the daily attendance of students</Text>
                         </View>
                     </View>
                 </TouchableOpacity >
