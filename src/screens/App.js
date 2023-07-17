@@ -45,6 +45,7 @@ import Calendar from "./holidayCalendar/HolidayCalendar";
 import Blog from "./blog";
 import Exam from "./examSchedule";
 import ViewAttendance from "./attendance/ViewAttendance";
+import StudentAttendance from "./attendance/StudentAttendance";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -342,6 +343,14 @@ const App = () => {
                         options={({ navigation }) => ({
                             headerShown: true,
                             header: () => <CustomHeader navigation={navigation} title="Exam Schedule" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='StudentAttendance'
+                        component={StudentAttendance}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="View Attendance" />
                         })}
                     />
                 </stack.Navigator>

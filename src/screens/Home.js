@@ -37,8 +37,8 @@ const Home = ({ navigation }) => {
                             navigation.navigate("Attendance")
                         }
 
-                        else {
-                            Alert.alert("Warning", "You are not allowed to access this feature")
+                        else if (user.loginType == 'Student') {
+                            navigation.navigate('StudentAttendance')
                         }
                     }
                     else if (item.title == 'Events Update') {

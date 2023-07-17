@@ -5,7 +5,7 @@ import { useAppSelector } from '../../../store/hook';
 import styles from './ViewAttendance.styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const ViewAttendance = () => {
+const StudentAttendance = () => {
     const user = useAppSelector((state) => state.profile.data);
     const [date, setDate] = useState(new Date());
     const [showPicker, setShowPicker] = useState(false);
@@ -120,4 +120,4 @@ const ViewAttendance = () => {
     );
 };
 
-export default ViewAttendance;
+export default StudentAttendance;

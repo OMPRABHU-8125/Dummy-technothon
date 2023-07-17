@@ -86,7 +86,7 @@ const DailyAttendance = ({ navigation }) => {
         if (selectedSubject !== null) {
             const data = {
                 studentName: students[currentIndex].name,
-                studentId: students[currentIndex].email,
+                studentId: students[currentIndex].grNo,
                 status: text
             };
 
@@ -108,7 +108,8 @@ const DailyAttendance = ({ navigation }) => {
             facultyName: user.firstName + ' ' + user.lastName,
             date: new Date(),
             sessionCount: sessionCount,
-            attendance: attendance
+            attendance: attendance,
+            subject: selectedSubject
         }
         console.log(dailyAttendance)
         firestore()
