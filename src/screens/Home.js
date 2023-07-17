@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import {
     View,
     Text,
-    SectionList     ,
-    ScrollView,
+    SectionList,
     Alert,
     ImageBackground,
     TouchableOpacity,
@@ -17,7 +16,7 @@ import styles from './Home.styles';
 
 const Card = ({ title }) => {
     return (
-        <View style={styles.outercard}>
+        <View style={styles.outercard} >
             <View style={styles.card1}>
                 <Text style={styles.title}>{title}</Text>
             </View>
@@ -28,15 +27,6 @@ const Card = ({ title }) => {
 const Home = ({ navigation }) => {
     const user = useAppSelector(state => state.profile.data);
     const data = useAppSelector(state => state.profile.modules);
-
-    // const sections = [{
-    //     title: 'Modules',
-    //     data: [...data]
-    // }]
-    useEffect(() => {
-        console.log(data[0]);
-       // console.log(sections.data)
-    }, []);
 
     const renderCard = ({ item }) => {
         return (
@@ -103,26 +93,26 @@ const Home = ({ navigation }) => {
         );
     };
 
-    
-  return (
-    <View style={styles.view}>
-      <ImageBackground
-        source={require('../assets/imgs/Swami_Vivekanand.jpg')}
-        style={styles.image}></ImageBackground>
 
-      <View style={styles.welcome}>
-        <Text style={styles.welcome_text}>WELCOME TO VES</Text>
-      </View>
+    return (
+        <View style={styles.view}>
+            <ImageBackground
+                source={require('../assets/imgs/Swami_Vivekanand.jpg')}
+                style={styles.image}></ImageBackground>
 
-      <SectionList
-        sections={data}
-        renderItem={renderCard}
-        keyExtractor={(item, index) => item + index}
-         numColumns={2}
-        contentContainerStyle={styles.contentContainer}
-      />
-    </View>
-  );
+            <View style={styles.welcome}>
+                <Text style={styles.welcome_text}>WELCOME TO VES</Text>
+            </View>
+
+            <SectionList
+                sections={data}
+                renderItem={renderCard}
+                keyExtractor={(item, index) => item + index}
+                numColumns={2}
+                contentContainerStyle={styles.contentContainer}
+            />
+        </View>
+    );
 };
 
 export default Home;

@@ -11,6 +11,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { black } from '../utils/color';
 import { teachermodule,studentmodule,guestmodule,parentmodule } from './Modules';
+import { compare } from 'react-native-bcrypt';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -22,24 +23,27 @@ const Login = ({ navigation }) => {
     const handleLogin = async () => {
 
         if (!email || !password) {
-            Alert.alert("Error", "Fields cannot be empty")
-        }
-
-        else {
+            Alert.alert("Error", "Fields cannot be empty");
+        } else {
             const users = firestore().collection('Users');
 
-            const querySnanpshot = await users
+            const querySnapshot = await users
                 .where('email', '==', email)
-                .where('password', '==', password)
+                .limit(1)
                 .get();
-            if (querySnanpshot.size == 1) {
-                console.log("Logged In")
-                const user = querySnanpshot.docs[0].data();
-                dispatch(setUserProfile(user));
-                // const filtered = modules.filter((module) =>
-                //     module.login.includes(user.loginType));
 
-                // dispatch(setModules(filtered));
+            if (querySnapshot.empty) {
+                Alert.alert("Error", "User not found");
+                return;
+            }
+
+            const user = querySnapshot.docs[0].data();
+            const hashedPassword = user.password;
+
+            compare(password, hashedPassword, async (error, isMatch) => {
+                if (isMatch) {
+                    console.log("Logged In");
+                dispatch(setUserProfile(user));
                  if (user.loginType == 'Student') {
                     dispatch(setModules([
                         {
@@ -83,16 +87,14 @@ const Login = ({ navigation }) => {
                     ]));
                 }
 
-                navigation.navigate('HomeScreen')
-
-                await AsyncStorage.setItem("userData", JSON.stringify(user))
+                navigation.navigate('HomeScreen');
+                await AsyncStorage.setItem("userData", JSON.stringify(user));
+            } else {
+                Alert.alert("Error", "Invalid email or password");
             }
-
-            else {
-                Alert.alert("Error", "User not found");
-            }
-        }
+        });
     }
+};
 
     return (
         <KeyboardAvoidingView style={styles.container}>
