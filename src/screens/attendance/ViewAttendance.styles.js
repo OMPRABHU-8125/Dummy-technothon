@@ -63,6 +63,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: COLORS.white
     },
+    headerText1: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: COLORS.white
+    },
     childAttendanceContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',

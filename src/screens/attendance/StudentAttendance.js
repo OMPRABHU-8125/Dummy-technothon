@@ -11,7 +11,6 @@ const StudentAttendance = () => {
     const [showPicker, setShowPicker] = useState(false);
     const [isDateSelected, setIsDateSelected] = useState(false);
     const [fetchedAttendance, setFetchedAttendance] = useState([]);
-    const [expandedIndex, setExpandedIndex] = useState(null);
 
     const fetchData = async (selectedDate) => {
         try {
@@ -30,14 +29,18 @@ const StudentAttendance = () => {
 
             const snapshot = await firestore()
                 .collection('Attendance')
-                .where('facultyId', '==', user.email)
                 .where('date', '>=', startDate)
                 .where('date', '<=', endDate)
                 .get();
 
             const data = snapshot.docs.map((doc) => doc.data());
-            data.sort((a, b) => a.sessionCount - b.sessionCount);
-            setFetchedAttendance(data);
+            const filteredAttendance = data.filter((attendance) =>
+                attendance.attendance.some((student) =>
+                    student.studentId === user.grNo
+                )
+            );
+            const sortedAttendance = filteredAttendance.sort((a, b) => a.sessionCount - b.sessionCount);
+            setFetchedAttendance(sortedAttendance);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -45,7 +48,6 @@ const StudentAttendance = () => {
 
     useEffect(() => {
         fetchData(date);
-        setExpandedIndex(null);
     }, []);
 
     const showDateTimePicker = () => {
@@ -62,20 +64,11 @@ const StudentAttendance = () => {
         hideDateTimePicker();
         setIsDateSelected(true);
         fetchData(currentDate);
-        console.log(fetchedAttendance);
-    };
-
-    const toggleExpand = (index) => {
-        if (index === expandedIndex) {
-            setExpandedIndex(null);
-        } else {
-            setExpandedIndex(index);
-        }
     };
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Welocme {user.firstName}!</Text>
+            <Text style={styles.title}>Welcome {user.firstName}!</Text>
             <View style={styles.row}>
                 <Text style={styles.label}>Select a date: </Text>
                 <TouchableOpacity style={styles.button} onPress={showDateTimePicker}>
@@ -95,23 +88,20 @@ const StudentAttendance = () => {
                     <Text style={styles.label1}>You selected: {date.toDateString()}</Text>
                     {fetchedAttendance.map((attendance, index) => (
                         <View key={index}>
-                            <TouchableOpacity style={styles.header} onPress={() => toggleExpand(index)}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.headerText}>Lecture No: {attendance.sessionCount}</Text>
-                                    <Text style={styles.headerText}>{index === expandedIndex ? '-' : '+'}</Text>
-                                </View>
-                                <Text style={styles.headerText}>{attendance.subject}</Text>
-                            </TouchableOpacity>
-                            {index === expandedIndex && (
-                                <View>
-                                    {attendance.attendance.map((childAttendance, childIndex) => (
-                                        <View key={childIndex} style={styles.childAttendanceContainer}>
-                                            <Text style={styles.childName}>{childAttendance.studentName}</Text>
-                                            <Text style={styles.childStatus}>{childAttendance.status}</Text>
+                            {attendance.attendance.map((studentAttendance, studentIndex) => {
+                                if (studentAttendance.studentId === user.grNo) {
+                                    return (
+                                        <View key={studentIndex} style={styles.attendanceItem}>
+                                            <View style={styles.header}>
+                                                <Text style={styles.headerText1}>Lecture No: {attendance.sessionCount}</Text>
+                                                <Text style={styles.headerText}>{attendance.subject}</Text>
+                                                <Text style={styles.headerText}>{attendance.facultyName}</Text>
+                                                <Text style={styles.headerText}>{studentAttendance.status}</Text>
+                                            </View>
                                         </View>
-                                    ))}
-                                </View>
-                            )}
+                                    );
+                                }
+                            })}
                         </View>
                     ))}
                 </View>
