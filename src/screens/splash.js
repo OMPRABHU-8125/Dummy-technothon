@@ -35,7 +35,7 @@ const Splash = () => {
                     phoneNo: null,
                 }
                 dispatch(setUserProfile(guest));
-                dispatch(setModules([ {
+                dispatch(setModules([{
                     id: '1',
                     title: 'Basic Components',
                     data: [...guestmodule]
@@ -61,21 +61,21 @@ const Splash = () => {
                         {
                             id: '1',
                             title: 'Teacher Components',
-                            data:[...teachermodule]
+                            data: [...teachermodule]
                         },
                         {
                             id: '2',
                             title: 'Basic Components',
                             data: [...guestmodule]
                         }
-                       ]));
+                    ]));
                 }
                 else if (user.loginType == 'Parent') {
                     dispatch(setModules([
                         {
                             id: '1',
                             title: 'Parent Components',
-                            data:[...parentmodule]
+                            data: [...parentmodule]
                         },
                         {
                             id: '2',

@@ -1,4 +1,4 @@
-const guestmodule=[
+const guestmodule = [
     {
         id: 1,
         title: 'Alumni and Mentorship',
@@ -6,7 +6,7 @@ const guestmodule=[
     {
         id: 2,
         title: 'Enquiry Management',
-    },  
+    },
     {
         id: 3,
         title: 'Photo Gallery',
@@ -29,7 +29,7 @@ const guestmodule=[
     },
 ]
 
-const teachermodule=[
+const teachermodule = [
     {
         id: 1,
         title: 'Attendance',
@@ -52,7 +52,7 @@ const teachermodule=[
     }
 ]
 
-const studentmodule=[
+const studentmodule = [
     {
         id: 1,
         title: 'Attendance',
@@ -78,7 +78,7 @@ const studentmodule=[
         title: 'Exam Schedule',
     },
 ]
-const parentmodule=[
+const parentmodule = [
     {
         id: 1,
         title: 'Attendance',
@@ -86,7 +86,7 @@ const parentmodule=[
     {
         id: 2,
         title: 'Fees',
-    }, 
+    },
     {
         id: 3,
         title: 'Stationary Supply Hub',
@@ -94,7 +94,7 @@ const parentmodule=[
     {
         id: 4,
         title: 'Placement',
-    } 
+    }
 ]
 
-export  {guestmodule,teachermodule,studentmodule,parentmodule};
+export { guestmodule, teachermodule, studentmodule, parentmodule };
