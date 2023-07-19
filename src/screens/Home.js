@@ -111,7 +111,6 @@ const Home = ({ navigation }) => {
                 sections={data}
                 renderItem={renderCard}
                 keyExtractor={(item, index) => item + index}
-
                 contentContainerStyle={styles.contentContainer}
             />
         </View>
