@@ -46,6 +46,10 @@ const teachermodule=[
         id: 4,
         title: 'Exam Schedule',
     },
+    {
+        id: 5,
+        title: 'Placement',
+    }
 ]
 
 const studentmodule=[
