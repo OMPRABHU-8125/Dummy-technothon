@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { black, blue, gray, maroon, white } from "../utils/color";
+import { black, blue, gray, maroon, white, lightMaroon } from "../utils/color";
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 const styles = StyleSheet.create({
     container: {
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
         color: black,
         borderRadius: 10,
     },
+
     usericon: {
         position: 'absolute',
         left: 1,
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: black,
+        backgroundColor: lightMaroon,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
@@ -77,6 +79,43 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: white,
+    },
+
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: black
+    },
+
+    label: {
+        color: maroon,
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+
+    inputContainer: {
+        marginLeft: 10
+    },
+
+    otpInput: {
+        width: responsiveWidth(90),
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#000',
+        marginBottom: 15,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+    },
+
+
 });
 
 export default styles;

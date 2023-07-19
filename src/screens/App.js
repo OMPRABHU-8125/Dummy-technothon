@@ -131,7 +131,7 @@ const App = () => {
                         component={SignUp}
                         options={({ navigation }) => ({
                             headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="SignUp" />,
+                            header: () => <CustomHeader navigation={navigation} title="Register New Account" />,
                         })}
                     />
                     <stack.Screen

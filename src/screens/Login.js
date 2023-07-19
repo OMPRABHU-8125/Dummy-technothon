@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useAppDispatch } from '../../store/hook';
@@ -9,13 +9,18 @@ import modules from './Modules';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { black } from '../utils/color';
+import { black, gray, white } from '../utils/color';
 import { compare } from 'react-native-bcrypt';
+import auth from '@react-native-firebase/auth'
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
+    const [showOtpModal, setShowOtpModal] = useState(false);
+    const [otp, setOtp] = useState();
+    const [verificationId, setVerificationId] = useState();
+    const [otpVisible, setOtpVisible] = useState(false);
 
     const dispatch = useAppDispatch();
 
@@ -54,6 +59,70 @@ const Login = ({ navigation }) => {
             });
         }
     };
+
+    const toggleOtpModal = () => {
+        setShowOtpModal(!showOtpModal);
+    };
+
+    const sendOtp = async () => {
+        try {
+            const users = firestore().collection('Users');
+
+            const querySnapshot = await users
+                .where('email', '==', email)
+                .limit(1)
+                .get();
+
+            if (querySnapshot.empty) {
+                Alert.alert("Error", "User not found");
+                return;
+            }
+
+            const user = querySnapshot.docs[0].data();
+
+            const confirmation = await auth().signInWithPhoneNumber('+91' + user.phoneNo);
+            setVerificationId(confirmation);
+
+            Alert.alert("Success", "OTP has been sent to your registered mobile number");
+            setOtpVisible(true);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleVerifyOTP = async () => {
+        try {
+            console.log(verificationId);
+            const credential = auth.PhoneAuthProvider.credential(verificationId.verificationId, otp);
+            const response = await auth().signInWithCredential(credential);
+            console.log(response);
+            if (response && response.user) {
+                Alert.alert('Success', 'OTP verification successful!');
+                const users = firestore().collection('Users');
+
+                const querySnapshot = await users
+                    .where('email', '==', email)
+                    .limit(1)
+                    .get();
+
+                const user = querySnapshot.docs[0].data();
+
+                dispatch(setUserProfile(user));
+                const filtered = modules.filter((module) =>
+                    module.login.includes(user.loginType)
+                );
+                dispatch(setModules(filtered));
+                navigation.navigate('HomeScreen');
+                await AsyncStorage.setItem("userData", JSON.stringify(user));
+            } else {
+                Alert.alert('Error', 'Invalid OTP');
+            }
+        } catch (error) {
+            console.log('Error===>', error);
+            Alert.alert('Error', 'Invalid OTP');
+        }
+    };
+
 
 
     return (
@@ -101,7 +170,12 @@ const Login = ({ navigation }) => {
             >
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
-            <Text></Text>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={toggleOtpModal}
+            >
+                <Text style={styles.buttonText}>Login using OTP</Text>
+            </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
                     navigation.navigate("SignUp");
@@ -109,6 +183,65 @@ const Login = ({ navigation }) => {
             >
                 <Text style={styles.lower}>Don't have an account Signup! </Text>
             </TouchableOpacity>
+
+            <Modal
+                animationType="slide"
+                visible={showOtpModal}
+                onRequestClose={() => {
+                    toggleOtpModal();
+                }}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.label}>Your Email:</Text>
+                        <TextInput
+                            style={styles.otpInput}
+                            placeholder="name@sample.com"
+                            value={email}
+                            onChangeText={setEmail}
+                            placeholderTextColor={gray}
+                            color={black}
+                        />
+                    </View>
+
+                    {
+                        otpVisible ?
+                            <View>
+                                <View style={styles.inputContainer}>
+                                    <Text style={styles.label}>Enter OTP:</Text>
+                                    <TextInput
+                                        style={styles.otpInput}
+                                        placeholder="name@sample.com"
+                                        value={otp}
+                                        onChangeText={setOtp}
+                                        placeholderTextColor={gray}
+                                        color={black}
+                                    />
+                                </View>
+                                <TouchableOpacity
+                                    style={styles.button}
+                                    onPress={handleVerifyOTP}
+                                >
+                                    <Text style={styles.buttonText}>Verify and Login</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.button}
+                                    onPress={sendOtp}
+                                >
+                                    <Text style={styles.buttonText}>Resend OTP</Text>
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={sendOtp}
+                            >
+                                <Text style={styles.buttonText}>Send OTP</Text>
+                            </TouchableOpacity>
+                    }
+                </View>
+            </Modal>
 
         </KeyboardAvoidingView>
     );
