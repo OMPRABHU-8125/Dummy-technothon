@@ -19,7 +19,10 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         height: windowheight + 200,
-        flexGrow: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        flexWrap: 'wrap'
     },
 
     card1: {

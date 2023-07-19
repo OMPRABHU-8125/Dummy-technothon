@@ -5,8 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch } from '../../store/hook';
 import { setModules, setUserProfile } from '../../store/slice/profileSlice';
 import styles from './splash.style';
-import modules from './Modules';
-import { parentmodule,guestmodule,studentmodule,teachermodule } from './Modules';
+import { parentmodule, guestmodule, studentmodule, teachermodule } from './Modules';
 
 const Splash = () => {
 
@@ -26,33 +25,70 @@ const Splash = () => {
 
             if (userData == null) {
                 const guest = {
-                    email:null,
+                    email: null,
                     fees: null,
                     firstName: 'Guest',
                     gender: null,
                     lastName: null,
-                    loginType:'Guest',
+                    loginType: 'Guest',
                     password: null,
                     phoneNo: null,
                 }
                 dispatch(setUserProfile(guest));
-                dispatch(setModules([guestmodule]));
+                dispatch(setModules([{
+                    id: '1',
+                    title: 'Basic Components',
+                    data: [...guestmodule]
+                }]));
             }
-            else{
-                if(user.loginType=='Student'){
-                    dispatch(setModules([studentmodule,guestmodule]));
+            else {
+                if (user.loginType == 'Student') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'Student Components',
+                            data: [...studentmodule]
+                        },
+                        {
+                            id: '2',
+                            title: 'Basic Components',
+                            data: [...guestmodule]
+                        }
+                    ]));
                 }
-                else if(user.loginType=='Teacher'){
-                    dispatch(setModules([teachermodule,guestmodule]));
+                else if (user.loginType == 'Teacher') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'Teacher Components',
+                            data: [...teachermodule]
+                        },
+                        {
+                            id: '2',
+                            title: 'Basic Components',
+                            data: [...guestmodule]
+                        }
+                    ]));
                 }
-                else if(user.loginType=='Parent'){
-                    dispatch(setModules([parentmodule,guestmodule]));
-                }   
+                else if (user.loginType == 'Parent') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'Parent Components',
+                            data: [...parentmodule]
+                        },
+                        {
+                            id: '2',
+                            title: 'Basic Components',
+                            data: [...guestmodule]
+                        }
+                    ]));
+                }
             }
             setTimeout(() => {
                 navigation.navigate("HomeScreen");
             }, 1000);
-            
+
         } catch (error) {
             console.log('Error:', error);
         }
