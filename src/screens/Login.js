@@ -9,7 +9,8 @@ import modules from './Modules';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { black, gray, white } from '../utils/color';
+import { black, gray } from '../utils/color';
+import { teachermodule, studentmodule, guestmodule, parentmodule } from './Modules';
 import { compare } from 'react-native-bcrypt';
 import auth from '@react-native-firebase/auth'
 
@@ -46,10 +47,49 @@ const Login = ({ navigation }) => {
             compare(password, hashedPassword, async (error, isMatch) => {
                 if (isMatch) {
                     dispatch(setUserProfile(user));
-                    const filtered = modules.filter((module) =>
-                        module.login.includes(user.loginType)
-                    );
-                    dispatch(setModules(filtered));
+                    if (user.loginType == 'Student') {
+                        dispatch(setModules([
+                            {
+                                id: '1',
+                                title: 'Student Components',
+                                data: [...studentmodule]
+                            },
+                            {
+                                id: '2',
+                                title: 'Basic Components',
+                                data: [...guestmodule]
+                            }
+                        ]));
+                    }
+                    else if (user.loginType == 'Teacher') {
+                        dispatch(setModules([
+                            {
+                                id: '1',
+                                title: 'Teacher Components',
+                                data: [...teachermodule]
+                            },
+                            {
+                                id: '2',
+                                title: 'Basic Components',
+                                data: [...guestmodule]
+                            }
+                        ]));
+                    }
+                    else if (user.loginType == 'Parent') {
+                        dispatch(setModules([
+                            {
+                                id: '1',
+                                title: 'Parent Components',
+                                data: [...parentmodule]
+                            },
+                            {
+                                id: '2',
+                                title: 'Basic Components',
+                                data: [...guestmodule]
+                            }
+                        ]));
+                    }
+
                     navigation.navigate('HomeScreen');
                     await AsyncStorage.setItem("userData", JSON.stringify(user));
                 } else {

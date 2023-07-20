@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { shadowcolor } from "../../utils/color";
 
 const styles = StyleSheet.create({
 
@@ -32,6 +33,10 @@ const styles = StyleSheet.create({
     tabIcon: {
         position: 'absolute',
         left: 10
+    },
+
+    logintext:{
+        color:shadowcolor
     },
 
     // rightTitle: {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -43,6 +43,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { white } from "../utils/color"
 import Calendar from "./holidayCalendar/HolidayCalendar";
 import Blog from "./blog";
+import { useAppSelector } from "../../store/hook";
 import Exam from "./examSchedule";
 import ViewAttendance from "./attendance/ViewAttendance";
 import StudentAttendance from "./attendance/StudentAttendance";
@@ -51,6 +52,18 @@ const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const MyHome = () => {
+    const [isVisible,setIsVisible]=useState(false)
+    const user = useAppSelector(state => state.profile.data);
+
+    useEffect(() => {
+        checkUser();
+    }, [user])
+
+    const checkUser = () => {
+        if (user.loginType != 'Guest') {
+            setIsVisible(true)
+        }
+    }
     return (
         <tab.Navigator
             screenOptions={({ route }) => ({
@@ -95,11 +108,14 @@ const MyHome = () => {
                 component={ContactUs}
                 options={{ headerShown: false }}
             />
+            {isVisible?( 
             <tab.Screen
                 name='Profile'
                 component={Profile}
                 options={{ headerShown: false }}
-            />
+            />):null
+            }
+           
         </tab.Navigator>
     )
 }
