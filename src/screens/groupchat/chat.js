@@ -67,7 +67,7 @@ const Chat = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>{user1.loginType}</Text>
+                <Text style={styles.headerText}>Parent Teacher Association(PTA)</Text>
             </View>
             <Text style={styles.date}>{new Date().toLocaleDateString()}</Text>
             <FlatList

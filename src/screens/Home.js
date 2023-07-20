@@ -8,7 +8,8 @@ import {
     ImageBackground,
     TouchableOpacity,
     Image,
-    StyleSheet
+    StyleSheet,
+    Touchable
 } from 'react-native';
 import { useAppSelector } from '../../store/hook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -131,29 +132,31 @@ const Home = ({ navigation }) => {
     return (
         <View style={{ backgroundColor: '#F4F4F4' }}>
             <View style={styles.heading}>
-                <View onPress={() => { navigation.navigate("Profile") }} style={{ justifyContent: 'center', alignItems: 'center', margin: responsiveHeight(1) }}>
+                <TouchableOpacity onPress={() => { navigation.navigate("Profile") }} style={{ justifyContent: 'center', alignItems: 'center', margin: responsiveHeight(1) }}>
                     <Image source={require('../assets/imgs/user_profile.png')} style={{ height: responsiveHeight(7), width: responsiveWidth(14.5) }} />
-                </View>
+                </TouchableOpacity>
                 <View style={{ justifyContent: 'center' }} >
                     <Text style={styles.greeting}>Hello {user.firstName},</Text>
                     <Text style={styles.mail}>{user.email}</Text>
                 </View>
             </View>
-            <View onPress={() => { navigation.navigate("EventUpdate") }} style={{ height: responsiveHeight(25), margin: responsiveWidth(2), borderRadius: 20, backgroundColor: maroon }}>
+            <View style={{ height: responsiveHeight(25), margin: responsiveWidth(2), borderRadius: 20, backgroundColor: maroon }}>
                 <View style={{ borderWidth: 1, borderColor: white, height: responsiveHeight(23), borderRadius: 20, margin: 5 }}>
                     <View style={{ margin: responsiveWidth(2), height: responsiveHeight(21) }}>
                         <Text style={{ fontSize: 16, fontWeight: 900, color: white }}>Newsfeed/Upcoming Events</Text>
                         <View style={{ borderWidth: 1, borderColor: white }}></View>
                         <Text></Text>
-                        <Text style={{ color: white, fontSize: 18 }}>
-                            {eventName}
-                        </Text>
-                        <Text style={{ textDecorationLine: 'underline', color: white, fontSize: 12, textAlign: 'justify' }}>
-                            {eventDesc}
-                        </Text>
-                        <Text style={{ textDecorationLine: 'underline', color: white, fontSize: 12, textAlign: 'justify' }}>
-                            {eventDetail}
-                        </Text>
+                        <TouchableOpacity onPress={() => { navigation.navigate("EventUpdate") }}>
+                            <Text style={{ color: white, fontSize: 18 }}>
+                                {eventName}
+                            </Text>
+                            <Text style={{ textDecorationLine: 'underline', color: white, fontSize: 12, textAlign: 'justify' }}>
+                                {eventDesc}
+                            </Text>
+                            <Text style={{ textDecorationLine: 'underline', color: white, fontSize: 12, textAlign: 'justify' }}>
+                                {eventDetail}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         fontWeight: 'bold',
-        flex: 1,
     },
     logoutButton: {
         padding: 8,
