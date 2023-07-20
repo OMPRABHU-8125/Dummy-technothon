@@ -5,8 +5,6 @@ import styles from './Counselling.style';
 
 
 const Counselling = () => {
-    
-
     const [ex1, setex1] = useState(false)
     const [ex2, setex2] = useState(false)
     const [ex3, setex3] = useState(false)

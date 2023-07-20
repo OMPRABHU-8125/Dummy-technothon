@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import {
     View,
     TextInput,
-    Button,
-    StyleSheet,
     Alert,
     TouchableOpacity,
     Text,
@@ -12,7 +10,6 @@ import {
     ScrollView,
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './SignUp.style';
 import * as COLOR from '../utils/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -385,5 +382,4 @@ const SignUp = ({ navigation }) => {
         </ScrollView>
     );
 };
-
 export default SignUp;

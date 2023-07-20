@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
     View,
     Text,
-    FlatList,
+    SectionList,
     Alert,
     ImageBackground,
     TouchableOpacity,
@@ -16,7 +16,7 @@ import styles from './Home.styles';
 
 const Card = ({ title }) => {
     return (
-        <View style={styles.outercard}>
+        <View style={styles.outercard} >
             <View style={styles.card1}>
                 <Text style={styles.title}>{title}</Text>
             </View>
@@ -37,8 +37,8 @@ const Home = ({ navigation }) => {
                             navigation.navigate("Attendance")
                         }
 
-                        else {
-                            Alert.alert("Warning", "You are not allowed to access this feature")
+                        else if (user.loginType == 'Student') {
+                            navigation.navigate('StudentAttendance')
                         }
                     }
                     else if (item.title == 'Events Update') {
@@ -96,27 +96,27 @@ const Home = ({ navigation }) => {
 
                 <Card title={item.title} />
             </TouchableOpacity >
-        )
+        );
     };
+
+
     return (
         <View style={styles.view}>
             <ImageBackground
                 source={require('../assets/imgs/Swami_Vivekanand.jpg')}
-                style={styles.image}>
-            </ImageBackground>
+                style={styles.image}></ImageBackground>
 
             <View style={styles.welcome}>
                 <Text style={styles.welcome_text}>WELCOME TO VES</Text>
             </View>
-            <FlatList
-                data={data}
+
+            <SectionList
+                sections={data}
                 renderItem={renderCard}
-                keyExtractor={item => item.id}
-                numColumns={2}
+                keyExtractor={(item, index) => item + index}
                 contentContainerStyle={styles.contentContainer}
             />
         </View>
-
     );
 };
 
