@@ -1,12 +1,18 @@
 import { StyleSheet } from "react-native";
 import { black, blue, green, lightgray, red, shadowcolor, titletext, white } from "../../utils/color";
 import { elevationsize } from "../../utils/constant";
+import { responsiveWidth, responsiveHeight } from "react-native-responsive-dimensions";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
         padding: 16,
+    },
+    row: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: responsiveWidth(60)
     },
     title: {
         fontSize: 35,
@@ -19,7 +25,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginRight: 8,
         marginTop: 10,
-        color: titletext
+        color: titletext,
     },
     card: {
         width: 300,
@@ -75,10 +81,15 @@ const styles = StyleSheet.create({
         borderColor: lightgray,
         borderWidth: 1,
         borderRadius: 4,
-        marginBottom: 20,
+        marginBottom: 10,
         elevation: elevationsize,
-        shadowColor: shadowcolor
+        shadowColor: shadowcolor,
+        width: responsiveWidth(60)
     },
+
+    dropDownContainer: {
+        width: responsiveWidth(60)
+    }
 });
 
 export default styles;

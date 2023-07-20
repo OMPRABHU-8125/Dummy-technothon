@@ -17,9 +17,30 @@ const DailyAttendance = ({ navigation }) => {
     const [subjects, setSubjects] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState(null);
     const [open, setOpen] = useState(false);
+    const [openSession, setOpenSession] = useState(false);
     const [students, setStudents] = useState([]);
+    const [attendance, setAttednance] = useState([]);
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [sessionCount, setSessionCount] = useState();
+    const [sessions, setSessions] = useState([
+        {
+            label: 1,
+            value: 1
+        },
+        {
+            label: 2,
+            value: 2
+        },
+        {
+            label: 3,
+            value: 3
+        },
+        {
+            label: 4,
+            value: 4
+        },
+    ])
 
     const handleNext = () => {
         setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -51,7 +72,10 @@ const DailyAttendance = ({ navigation }) => {
                 .where('loginType', '==', 'Student')
                 .get();
 
-            const studentsList = snapshot.docs.map((doc) => doc.data().firstName);
+            const studentsList = snapshot.docs.map((doc) => ({
+                name: doc.data().firstName + ' ' + doc.data().lastName,
+                ...doc.data()
+            }));
             setStudents(studentsList)
         } catch (error) {
 
@@ -59,55 +83,99 @@ const DailyAttendance = ({ navigation }) => {
     }
 
     const handleClick = (text) => () => {
-        if (selectedSubject != null) {
-            console.log(`${students[currentIndex]} is ${text} in ${selectedSubject}`)
-            if (currentIndex < students.length)
-                handleNext();
-        }
+        if (selectedSubject !== null) {
+            const data = {
+                studentName: students[currentIndex].name,
+                studentId: students[currentIndex].grNo,
+                status: text
+            };
 
-        else {
-            Alert.alert("Error", "Please select a subject")
+            if (attendance.length === currentIndex) {
+                const updatedAttendance = [...attendance];
+                updatedAttendance.push(data);
+                setAttednance(updatedAttendance);
+            }
+
+            handleNext();
+        } else {
+            Alert.alert("Error", "Please select a subject");
         }
+    };
+
+    const handleSubmit = () => {
+        const dailyAttendance = {
+            facultyId: user.email,
+            facultyName: user.firstName + ' ' + user.lastName,
+            date: new Date(),
+            sessionCount: sessionCount,
+            attendance: attendance,
+            subject: selectedSubject
+        }
+        console.log(dailyAttendance)
+        firestore()
+            .collection("Attendance")
+            .add(dailyAttendance)
+            .then(() => {
+                Alert.alert("Success", "Attendance Added Successfully")
+            })
     }
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Welcome, {user.firstName}!</Text>
 
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.row}>
                 <Text style={styles.label}>Select a subject: </Text>
                 <DropDownPicker
                     style={styles.picker}
                     textStyle={{ color: 'black' }}
                     placeholder='Subjects'
-                    dropDownDirection="BOTTOM"
+                    dropDownDirection="TOP"
                     open={open}
                     value={selectedSubject}
                     items={subjects}
                     setOpen={setOpen}
                     setValue={setSelectedSubject}
                     setItems={setSubjects}
-                    containerStyle={{ width: '70%' }}
+                    containerStyle={styles.dropDownContainer}
+                />
+            </View>
+
+            <View style={styles.row}>
+                <Text style={styles.label}>Select lecture number: </Text>
+                <DropDownPicker
+                    style={styles.picker}
+                    textStyle={{ color: 'black' }}
+                    placeholder='Lecture Number'
+                    dropDownDirection="BOTTOM"
+                    open={openSession}
+                    value={sessionCount}
+                    items={sessions}
+                    setOpen={setOpenSession}
+                    setValue={setSessionCount}
+                    setItems={setSessions}
+                    containerStyle={styles.dropDownContainer}
                 />
             </View>
 
             <View style={styles.card}>
                 <Text style={styles.heading1}>{currentIndex < students.length ? `Student ${currentIndex + 1}` : 'List Over'}</Text>
-                <Text style={styles.heading}>{students[currentIndex]}</Text>
+                <Text style={styles.heading}>{currentIndex < students.length ? students[currentIndex].name : null}</Text>
                 {
                     currentIndex < students.length ?
                         <View style={{ flexDirection: 'row', marginTop: 40 }}>
                             <TouchableOpacity
                                 style={styles.buttonP}
                                 onPress={handleClick('Present')}
-                                disabled={currentIndex === students.length}
+                                disabled={currentIndex === students.length || attendance.length > currentIndex}
                             >
                                 <Text style={styles.buttonText}>Present</Text>
                             </TouchableOpacity>
+
                             <TouchableOpacity
                                 style={styles.buttonA}
                                 onPress={handleClick('Absent')}
-                                disabled={currentIndex === students.length}
+                                disabled={currentIndex === students.length || attendance.length > currentIndex}
                             >
                                 <Text style={styles.buttonText}>Absent</Text>
                             </TouchableOpacity>
@@ -116,9 +184,9 @@ const DailyAttendance = ({ navigation }) => {
                         :
                         <TouchableOpacity
                             style={styles.buttonG}
-                            onPress={() => { navigation.navigate('Attendance') }}
+                            onPress={handleSubmit}
                         >
-                            <Text style={styles.buttonText}>Go Back</Text>
+                            <Text style={styles.buttonText}>Submit Attendance</Text>
                         </TouchableOpacity>
                 }
             </View>
