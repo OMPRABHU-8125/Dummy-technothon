@@ -45,7 +45,6 @@ const Login = ({ navigation }) => {
 
             compare(password, hashedPassword, async (error, isMatch) => {
                 if (isMatch) {
-                    console.log("Logged In");
                     dispatch(setUserProfile(user));
                     const filtered = modules.filter((module) =>
                         module.login.includes(user.loginType)
@@ -92,12 +91,9 @@ const Login = ({ navigation }) => {
 
     const handleVerifyOTP = async () => {
         try {
-            console.log(verificationId);
             const credential = auth.PhoneAuthProvider.credential(verificationId.verificationId, otp);
             const response = await auth().signInWithCredential(credential);
-            console.log(response);
             if (response && response.user) {
-                Alert.alert('Success', 'OTP verification successful!');
                 const users = firestore().collection('Users');
 
                 const querySnapshot = await users
@@ -118,7 +114,6 @@ const Login = ({ navigation }) => {
                 Alert.alert('Error', 'Invalid OTP');
             }
         } catch (error) {
-            console.log('Error===>', error);
             Alert.alert('Error', 'Invalid OTP');
         }
     };
@@ -211,11 +206,12 @@ const Login = ({ navigation }) => {
                                     <Text style={styles.label}>Enter OTP:</Text>
                                     <TextInput
                                         style={styles.otpInput}
-                                        placeholder="name@sample.com"
+                                        placeholder="Enter OTP Sent to your verified number"
                                         value={otp}
                                         onChangeText={setOtp}
                                         placeholderTextColor={gray}
                                         color={black}
+                                        keyboardType='phone-pad'
                                     />
                                 </View>
                                 <TouchableOpacity
