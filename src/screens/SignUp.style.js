@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import * as COLOR from '../utils/color'
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 const styles = StyleSheet.create({
     container: {
@@ -7,6 +8,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 20,
         backgroundColor: '#fff'
+    },
+
+    label: {
+        color: COLOR.maroon,
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+
+    inputContainer: {
+        marginLeft: 10
     },
 
     submitContainer: {
@@ -31,7 +43,7 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        width: '100%',
+        width: responsiveWidth(90),
         height: 40,
         borderWidth: 1,
         borderColor: '#000',
@@ -41,7 +53,7 @@ const styles = StyleSheet.create({
     },
 
     inputCaptcha: {
-        width: '40%',
+        width: responsiveWidth(35),
         height: 35,
         borderWidth: 1,
         borderColor: '#000',
@@ -51,13 +63,18 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: 'black',
+        backgroundColor: COLOR.lightMaroon,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
         marginBottom: 30,
         marginHorizontal: 20,
         elevation: 10,
+    },
+
+    buttonText: {
+        color: COLOR.white,
+        fontWeight: 'bold'
     },
 
     text: {

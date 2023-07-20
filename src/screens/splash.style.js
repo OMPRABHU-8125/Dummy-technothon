@@ -2,23 +2,18 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     safeview: {
-        flex: 1,
+
+        borderWidth: 5
     },
 
     splashview: {
         backgroundColor: 'white',
-        flex: 1,
-        padding: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
+        borderWidth: 1
     },
 
     logo: {
         resizeMode: 'center',
-        height: 180,
-        borderColor: '#000',
-        padding: 10,
-
+        borderWidth: 2,
     },
     loading: {
         color: '#C0392B',
