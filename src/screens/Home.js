@@ -87,6 +87,9 @@ const Home = ({ navigation }) => {
                     else if (item.title == 'Exam Schedule') {
                         navigation.navigate("Exam")
                     }
+                    else if (item.title == 'Counselling') {
+                        navigation.navigate("Counselling")
+                    }
                 }
 
                 }>

@@ -44,6 +44,7 @@ import { white } from "../utils/color"
 import Calendar from "./holidayCalendar/HolidayCalendar";
 import Blog from "./blog";
 import Exam from "./examSchedule";
+import Counselling from "./counselling/Counselling";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -333,6 +334,14 @@ const App = () => {
                         options={({ navigation }) => ({
                             headerShown: true,
                             header: () => <CustomHeader navigation={navigation} title="Exam Schedule" />
+                        })}
+                    />
+                     <stack.Screen
+                        name='Counselling'
+                        component={Counselling}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Counselling" />
                         })}
                     />
                 </stack.Navigator>
