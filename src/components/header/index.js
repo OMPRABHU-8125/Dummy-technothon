@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './header.styles';
 import LinearGradient from 'react-native-linear-gradient';
@@ -6,8 +6,23 @@ import LineIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAppSelector } from '../../../store/hook';
 
 const CustomHeader = ({ title, navigation }) => {
+    const [isVisible, setIsVisible] = useState(false)
+    const user = useAppSelector(state => state.profile.data);
+    useEffect(() => {
+        checkUser();
+    }, [user]);
+
+    const checkUser = () => {
+        if (user.loginType !== 'Guest') {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
+        }
+    };
+
     const renderHeader = () => {
         if (title === 'Home') {
             return (
@@ -27,7 +42,13 @@ const CustomHeader = ({ title, navigation }) => {
                         navigation.navigate('Login');
                         await AsyncStorage.removeItem("userData");
                     }} style={styles.icon}>
-                        <LineIcons name="logout" size={26} color="black" />
+                        {isVisible ? (
+                            <LineIcons name="power" size={26} color='rgb(145, 41, 40)'/>
+                        ) : 
+                        (
+                            <Text style={styles.logintext}>Login</Text>
+                        )
+                        }
                     </TouchableOpacity>
                 </LinearGradient>
             );
