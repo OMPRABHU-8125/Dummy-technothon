@@ -18,8 +18,11 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     contentContainer: {
-        height: windowheight + 40,
-        flexGrow: 1,
+        height: windowheight + 200,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        flexWrap: 'wrap'
     },
 
     card1: {

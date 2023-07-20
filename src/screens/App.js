@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -26,6 +26,7 @@ import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import Splash from "./splash";
+import Chat from "./groupchat/chat";
 
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
 import FAQ from "./FAQs/faqs";
@@ -44,11 +45,27 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { white } from "../utils/color"
 import Calendar from "./holidayCalendar/HolidayCalendar";
 import Blog from "./blog";
+import { useAppSelector } from "../../store/hook";
+import Exam from "./examSchedule";
+import ViewAttendance from "./attendance/ViewAttendance";
+import StudentAttendance from "./attendance/StudentAttendance";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const MyHome = () => {
+    const [isVisible,setIsVisible]=useState(false)
+    const user = useAppSelector(state => state.profile.data);
+
+    useEffect(() => {
+        checkUser();
+    }, [user])
+
+    const checkUser = () => {
+        if (user.loginType != 'Guest') {
+            setIsVisible(true)
+        }
+    }
     return (
         <tab.Navigator
             screenOptions={({ route }) => ({
@@ -93,11 +110,14 @@ const MyHome = () => {
                 component={ContactUs}
                 options={{ headerShown: false }}
             />
+            {isVisible?( 
             <tab.Screen
                 name='Profile'
                 component={Profile}
                 options={{ headerShown: false }}
-            />
+            />):null
+            }
+           
         </tab.Navigator>
     )
 }
@@ -162,6 +182,14 @@ const App = () => {
                         options={({ navigation }) => ({
                             headerShown: true,
                             header: () => <CustomHeader navigation={navigation} title="Daily Attendance" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='ViewAttendance'
+                        component={ViewAttendance}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="View Attendance" />
                         })}
                     />
                     <stack.Screen
@@ -332,7 +360,31 @@ const App = () => {
                         options={({ navigation }) => ({
                             headerShown: true,
                             header: () => <CustomHeader navigation={navigation} title="Digital Academy Detail" />
-                        })}                    />
+                        })}                 />
+                       <stack.Screen
+                       name='Chat'
+                        component={Chat}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="VES Chat" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='Exam'
+                        component={Exam}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Exam Schedule" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='StudentAttendance'
+                        component={StudentAttendance}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="View Attendance" />
+                        })}
+                    />
                 </stack.Navigator>
             </NavigationContainer>
         </Provider >
