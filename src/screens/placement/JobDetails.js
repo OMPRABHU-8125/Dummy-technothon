@@ -23,7 +23,7 @@ const JobDetails = ({ route }) => {
 
       {!isApplied && (
         <TouchableOpacity style={styles.button} onPress={handleApplyPress}>
-          <Text style={styles.buttonText}>Apply</Text>
+          <Text style={styles.buttontext}>Apply</Text>
         </TouchableOpacity>
       )}
       {isApplied && <Text style={styles.successText}>You have successfully applied for this job.</Text>}
