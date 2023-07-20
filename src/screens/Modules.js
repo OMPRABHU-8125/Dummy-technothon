@@ -25,41 +25,6 @@ const guestmodule = [
     },
     {
         id: 7,
-        title: "About Us",
-        login: ['Student', 'Parent',]
-    },
-    {
-        id: 8,
-        title: 'FAQs',
-        login: ['Student', 'Parent', 'Teacher']
-    },
-    {
-        id: 9,
-        title: 'Faculty Load',
-        login: ['Teacher']
-    },
-    {
-        id: 10,
-        title: 'Holiday Calender',
-        login: ['Student', 'Teacher']
-    },
-    {
-        id: 11,
-        title: 'Stationary Supply Hub',
-        login: ['Student', 'Parent']
-    },
-    {
-        id: 12,
-        title: 'Fitness And Health',
-        login: ['Student', 'Parent', 'Teacher']
-    },
-    {
-        id: 13,
-        title: 'Placement',
-        login: ['Student', 'Parent', 'Teacher']
-    },
-    {
-        id: 14,
         title: 'Blog',
     },
 ]
