@@ -26,6 +26,8 @@ import Details from "./stationarySupply/Details";
 import Cart from "./stationarySupply/Cart";
 import Fees from "./fees/Fees";
 import Splash from "./splash";
+import AddJob from "./placement/AddJob";
+import JobDetails from "./placement/JobDetails";
 import Chat from "./groupchat/chat";
 
 import HolidayCalendar from './holidayCalendar/HolidayCalendar';
@@ -37,6 +39,8 @@ import Checkout from "./stationarySupply/Checkout";
 import Orders from "./stationarySupply/Orders";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import DigitalAcademy from "./digitalAcademy/DigitalAcademy";
+import DigitalAcademyDetail from "./digitalAcademy/DigitalAcademyDetail";
 import Placement from "./placement/Placement";
 import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -339,6 +343,23 @@ const App = () => {
                         })}
                     />
                     <stack.Screen
+                        name='JobDetails'
+                        component={JobDetails}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="JobDetails" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='AddJob'
+                        component={AddJob}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="AddJob" />
+                        })}
+                    />
+                    
+                    <stack.Screen
                         name='Blog'
                         component={Blog}
                         options={({ navigation }) => ({
@@ -347,7 +368,21 @@ const App = () => {
                         })}
                     />
                     <stack.Screen
-                        name='Chat'
+                        name='DigitalAcademy'
+                        component={DigitalAcademy}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Digital Academy" />
+                        })}                    />
+                    <stack.Screen
+                        name='DigitalAcademyDetail'
+                        component={DigitalAcademyDetail}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Digital Academy Detail" />
+                        })}                 />
+                       <stack.Screen
+                       name='Chat'
                         component={Chat}
                         options={({ navigation }) => ({
                             headerShown: true,

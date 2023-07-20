@@ -21,10 +21,6 @@ const guestmodule = [
     },
     {
         id: 6,
-        title: 'Fitness And Health',
-    },
-    {
-        id: 7,
         title: 'Blog',
     },
 
@@ -85,6 +81,10 @@ const studentmodule = [
     {
         id: 7,
         title: 'Counselling',
+    },
+    {
+        id: 8,
+        title: 'Digital Academy',
     },
 ]
 const parentmodule = [
