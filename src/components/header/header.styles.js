@@ -1,15 +1,15 @@
 import { StyleSheet } from "react-native";
-import { shadowcolor } from "../../utils/color";
+import { maroon, shadowcolor } from "../../utils/color";
 
 const styles = StyleSheet.create({
 
     Homecontainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        elevation: 15,
-        shadowColor: 'rgb(145,41,40)',
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        elevation: 25,
+        shadowColor: '#',
         overflow: 'hidden',
         height: 45,
         paddingHorizontal: 10,
@@ -29,22 +29,23 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 20,
     },
+    chaticon: {
+        position: 'absolute',
+        right: 60,
+    },
 
     tabIcon: {
         position: 'absolute',
         left: 10
     },
 
-    logintext:{
-        color:shadowcolor
+    logintext: {
+        color: shadowcolor,
+        fontSize: 14,
+        fontWeight: '900',
+        fontStyle: 'italic'
     },
 
-    // rightTitle: {
-    //     color: 'rgb(145,41,40)',
-    //     fontSize: 24,
-    //     fontWeight: 'bold',
-    //     marginHorizontal: 10
-    // },
 
     TabTitle: {
         color: '#FFFFFF',

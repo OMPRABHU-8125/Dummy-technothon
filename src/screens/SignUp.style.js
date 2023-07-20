@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: COLOR.lightMaroon,
+        backgroundColor: COLOR.maroon,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,

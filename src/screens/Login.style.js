@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { black, blue, gray, maroon, white } from "../utils/color";
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 const styles = StyleSheet.create({
     container: {
@@ -14,10 +15,13 @@ const styles = StyleSheet.create({
         color: blue,
         textDecorationLine: 'underline',
     },
+    nullaccount: {
+        fontSize: 15,
+    },
 
     logo: {
-        width: 100,
-        height: 150,
+        width: responsiveWidth(100),
+        height: responsiveHeight(50),
         resizeMode: 'stretch'
     },
 
@@ -29,9 +33,10 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: maroon,
-        fontSize: 40,
-        marginBottom: 80
+        color: white,
+        fontSize: 22,
+        fontWeight: '900',
+        alignSelf: 'center'
     },
 
 
@@ -70,13 +75,43 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 5,
         marginBottom: 10,
-        elevation: 10,
+        elevation: 7,
+        shadowColor: maroon
     },
     buttonText: {
         color: white,
         fontSize: 16,
         fontWeight: 'bold',
     },
+    backgroundView: {
+        height: responsiveHeight(50),
+        width: responsiveWidth(100)
+    },
+    logoView: {
+        width: responsiveWidth(100),
+        height: responsiveHeight(14),
+        justifyContent: 'center'
+    },
+    logoImg: {
+        height: responsiveHeight(7),
+        width: responsiveWidth(68),
+        alignSelf: 'center'
+    },
+    textView: {
+        backgroundColor: '#A82C2C',
+        height: responsiveHeight(6),
+        width: responsiveWidth(100),
+        justifyContent: 'center'
+    },
+    inputView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: responsiveHeight(44),
+        width: responsiveWidth(100)
+    },
+    inputiconView: {
+        flexDirection: 'row'
+    }
 });
 
 export default styles;

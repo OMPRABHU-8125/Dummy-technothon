@@ -8,7 +8,6 @@ import styles from './splash.style';
 import { parentmodule, guestmodule, studentmodule, teachermodule } from './Modules';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { black, white } from '../utils/color';
-
 const Splash = () => {
 
     const dispatch = useAppDispatch();
@@ -87,9 +86,9 @@ const Splash = () => {
                     ]));
                 }
             }
-            // setTimeout(() => {
-            //     navigation.navigate("HomeScreen");
-            // }, 1000);
+            setTimeout(() => {
+                navigation.navigate("HomeScreen");
+            }, 1000);
 
         } catch (error) {
             console.log('Error:', error);
@@ -99,21 +98,17 @@ const Splash = () => {
     return (
         <View style={{ flex: 1 }}>
 
-            <View style={{
-                height: responsiveHeight(22), width: responsiveWidth(30), alignSelf: 'center', justifyContent: 'center'
-            }}>
+            <View style={styles.logoView}>
                 <Image
                     source={require('../assets/imgs/VES-Logo.png')}
-                    style={{ height: responsiveHeight(18), width: responsiveWidth(20), alignSelf: 'center' }}
+                    style={styles.logo}
                 />
             </View>
             <ImageBackground
                 source={require('../assets/imgs/Opacity.jpg')}
-                style={{
-                    flex: 1, resizeMode: 'center',
-                }}>
-                <View style={{ height: responsiveHeight(13), paddingHorizontal: responsiveWidth(3) }}>
-                    <Text style={{ color: black, fontWeight: 'bold', fontSize: 12, textAlign: 'center' }}>
+                style={styles.background}>
+                <View style={styles.textView}>
+                    <Text style={styles.info}>
                         Vivekanand Education Society (VES) runs 26
                         institutions in the
                         vicinity of Chembur. The Society's aim is to impart quality education
@@ -122,25 +117,19 @@ const Splash = () => {
                         Advaniji, a great social worker.
                     </Text>
                 </View>
-                {/* <ImageBackground
-                source={require('../assets/imgs/Opacity.jpg')}
-                style={{
-                    flex: 1, resizeMode: 'center',
-                }}> */}
 
-                <View style={{ height: responsiveHeight(5) }}>
+                <View style={styles.campuseView}>
                     <Text style={{
                         color: '#932727', fontSize: 24, fontWeight: '900', textAlign: 'center'
                     }}> 8 CAMPUSES</Text>
                 </View>
-                {/* <View style={{ borderWidth: 1 }}> */}
+
 
                 <Image
                     source={require('../assets/imgs/Branches.png')}
                     resizeMode='contain'
                 />
 
-                {/* </View> */}
                 <Text></Text>
             </ImageBackground>
             <View style={{ backgroundColor: '#E5B900', justifyContent: 'center', alignItems: 'center', height: responsiveHeight(6), }}>

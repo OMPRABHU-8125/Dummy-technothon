@@ -23,6 +23,9 @@ import RadioForm, {
     RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import bcrypt from 'react-native-bcrypt';
+import WelcomeUser from "./WelcomeUser";
+import { useAppDispatch } from '../../store/hook';
+
 
 
 const SignUp = ({ navigation }) => {
@@ -160,10 +163,13 @@ const SignUp = ({ navigation }) => {
                                 'User created Successfully',
                                 [
                                     {
-                                        text: 'Ok',
+                                        text: 'cancel',
+                                        // onPress: () => {
+                                        //     navigation.navigate('Login');
+                                        // },
                                     },
                                     {
-                                        text: 'Go to Login Screen',
+                                        text: 'Back to Login',
                                         onPress: () => {
                                             navigation.navigate('Login');
                                         },
@@ -210,7 +216,7 @@ const SignUp = ({ navigation }) => {
                         value={firstName}
                         onChangeText={setFirstName}
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -221,7 +227,7 @@ const SignUp = ({ navigation }) => {
                         value={lastName}
                         onChangeText={setLastName}
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -232,7 +238,8 @@ const SignUp = ({ navigation }) => {
                         value={email}
                         onChangeText={setEmail}
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
+                        keyboardType='email-address'
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -243,7 +250,7 @@ const SignUp = ({ navigation }) => {
                         value={grNo}
                         onChangeText={setGrNo}
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -254,7 +261,7 @@ const SignUp = ({ navigation }) => {
                         value={address}
                         onChangeText={setAddress}
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
                         multiline
                     />
                 </View>
@@ -266,7 +273,7 @@ const SignUp = ({ navigation }) => {
                         value={phoneNo}
                         onChangeText={setContactNo}
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -278,7 +285,7 @@ const SignUp = ({ navigation }) => {
                         value={password}
                         onChangeText={setPassword}
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -288,7 +295,7 @@ const SignUp = ({ navigation }) => {
                         placeholder="***"
                         secureTextEntry
                         placeholderTextColor={COLOR.gray}
-                        color={COLOR.white}
+                        color={COLOR.black}
                         value={confirmPassword}
                         onChangeText={setConfirmPassword}
                     />
@@ -370,7 +377,7 @@ const SignUp = ({ navigation }) => {
                                 value={child}
                                 onChangeText={setChild}
                                 placeholderTextColor={COLOR.gray}
-                                color={COLOR.white}
+                                color={COLOR.black}
                             />
                         </View>
                         :
@@ -393,7 +400,7 @@ const SignUp = ({ navigation }) => {
                         placeholder='Enter captcha'
                         placeholderTextColor={COLOR.gray}
                         onEndEditing={checkCaptcha}
-                        color={COLOR.white}
+                        color={COLOR.black}
                     />
                     {
                         isVerified ?

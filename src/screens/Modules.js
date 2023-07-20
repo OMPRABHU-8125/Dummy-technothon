@@ -49,6 +49,10 @@ const teachermodule = [
     {
         id: 5,
         title: 'Placement',
+    },
+    {
+        id: 6,
+        title: 'Chat'
     }
 ]
 
@@ -94,6 +98,10 @@ const parentmodule = [
     {
         id: 4,
         title: 'Placement',
+    },
+    {
+        id: 5,
+        title: 'Chat',
     }
 ]
 
