@@ -23,6 +23,7 @@ const guestmodule = [
         id: 6,
         title: 'Blog',
     },
+
 ]
 
 const teachermodule = [
@@ -45,7 +46,11 @@ const teachermodule = [
     {
         id: 5,
         title: 'Placement',
-    }
+    },
+    {
+        id: 6,
+        title: 'Counselling',
+    },
 ]
 
 const studentmodule = [
@@ -75,6 +80,10 @@ const studentmodule = [
     },
     {
         id: 7,
+        title: 'Counselling',
+    },
+    {
+        id: 8,
         title: 'Digital Academy',
     },
 ]

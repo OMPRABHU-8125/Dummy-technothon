@@ -49,6 +49,7 @@ import Calendar from "./holidayCalendar/HolidayCalendar";
 import Blog from "./blog";
 import { useAppSelector } from "../../store/hook";
 import Exam from "./examSchedule";
+import Counselling from "./counselling/Counselling";
 import ViewAttendance from "./attendance/ViewAttendance";
 import StudentAttendance from "./attendance/StudentAttendance";
 
@@ -396,6 +397,14 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="Exam Schedule" />
                         })}
                     />
+                     <stack.Screen
+                        name='Counselling'
+                        component={Counselling}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Counselling" />
+                        })}
+                        />
                     <stack.Screen
                         name='StudentAttendance'
                         component={StudentAttendance}
