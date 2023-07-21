@@ -24,12 +24,14 @@ import RadioForm, {
 } from 'react-native-simple-radio-button';
 import bcrypt from 'react-native-bcrypt';
 import WelcomeUser from "./WelcomeUser";
-import { useAppDispatch } from '../../store/hook';
+// import { useAppDispatch } from '../../store/hook';
+import ModalDropdown from "react-native-modal-dropdown";
+import Ionicon from 'react-native-vector-icons/Ionicons'
 
-
-import PushNotification from "react-native-push-notification";
+// import PushNotification from "react-native-push-notification";
 
 const SignUp = ({ navigation }) => {
+    const [selectedItem, setSelectedItem] = useState('VESIT');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -66,7 +68,7 @@ const SignUp = ({ navigation }) => {
     };
 
     useEffect(() => {
-        createChannels()
+        // createChannels();
         getEmails();
         regenerateCaptcha();
     }, []);
@@ -78,24 +80,6 @@ const SignUp = ({ navigation }) => {
             captcha += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return captcha;
-    }
-
-    const createChannels = () => {
-        PushNotification.createChannel(
-            {
-                channelId: "test-channel",
-                channelName: "Test Channel"
-            }
-        )
-    }
-
-    const pushNoti = (user) => {
-        PushNotification.localNotification({
-            channelId: "test-channel",
-            title: `Hello ${user.firstName}`,
-            message: "Welcome to the VES Family!",
-        })
-
     }
 
     function regenerateCaptcha() {
@@ -118,7 +102,6 @@ const SignUp = ({ navigation }) => {
 
     const handlePress = () => {
         Tts.setDefaultLanguage('en-IN');
-        // Tts.setDefaultVoice('com.apple.ttsbundle.kalpana-compact');
         for (let i = 0; i < captchaText.length; i++) {
             if (captchaText[i].toUpperCase() === captchaText[i])
                 speakText(`Capital ${captchaText[i]}`)
@@ -127,6 +110,10 @@ const SignUp = ({ navigation }) => {
                 speakText(captchaText[i])
             }
         }
+    };
+
+    const handleTitleChange = (index, value) => {
+        setSelectedItem(value);
     };
 
     const handleSignup = async () => {
@@ -178,16 +165,13 @@ const SignUp = ({ navigation }) => {
                         .collection('Users')
                         .add(user)
                         .then(() => {
-                            pushNoti(user)
+
                             Alert.alert(
                                 'Success',
                                 'User created Successfully',
                                 [
                                     {
                                         text: 'cancel',
-                                        // onPress: () => {
-                                        //     navigation.navigate('Login');
-                                        // },
                                     },
                                     {
                                         text: 'Back to Login',
@@ -400,6 +384,34 @@ const SignUp = ({ navigation }) => {
                                 placeholderTextColor={COLOR.gray}
                                 color={COLOR.black}
                             />
+                        </View>
+                        :
+                        null
+                }
+                {
+                    loginType == 'Student' ?
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.label}>Your Institute:</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <ModalDropdown
+                                    options={[
+                                        " VES College of Arts, Science & Commerce (Autonomous)",
+                                        " VES Institute of Technology",
+                                        "VES College of Architecture",
+                                        "VES College of Pharmacy",
+                                        "VES POLYTECHNIC",
+                                        "VES College of Law",
+                                    ]}
+                                    defaultValue={selectedItem}
+                                    onSelect={handleTitleChange}
+                                    textStyle={styles.dropdownText}
+                                    dropdownStyle={styles.dropdownStyle}
+                                    dropdownTextStyle={styles.dropdownTextStyle}
+                                // customItemContainerStyle={{ justifyContent: 'center' }}
+                                // labelStyle={{ textAlign: 'center', justifyContent: 'center' }}
+                                />
+                                <Ionicon name={'chevron-down'} size={20} style={{ position: 'absolute', right: 1, padding: 10 }} />
+                            </View>
                         </View>
                         :
                         null

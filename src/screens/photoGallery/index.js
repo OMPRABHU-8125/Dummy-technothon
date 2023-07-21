@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, Animated } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, Animated, Touchable } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './PhotoGallery.styles';
@@ -7,6 +7,8 @@ import { useAppSelector } from '../../../store/hook';
 import { black, red } from '../../utils/color';
 import Share from 'react-native-share';
 import ModalDropdown from 'react-native-modal-dropdown';
+import Ionicon from 'react-native-vector-icons/Ionicons'
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const ImageGrid = () => {
     const [imageArrays, setImageArrays] = useState([]);
@@ -83,7 +85,7 @@ const ImageGrid = () => {
             const likedBy = postData.likedBy;
 
             if (!likedBy.includes(user.email)) {
-                // User has not liked the post, add like
+
                 await postRef.update({
                     likes: firestore.FieldValue.increment(1),
                     likedBy: firestore.FieldValue.arrayUnion(user.email),
@@ -95,7 +97,7 @@ const ImageGrid = () => {
                 }));
                 setIsLiked(true);
             } else {
-                // User has already liked the post, remove like
+
                 await postRef.update({
                     likes: firestore.FieldValue.increment(-1),
                     likedBy: firestore.FieldValue.arrayRemove(user.email),
@@ -156,24 +158,35 @@ const ImageGrid = () => {
 
     return (
         <View style={styles.main}>
-            <ModalDropdown
-                options={[
-                    "VESIT", "VESP", "Architecture College", "Convocation Ceremony", "Womens Day", "Cricket Camp", "Music Room", "Guru Purnima", "Play Group", "Pharmacy College", "Law College"
-                ]}
-                defaultValue={selectedItem}
-                onSelect={handleTitleChange}
-                style={styles.dropdown}
-                textStyle={styles.dropdownText}
-                dropdownStyle={styles.dropdownStyle}
-                customItemContainerStyle={{ justifyContent: 'center' }}
-                labelStyle={{ textAlign: 'center', justifyContent: 'center' }}
-            />
+            <View style={{ flexDirection: 'row', marginVertical: responsiveHeight(1) }}>
+                <ModalDropdown
+                    options={[
+                        "VESIT", "VESP", "Architecture College",
+                        "Convocation Ceremony",
+                        "Womens Day",
+                        "Cricket Camp",
+                        "Music Room",
+                        "Guru Purnima",
+                        "Play Group",
+                        "Pharmacy College",
+                        "Law College"
+                    ]}
+                    defaultValue={selectedItem}
+                    onSelect={handleTitleChange}
+                    textStyle={styles.dropdownText}
+                    dropdownStyle={styles.dropdownStyle}
+                    customItemContainerStyle={{ justifyContent: 'center' }}
+                    labelStyle={{ textAlign: 'center', justifyContent: 'center' }}
+                    dropdownTextStyle={styles.dropdownTextStyle}
+                />
+                <Ionicon name={'chevron-down'} size={20} color={black} style={{ position: 'absolute', marginVertical: responsiveWidth(2.5), right: 1 }} />
+            </View>
             <FlatList
                 data={imageArrays}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
             />
-        </View>
+        </View >
     );
 };
 
