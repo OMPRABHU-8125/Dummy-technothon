@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     },
     nullaccount: {
         fontSize: 15,
+        color: blue
     },
 
     logo: {
