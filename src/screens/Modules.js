@@ -48,6 +48,7 @@ const teachermodule = [
         title: 'Placement',
     },
     {
+
         id: 6,
         title: 'Counselling',
     },
@@ -103,7 +104,8 @@ const parentmodule = [
     {
         id: 4,
         title: 'Placement',
-    }
+    },
+
 ]
 
 export { guestmodule, teachermodule, studentmodule, parentmodule };

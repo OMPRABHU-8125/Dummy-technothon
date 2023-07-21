@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     View,
+    ImageBackground,
     Text,
 } from 'react-native';
 import Login from "./Login";
@@ -52,12 +53,13 @@ import Exam from "./examSchedule";
 import Counselling from "./counselling/Counselling";
 import ViewAttendance from "./attendance/ViewAttendance";
 import StudentAttendance from "./attendance/StudentAttendance";
+import WelcomeUser from "./WelcomeUser";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const MyHome = () => {
-    const [isVisible,setIsVisible]=useState(false)
+    const [isVisible, setIsVisible] = useState(false)
     const user = useAppSelector(state => state.profile.data);
 
     useEffect(() => {
@@ -93,7 +95,6 @@ const MyHome = () => {
                 },
                 tabBarActiveBackgroundColor: 'rgb(160,80,15)',
                 tabBarStyle: {
-                    position: 'absolute',
                     backgroundColor: 'rgb(145,40,41)',
                 },
             })}
@@ -113,14 +114,14 @@ const MyHome = () => {
                 component={ContactUs}
                 options={{ headerShown: false }}
             />
-            {isVisible?( 
-            <tab.Screen
-                name='Profile'
-                component={Profile}
-                options={{ headerShown: false }}
-            />):null
+            {isVisible ? (
+                <tab.Screen
+                    name='Profile'
+                    component={Profile}
+                    options={{ headerShown: false }}
+                />) : null
             }
-           
+
         </tab.Navigator>
     )
 }
@@ -413,6 +414,14 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="View Attendance" />
                         })}
                     />
+                    <stack.Screen
+                        name='WelcomeUser'
+                        component={WelcomeUser}
+                        options={() => ({
+                            headerShown: false,
+                        })}
+                    />
+
                 </stack.Navigator>
             </NavigationContainer>
         </Provider >

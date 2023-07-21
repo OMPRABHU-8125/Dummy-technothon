@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from 'react-native';
-import { white, maroon, shadowcolor } from '../utils/color';
+import { white, maroon, shadowcolor, black, gray } from '../utils/color';
+import { responsiveWidth, responsiveHeight } from "react-native-responsive-dimensions";
 
 
 const windowWidth = Dimensions.get("window").width;
@@ -18,12 +19,28 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     contentContainer: {
-        height: windowheight + 200,
+        height: windowheight + 400,
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        alignItems: 'baseline',
         flexWrap: 'wrap'
+
     },
+    heading: {
+        flexDirection: 'row',
+        height: responsiveHeight(10),
+        width: responsiveWidth(100),
+
+    },
+    greeting: {
+        fontSize: 17,
+        color: black,
+    },
+    mail: {
+        fontSize: 12,
+        color: gray,
+    },
+
 
     card1: {
         width: windowWidth / 2 - 20,

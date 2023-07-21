@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const Enquiry = ({ navigation }) => {
 
-
+    0
     return (
         <SafeAreaView style={styles.container}>
             <View>

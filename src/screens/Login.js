@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView, Modal } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useAppDispatch } from '../../store/hook';
@@ -13,6 +13,7 @@ import { black, gray } from '../utils/color';
 import { teachermodule, studentmodule, guestmodule, parentmodule } from './Modules';
 import { compare } from 'react-native-bcrypt';
 import auth from '@react-native-firebase/auth'
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -162,63 +163,79 @@ const Login = ({ navigation }) => {
 
     return (
         <KeyboardAvoidingView style={styles.container}>
-            <Image
-                source={require('../assets/imgs/logo.png')}
-                style={styles.logo}
-            />
-            <Text></Text>
-            <Text style={styles.text}>VES Login</Text>
-            <View style={{ flexDirection: 'row' }}>
-                {/* <View > */}
-                <FontAwesome name={'user-circle-o'} size={20} color={black} style={styles.usericon} />
-                {/* </View> */}
-                <TextInput
-                    style={styles.input}
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholderTextColor={'grey'}
-                />
+            <View style={styles.backgroundView}>
+                <ImageBackground
+                    source={require('../assets/imgs/Swami_Login.png')}
+                    style={styles.logo}
+                >
+                    <View style={styles.logoView}>
+                        <Image
+                            source={require('../assets/imgs/ves_logo_name.png')}
+                            style={styles.logoImg}
+                        />
+                    </View>
+
+
+                </ImageBackground>
             </View>
+            <View style={styles.textView}>
+                <Text style={styles.text}>WELCOME TO VES APP</Text>
+            </View>
+            <View style={styles.inputView}>
+                <View style={styles.inputiconView}>
+                    <FontAwesome name={'user-circle-o'} size={20} color={black} style={styles.usericon} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Email"
+                        value={email}
+                        onChangeText={setEmail}
+                        placeholderTextColor={'grey'}
+                        keyboardType='email-address'
 
-            <View style={{ flexDirection: 'row' }}>
-                <Fontisto name={'locked'} size={20} color={black} style={styles.lockicon} />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
-                    secureTextEntry={!visible}
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholderTextColor={'grey'}
-                />
+                    />
+                </View>
 
-                <TouchableOpacity style={styles.eyeicon} onPress={() => {
-                    setVisible(!visible);
-                }}>
-                    <MaterialIcons name={visible ? 'visibility' : 'visibility-off'} size={25} color={black} />
+                <View style={styles.inputiconView}>
+                    <Fontisto name={'locked'} size={20} color={black} style={styles.lockicon} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Password"
+                        secureTextEntry={!visible}
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholderTextColor={'grey'}
+                    />
+
+                    <TouchableOpacity style={styles.eyeicon} onPress={() => {
+                        setVisible(!visible);
+                    }}>
+                        <MaterialIcons name={visible ? 'visibility' : 'visibility-off'} size={25} color={black} />
+                    </TouchableOpacity>
+                </View>
+                <Text></Text>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={handleLogin}
+                >
+                    <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={toggleOtpModal}
+                >
+                    <Text style={styles.buttonText}>Login using OTP</Text>
+                </TouchableOpacity>
+                <View style={styles.inputiconView}>
+                    <Text style={styles.nullaccount}>Don't have an account</Text>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate("SignUp");
+                        }}
+                    >
+                        <Text style={styles.lower}>Signup!</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <Text></Text>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={handleLogin}
-            >
-                <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={toggleOtpModal}
-            >
-                <Text style={styles.buttonText}>Login using OTP</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate("SignUp");
-                }}
-            >
-                <Text style={styles.lower}>Don't have an account Signup! </Text>
-            </TouchableOpacity>
-
             <Modal
                 animationType="slide"
                 visible={showOtpModal}
