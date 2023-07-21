@@ -20,7 +20,7 @@ import RadioForm, {
     RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import bcrypt from 'react-native-bcrypt';
-
+import PushNotification from "react-native-push-notification";
 
 const SignUp = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -59,6 +59,7 @@ const SignUp = ({ navigation }) => {
     };
 
     useEffect(() => {
+        createChannels()
         getEmails();
         regenerateCaptcha();
     }, []);
@@ -70,6 +71,24 @@ const SignUp = ({ navigation }) => {
             captcha += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return captcha;
+    }
+
+    const createChannels = () => {
+        PushNotification.createChannel(
+            {
+                channelId: "test-channel",
+                channelName: "Test Channel"
+            }
+        )
+    }
+
+    const pushNoti = (user) => {
+        PushNotification.localNotification({
+            channelId: "test-channel",
+            title: `Hello ${user.firstName}`,
+            message: "Welcome to the VES Family!",
+        })
+
     }
 
     function regenerateCaptcha() {
@@ -152,6 +171,7 @@ const SignUp = ({ navigation }) => {
                         .collection('Users')
                         .add(user)
                         .then(() => {
+                            pushNoti(user)
                             Alert.alert(
                                 'Success',
                                 'User created Successfully',
