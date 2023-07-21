@@ -113,7 +113,7 @@ const Calendar = () => {
         <View style={styles.buttonview}>
           <TouchableOpacity onPress={handlePreviousMonth}>
             <Text style={styles.button}>
-              <Icon name="md-chevron-back-circle-outline" size={28}></Icon>
+              <Icon name="md-chevron-back-circle-outline" size={28} color={black} ></Icon>
             </Text>
           </TouchableOpacity>
         </View>
@@ -133,7 +133,7 @@ const Calendar = () => {
         <View style={styles.buttonview}>
           <TouchableOpacity onPress={handleNextMonth}>
             <Text style={styles.button}>
-              <Icon name="md-chevron-forward-circle-outline" size={28} ></Icon>
+              <Icon name="md-chevron-forward-circle-outline" size={28} color={black}></Icon>
             </Text>
           </TouchableOpacity>
         </View>
