@@ -236,7 +236,6 @@ const Login = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-
             <Modal
                 animationType="slide"
                 visible={showOtpModal}
