@@ -89,7 +89,7 @@ const studentmodule = [
     },
     {
         id: 9,
-        title: 'Fitness and Health',
+        title: 'Fitness And Health',
     },
 ]
 const parentmodule = [
