@@ -87,6 +87,10 @@ const studentmodule = [
         id: 8,
         title: 'Digital Academy',
     },
+    {
+        id: 9,
+        title: 'Fitness and Health',
+    },
 ]
 const parentmodule = [
     {
