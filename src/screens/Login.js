@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView, ImageBackground } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, Alert, KeyboardAvoidingView, ImageBackground, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { useAppDispatch } from '../../store/hook';
@@ -105,6 +105,10 @@ const Login = ({ navigation }) => {
         setShowOtpModal(!showOtpModal);
     };
 
+    const resendOtp = () => {
+        sendOtp()
+        setOtp()
+    }
     const sendOtp = async () => {
         try {
             const users = firestore().collection('Users');
@@ -128,14 +132,15 @@ const Login = ({ navigation }) => {
             setOtpVisible(true);
         } catch (error) {
             console.log(error);
+            Alert.alert("Error", "Cannot Send OTP right Now, Please try again later")
         }
     };
 
     const handleVerifyOTP = async () => {
         try {
-            const credential = auth.PhoneAuthProvider.credential(verificationId.verificationId, otp);
-            const response = await auth().signInWithCredential(credential);
-            if (response && response.user) {
+            const confirmation = await verificationId.confirm(otp)
+
+            if (confirmation) {
                 const users = firestore().collection('Users');
 
                 const querySnapshot = await users
@@ -146,16 +151,57 @@ const Login = ({ navigation }) => {
                 const user = querySnapshot.docs[0].data();
 
                 dispatch(setUserProfile(user));
-                const filtered = modules.filter((module) =>
-                    module.login.includes(user.loginType)
-                );
-                dispatch(setModules(filtered));
+                if (user.loginType == 'Student') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'Student Components',
+                            data: [...studentmodule]
+                        },
+                        {
+                            id: '2',
+                            title: 'Basic Components',
+                            data: [...guestmodule]
+                        }
+                    ]));
+                }
+                else if (user.loginType == 'Teacher') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'Teacher Components',
+                            data: [...teachermodule]
+                        },
+                        {
+                            id: '2',
+                            title: 'Basic Components',
+                            data: [...guestmodule]
+                        }
+                    ]));
+                }
+                else if (user.loginType == 'Parent') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'Parent Components',
+                            data: [...parentmodule]
+                        },
+                        {
+                            id: '2',
+                            title: 'Basic Components',
+                            data: [...guestmodule]
+                        }
+                    ]));
+                }
+
                 navigation.navigate('HomeScreen');
                 await AsyncStorage.setItem("userData", JSON.stringify(user));
             } else {
                 Alert.alert('Error', 'Invalid OTP');
             }
         } catch (error) {
+            console.log('Otp====>>>', otp);
+            console.log('Error====>>>', error);
             Alert.alert('Error', 'Invalid OTP');
         }
     };
@@ -227,7 +273,7 @@ const Login = ({ navigation }) => {
                     <Text style={styles.buttonText}>Login using OTP</Text>
                 </TouchableOpacity>
                 <View style={styles.inputiconView}>
-                    <Text style={styles.nullaccount}>Don't have an account</Text>
+                    <Text style={styles.nullaccount}>Don't have an account? </Text>
                     <TouchableOpacity
                         onPress={() => {
                             navigation.navigate("SignUp");

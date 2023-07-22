@@ -28,8 +28,6 @@ import WelcomeUser from "./WelcomeUser";
 import ModalDropdown from "react-native-modal-dropdown";
 import Ionicon from 'react-native-vector-icons/Ionicons'
 
-// import PushNotification from "react-native-push-notification";
-
 const SignUp = ({ navigation }) => {
     const [selectedItem, setSelectedItem] = useState('VESIT');
     const [email, setEmail] = useState('');
@@ -68,7 +66,6 @@ const SignUp = ({ navigation }) => {
     };
 
     useEffect(() => {
-        // createChannels();
         getEmails();
         regenerateCaptcha();
     }, []);
@@ -165,7 +162,6 @@ const SignUp = ({ navigation }) => {
                         .collection('Users')
                         .add(user)
                         .then(() => {
-
                             Alert.alert(
                                 'Success',
                                 'User created Successfully',
