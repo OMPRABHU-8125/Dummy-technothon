@@ -14,7 +14,6 @@ import { teachermodule, studentmodule, guestmodule, parentmodule } from './Modul
 import { compare } from 'react-native-bcrypt';
 import auth from '@react-native-firebase/auth'
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
-import { Modal } from 'react-native';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
