@@ -1,8 +1,43 @@
 import { StyleSheet } from "react-native";
 import * as COLOR from '../utils/color'
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
+import { blue } from "../utils/color";
 
 const styles = StyleSheet.create({
+    dropdownText: {
+        width: responsiveWidth(90),
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#000',
+        marginBottom: 15,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        textAlign: 'left',
+        flexDirection: 'row',
+        textAlignVertical: 'center',
+        color: '#000',
+        fontWeight: 'bold'
+    },
+    dropdownStyle: {
+
+        fontSize: 20,
+        width: responsiveWidth(90),
+        height: responsiveHeight(25),
+        borderWidth: 1,
+        borderColor: '#912929',
+        marginBottom: 15,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        fontWeight: 'bold',
+    },
+
+    dropdownTextStyle: {
+        textAlign: 'justify',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: blue
+    },
+
     container: {
         flex: 1,
         paddingHorizontal: 10,
@@ -114,6 +149,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         marginBottom: 10,
     },
+
+
 });
 
 export default styles;

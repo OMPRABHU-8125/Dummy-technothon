@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { black, maroon, shadowcolor, white } from "../../utils/color";
+import { black, blue, maroon, shadowcolor, white } from "../../utils/color";
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
 const styles = StyleSheet.create({
@@ -35,31 +35,45 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        // width: "100%",
         borderColor: '#fff',
         height: responsiveHeight(56),
         width: responsiveWidth(100),
     },
-
-
     main: {
         flex: 1,
         padding: 10
     },
-
     dropdown: {
         width: responsiveWidth(95),
     },
     dropdownText: {
-        fontSize: 24,
+        fontSize: 20,
         color: black,
-
+        borderRadius: 10,
+        borderWidth: 1,
+        width: responsiveWidth(95),
+        height: responsiveHeight(5),
+        paddingHorizontal: responsiveWidth(2),
+        // alignContent: 'flex-end',
+        alignSelf: 'center',
+        textAlign: 'left',
+        verticalAlign: 'middle'
     },
     dropdownStyle: {
-        maxHeight: responsiveHeight(30),
-        width: responsiveWidth(90),
-        borderRadius: 5,
-        elevation: 10,
+        width: responsiveWidth(95),
+        height: responsiveHeight(40),
+        borderWidth: 1,
+        borderColor: '#912929',
+        marginBottom: 15,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+    },
+
+    dropdownTextStyle: {
+        textAlign: 'justify',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: blue
     },
 
 });
