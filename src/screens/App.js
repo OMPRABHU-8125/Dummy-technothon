@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     View,
+    ImageBackground,
     Text,
 } from 'react-native';
 import Login from "./Login";
@@ -39,6 +40,8 @@ import Checkout from "./stationarySupply/Checkout";
 import Orders from "./stationarySupply/Orders";
 import CustomHeader from "../components/header";
 import FitnessAndHealth from "./fitnessandhealth/FitnessAndHealth";
+import DigitalAcademy from "./digitalAcademy/DigitalAcademy";
+import DigitalAcademyDetail from "./digitalAcademy/DigitalAcademyDetail";
 import Placement from "./placement/Placement";
 import ImageGrid from "./photoGallery";
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -47,14 +50,16 @@ import Calendar from "./holidayCalendar/HolidayCalendar";
 import Blog from "./blog";
 import { useAppSelector } from "../../store/hook";
 import Exam from "./examSchedule";
+import Counselling from "./counselling/Counselling";
 import ViewAttendance from "./attendance/ViewAttendance";
 import StudentAttendance from "./attendance/StudentAttendance";
+import WelcomeUser from "./WelcomeUser";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const MyHome = () => {
-    const [isVisible,setIsVisible]=useState(false)
+    const [isVisible, setIsVisible] = useState(false)
     const user = useAppSelector(state => state.profile.data);
 
     useEffect(() => {
@@ -90,7 +95,6 @@ const MyHome = () => {
                 },
                 tabBarActiveBackgroundColor: 'rgb(160,80,15)',
                 tabBarStyle: {
-                    position: 'absolute',
                     backgroundColor: 'rgb(145,40,41)',
                 },
             })}
@@ -110,14 +114,14 @@ const MyHome = () => {
                 component={ContactUs}
                 options={{ headerShown: false }}
             />
-            {isVisible?( 
-            <tab.Screen
-                name='Profile'
-                component={Profile}
-                options={{ headerShown: false }}
-            />):null
+            {isVisible ? (
+                <tab.Screen
+                    name='Profile'
+                    component={Profile}
+                    options={{ headerShown: false }}
+                />) : null
             }
-           
+
         </tab.Navigator>
     )
 }
@@ -149,7 +153,7 @@ const App = () => {
                         component={SignUp}
                         options={({ navigation }) => ({
                             headerShown: true,
-                            header: () => <CustomHeader navigation={navigation} title="SignUp" />,
+                            header: () => <CustomHeader navigation={navigation} title="Register New Account" />,
                         })}
                     />
                     <stack.Screen
@@ -365,7 +369,21 @@ const App = () => {
                         })}
                     />
                     <stack.Screen
-                        name='Chat'
+                        name='DigitalAcademy'
+                        component={DigitalAcademy}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Digital Academy" />
+                        })}                    />
+                    <stack.Screen
+                        name='DigitalAcademyDetail'
+                        component={DigitalAcademyDetail}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Digital Academy Detail" />
+                        })}                 />
+                       <stack.Screen
+                       name='Chat'
                         component={Chat}
                         options={({ navigation }) => ({
                             headerShown: true,
@@ -380,6 +398,14 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="Exam Schedule" />
                         })}
                     />
+                     <stack.Screen
+                        name='Counselling'
+                        component={Counselling}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Counselling" />
+                        })}
+                        />
                     <stack.Screen
                         name='StudentAttendance'
                         component={StudentAttendance}
@@ -388,6 +414,14 @@ const App = () => {
                             header: () => <CustomHeader navigation={navigation} title="View Attendance" />
                         })}
                     />
+                    <stack.Screen
+                        name='WelcomeUser'
+                        component={WelcomeUser}
+                        options={() => ({
+                            headerShown: false,
+                        })}
+                    />
+
                 </stack.Navigator>
             </NavigationContainer>
         </Provider >

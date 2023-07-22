@@ -1,12 +1,59 @@
 import { StyleSheet } from "react-native";
 import * as COLOR from '../utils/color'
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
+import { blue } from "../utils/color";
 
 const styles = StyleSheet.create({
+    dropdownText: {
+        width: responsiveWidth(90),
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#000',
+        marginBottom: 15,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        textAlign: 'left',
+        flexDirection: 'row',
+        textAlignVertical: 'center',
+        color: '#000',
+        fontWeight: 'bold'
+    },
+    dropdownStyle: {
+
+        fontSize: 20,
+        width: responsiveWidth(90),
+        height: responsiveHeight(25),
+        borderWidth: 1,
+        borderColor: '#912929',
+        marginBottom: 15,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        fontWeight: 'bold',
+    },
+
+    dropdownTextStyle: {
+        textAlign: 'justify',
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: blue
+    },
+
     container: {
         flex: 1,
         paddingHorizontal: 10,
         paddingVertical: 20,
         backgroundColor: '#fff'
+    },
+
+    label: {
+        color: COLOR.maroon,
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+
+    inputContainer: {
+        marginLeft: 10
     },
 
     submitContainer: {
@@ -31,7 +78,7 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        width: '100%',
+        width: responsiveWidth(90),
         height: 40,
         borderWidth: 1,
         borderColor: '#000',
@@ -41,7 +88,7 @@ const styles = StyleSheet.create({
     },
 
     inputCaptcha: {
-        width: '40%',
+        width: responsiveWidth(35),
         height: 35,
         borderWidth: 1,
         borderColor: '#000',
@@ -51,13 +98,18 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: 'black',
+        backgroundColor: COLOR.maroon,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
         marginBottom: 30,
         marginHorizontal: 20,
         elevation: 10,
+    },
+
+    buttonText: {
+        color: COLOR.white,
+        fontWeight: 'bold'
     },
 
     text: {
@@ -97,6 +149,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         marginBottom: 10,
     },
+
+
 });
 
 export default styles;

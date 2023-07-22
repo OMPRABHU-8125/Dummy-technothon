@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, Alert } from 'react-native';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import styles from './Placement.style';
@@ -13,22 +13,26 @@ const AddJob = () => {
   const [jobDuration, setJobDuration] = useState('');
   const [jobExp, setJobExp] = useState('');
   const [jobDes, setJobDes] = useState('');
-  
 
   const handleAddJob = async () => {
-      await firestore().collection('Placement').add({
-        Title: jobTitle,
-        Location: jobLoc,
-        Duration: jobDuration,
-        Experience: jobExp,
-        Description: jobDes,
-      });
-      setJobTitle('');
-      setJobLoc('');
-      setJobDuration('');
-      setJobExp('');
-      setJobDes('');
+    if (!jobTitle || !jobLoc || !jobDuration || !jobExp || !jobDes) {
+      Alert.alert('Error', 'Please fill in all the fields before adding the job.');
+      return;
     }
+
+    await firestore().collection('Placement').add({
+      Title: jobTitle,
+      Location: jobLoc,
+      Duration: jobDuration,
+      Experience: jobExp,
+      Description: jobDes,
+    });
+    setJobTitle('');
+    setJobLoc('');
+    setJobDuration('');
+    setJobExp('');
+    setJobDes('');
+  }
 
   return (
     <View style={styles.container}>

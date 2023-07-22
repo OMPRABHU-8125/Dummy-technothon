@@ -21,12 +21,9 @@ const guestmodule = [
     },
     {
         id: 6,
-        title: 'Fitness And Health',
-    },
-    {
-        id: 7,
         title: 'Blog',
     },
+
 ]
 
 const teachermodule = [
@@ -49,7 +46,12 @@ const teachermodule = [
     {
         id: 5,
         title: 'Placement',
-    }
+    },
+    {
+
+        id: 6,
+        title: 'Counselling',
+    },
 ]
 
 const studentmodule = [
@@ -77,6 +79,18 @@ const studentmodule = [
         id: 6,
         title: 'Exam Schedule',
     },
+    {
+        id: 7,
+        title: 'Counselling',
+    },
+    {
+        id: 8,
+        title: 'Digital Academy',
+    },
+    {
+        id: 9,
+        title: 'Fitness And Health',
+    },
 ]
 const parentmodule = [
     {
@@ -94,7 +108,8 @@ const parentmodule = [
     {
         id: 4,
         title: 'Placement',
-    }
+    },
+
 ]
 
 export { guestmodule, teachermodule, studentmodule, parentmodule };

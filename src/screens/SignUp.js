@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import {
     View,
     TextInput,
+    Button,
+    StyleSheet,
     Alert,
     TouchableOpacity,
     Text,
@@ -10,6 +12,7 @@ import {
     ScrollView,
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './SignUp.style';
 import * as COLOR from '../utils/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -20,9 +23,13 @@ import RadioForm, {
     RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import bcrypt from 'react-native-bcrypt';
-
+import WelcomeUser from "./WelcomeUser";
+// import { useAppDispatch } from '../../store/hook';
+import ModalDropdown from "react-native-modal-dropdown";
+import Ionicon from 'react-native-vector-icons/Ionicons'
 
 const SignUp = ({ navigation }) => {
+    const [selectedItem, setSelectedItem] = useState('VESIT');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -92,7 +99,6 @@ const SignUp = ({ navigation }) => {
 
     const handlePress = () => {
         Tts.setDefaultLanguage('en-IN');
-        // Tts.setDefaultVoice('com.apple.ttsbundle.kalpana-compact');
         for (let i = 0; i < captchaText.length; i++) {
             if (captchaText[i].toUpperCase() === captchaText[i])
                 speakText(`Capital ${captchaText[i]}`)
@@ -101,6 +107,10 @@ const SignUp = ({ navigation }) => {
                 speakText(captchaText[i])
             }
         }
+    };
+
+    const handleTitleChange = (index, value) => {
+        setSelectedItem(value);
     };
 
     const handleSignup = async () => {
@@ -157,10 +167,10 @@ const SignUp = ({ navigation }) => {
                                 'User created Successfully',
                                 [
                                     {
-                                        text: 'Ok',
+                                        text: 'cancel',
                                     },
                                     {
-                                        text: 'Go to Login Screen',
+                                        text: 'Back to Login',
                                         onPress: () => {
                                             navigation.navigate('Login');
                                         },
@@ -182,12 +192,9 @@ const SignUp = ({ navigation }) => {
                                     },
                                 }
                             );
-
-                            // Handle successful signup, such as navigating to the login screen
                         })
                         .catch((error) => {
                             console.error('Error creating user:', error);
-                            // Handle error during signup
                         });
                 } catch (error) {
                     console.error('Error hashing password:', error);
@@ -202,147 +209,206 @@ const SignUp = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <KeyboardAvoidingView behavior="padding" style={styles.flex1}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Confirm Password"
-                    secureTextEntry
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="First Name"
-                    value={firstName}
-                    onChangeText={setFirstName}
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChangeText={setLastName}
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Address"
-                    value={address}
-                    onChangeText={setAddress}
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                    multiline
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="GR/ID Number"
-                    value={grNo}
-                    onChangeText={setGrNo}
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                />
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Your First Name:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="First Name"
+                        value={firstName}
+                        onChangeText={setFirstName}
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Your Last Name:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChangeText={setLastName}
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Your Email:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="name@sample.com"
+                        value={email}
+                        onChangeText={setEmail}
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                        keyboardType='email-address'
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>GR/ID Number:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="12345"
+                        value={grNo}
+                        onChangeText={setGrNo}
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Address:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Flat No/Building Name/Area/Pincode"
+                        value={address}
+                        onChangeText={setAddress}
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                        multiline
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Mobile No:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="1234567890"
+                        value={phoneNo}
+                        onChangeText={setContactNo}
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Password:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="***"
+                        secureTextEntry
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Confirm Password:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="***"
+                        secureTextEntry
+                        placeholderTextColor={COLOR.gray}
+                        color={COLOR.black}
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Select Your Gender:</Text>
+                    <RadioForm formHorizontal>
+                        {items.map((option, index) => (
+                            <View key={index} style={styles.radioButtonContainer}>
+                                <RadioButton labelHorizontal>
+                                    <RadioButtonInput
+                                        obj={option}
+                                        index={index}
+                                        isSelected={gender === option.value}
+                                        onPress={() => setGender(option.value)}
+                                        borderWidth={1}
+                                        buttonInnerColor={COLOR.black}
+                                        buttonOuterColor={COLOR.black}
+                                        buttonSize={8}
+                                        buttonOuterSize={15}
+                                        buttonStyle={{}}
+                                        buttonWrapStyle={{ marginLeft: 20, marginRight: 5, top: 2 }}
+                                    />
 
-                <RadioForm formHorizontal>
-                    {items.map((option, index) => (
-                        <View key={index} style={styles.radioButtonContainer}>
-                            <RadioButton labelHorizontal>
-                                <RadioButtonInput
-                                    obj={option}
-                                    index={index}
-                                    isSelected={gender === option.value}
-                                    onPress={() => setGender(option.value)}
-                                    borderWidth={1}
-                                    buttonInnerColor={COLOR.black}
-                                    buttonOuterColor={COLOR.black}
-                                    buttonSize={8}
-                                    buttonOuterSize={15}
-                                    buttonStyle={{}}
-                                    buttonWrapStyle={{ marginLeft: 20, marginRight: 5, top: 2 }}
-                                />
+                                    <RadioButtonLabel
+                                        obj={option}
+                                        index={index}
+                                        labelHorizontal
+                                        onPress={() => setGender(option.value)}
+                                        labelStyle={{ color: 'black' }}
+                                        labelWrapStyle={{ marginRight: 20 }}
+                                    />
+                                </RadioButton>
+                            </View>
+                        ))}
+                    </RadioForm>
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Select Your Login Type:</Text>
+                    <RadioForm formHorizontal>
+                        {logins.map((option, index) => (
+                            <View key={index} style={styles.radioButtonContainer}>
+                                <RadioButton labelHorizontal>
+                                    <RadioButtonInput
+                                        obj={option}
+                                        index={index}
+                                        isSelected={loginType === option.value}
+                                        onPress={() => setLoginType(option.value)}
+                                        borderWidth={1}
+                                        buttonInnerColor={COLOR.black}
+                                        buttonOuterColor={COLOR.black}
+                                        buttonSize={8}
+                                        buttonOuterSize={15}
+                                        buttonStyle={{}}
+                                        buttonWrapStyle={{ marginLeft: 20, marginRight: 5, top: 2 }}
+                                    />
 
-                                <RadioButtonLabel
-                                    obj={option}
-                                    index={index}
-                                    labelHorizontal
-                                    onPress={() => setGender(option.value)}
-                                    labelStyle={{ color: 'black' }}
-                                    labelWrapStyle={{ marginRight: 20 }}
-                                />
-                            </RadioButton>
-                        </View>
-                    ))}
-                </RadioForm>
+                                    <RadioButtonLabel
+                                        obj={option}
+                                        index={index}
+                                        labelHorizontal
+                                        onPress={() => setLoginType(option.value)}
+                                        labelStyle={{ color: 'black' }}
+                                        labelWrapStyle={{ marginRight: 20 }}
+                                    />
+                                </RadioButton>
+                            </View>
+                        ))}
+                    </RadioForm>
+                </View>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Contact Number"
-                    value={phoneNo}
-                    onChangeText={setContactNo}
-                    placeholderTextColor={COLOR.gray}
-                    color={COLOR.black}
-                />
-
-
-                <RadioForm formHorizontal>
-                    {logins.map((option, index) => (
-                        <View key={index} style={styles.radioButtonContainer}>
-                            <RadioButton labelHorizontal>
-                                <RadioButtonInput
-                                    obj={option}
-                                    index={index}
-                                    isSelected={loginType === option.value}
-                                    onPress={() => setLoginType(option.value)}
-                                    borderWidth={1}
-                                    buttonInnerColor={COLOR.black}
-                                    buttonOuterColor={COLOR.black}
-                                    buttonSize={8}
-                                    buttonOuterSize={15}
-                                    buttonStyle={{}}
-                                    buttonWrapStyle={{ marginLeft: 20, marginRight: 5, top: 2 }}
-                                />
-
-                                <RadioButtonLabel
-                                    obj={option}
-                                    index={index}
-                                    labelHorizontal
-                                    onPress={() => setLoginType(option.value)}
-                                    labelStyle={{ color: 'black' }}
-                                    labelWrapStyle={{ marginRight: 20 }}
-                                />
-                            </RadioButton>
-                        </View>
-                    ))}
-                </RadioForm>
                 {
                     loginType == 'Parent' ?
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Enter your Child's Email"
-                            value={child}
-                            onChangeText={setChild}
-                            placeholderTextColor={COLOR.gray}
-                            color={COLOR.black}
-                        />
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.label}>Your Child's Email:</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Enter your Child's Email"
+                                value={child}
+                                onChangeText={setChild}
+                                placeholderTextColor={COLOR.gray}
+                                color={COLOR.black}
+                            />
+                        </View>
+                        :
+                        null
+                }
+                {
+                    loginType == 'Student' ?
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.label}>Your Institute:</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <ModalDropdown
+                                    options={[
+                                        " VES College of Arts, Science & Commerce (Autonomous)",
+                                        " VES Institute of Technology",
+                                        "VES College of Architecture",
+                                        "VES College of Pharmacy",
+                                        "VES POLYTECHNIC",
+                                        "VES College of Law",
+                                    ]}
+                                    defaultValue={selectedItem}
+                                    onSelect={handleTitleChange}
+                                    textStyle={styles.dropdownText}
+                                    dropdownStyle={styles.dropdownStyle}
+                                    dropdownTextStyle={styles.dropdownTextStyle}
+                                // customItemContainerStyle={{ justifyContent: 'center' }}
+                                // labelStyle={{ textAlign: 'center', justifyContent: 'center' }}
+                                />
+                                <Ionicon name={'chevron-down'} size={20} style={{ position: 'absolute', right: 1, padding: 10 }} />
+                            </View>
+                        </View>
                         :
                         null
                 }
@@ -375,11 +441,12 @@ const SignUp = ({ navigation }) => {
                 </View>
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={styles.button} onPress={handleSignup}>
-                        <Text style={{ color: '#fff' }}>SignUp</Text>
+                        <Text style={styles.buttonText}>Submit</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
         </ScrollView>
     );
 };
+
 export default SignUp;
