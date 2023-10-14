@@ -101,6 +101,9 @@ const Home = ({ navigation }) => {
                 case 'Counselling':
                     navigation.navigate("Counselling");
                     break;
+                case 'Booking':
+                    navigation.navigate("Booking");
+                    break;
                 default:
                     break;
             }

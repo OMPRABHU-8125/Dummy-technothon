@@ -52,6 +52,10 @@ const teachermodule = [
         id: 6,
         title: 'Counselling',
     },
+    {
+        id: 7,
+        title: "Booking",
+    }
 ]
 
 const studentmodule = [
