@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch } from '../../store/hook';
 import { setModules, setUserProfile } from '../../store/slice/profileSlice';
 import styles from './splash.style';
-import { parentmodule, guestmodule, studentmodule, teachermodule } from './Modules';
+import { parentmodule, guestmodule, studentmodule, teachermodule, TPOmodule } from './Modules';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { black, white } from '../utils/color';
 const Splash = () => {
@@ -83,6 +83,15 @@ const Splash = () => {
                             title: 'Basic Components',
                             data: [...guestmodule]
                         }
+                    ]));
+                }
+                else if (user.loginType == 'TPO') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'TPO Components',
+                            data: [...TPOmodule]
+                        },
                     ]));
                 }
             }

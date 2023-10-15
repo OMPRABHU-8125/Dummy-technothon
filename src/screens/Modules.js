@@ -113,7 +113,41 @@ const parentmodule = [
         id: 4,
         title: 'Placement',
     },
-
 ]
 
-export { guestmodule, teachermodule, studentmodule, parentmodule };
+const TPOmodule = [
+    {
+        id: 1,
+        title: 'Student Data',
+    },
+    {
+        id: 2,
+        title: 'Corporate Relations',
+    },
+    {
+        id: 3,
+        title: 'Campus Placements'
+    },
+    {
+        id: 4,
+        title: 'Collaboration',
+    },
+    {
+        id: 5,
+        title: 'SurveyCalendex',
+    },
+    {
+        id: 6,
+        title: 'Assesment',
+    },
+    {
+        id: 7,
+        title: 'Rules and Policies',
+    },
+    {
+        id: 8,
+        title: 'communication'
+    }
+]
+
+export { guestmodule, teachermodule, studentmodule, parentmodule, TPOmodule };
