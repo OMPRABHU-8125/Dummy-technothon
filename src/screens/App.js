@@ -54,6 +54,8 @@ import Counselling from "./counselling/Counselling";
 import ViewAttendance from "./attendance/ViewAttendance";
 import StudentAttendance from "./attendance/StudentAttendance";
 import WelcomeUser from "./WelcomeUser";
+import Booking from "./booking";
+import Information from "./booking/Information";
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -419,6 +421,23 @@ const App = () => {
                         component={WelcomeUser}
                         options={() => ({
                             headerShown: false,
+                        })}
+                    />
+                    
+                    <stack.Screen
+                        name='Booking'
+                        component={Booking}
+                        options={({navigation}) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Booking" />
+                        })}
+                    />
+                    <stack.Screen
+                        name='Information'
+                        component={Information}
+                        options={({navigation}) => ({
+                            headerShown: true,
+                            header: () => <CustomHeader navigation={navigation} title="Infromation" />
                         })}
                     />
 
