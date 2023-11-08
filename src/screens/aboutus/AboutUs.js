@@ -2,28 +2,25 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Linking, ScrollView, TouchableOpacity } from 'react-native';
 import styles from './Aboutus.style';
 
-
-  
-
 const AboutUs = () => {
-  
-  const handleImagePress = (url) => { 
+
+  const handleImagePress = (url) => {
     Linking.openURL(url);
   };
 
-    return (
+  return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.coloredSection}>
-      <Text style={styles.heading1}> VIVEKANAND</Text>
-      <Text style={styles.heading2}>  EDUCATION SOCIETY</Text>
+        <Text style={styles.heading1}> VIVEKANAND</Text>
+        <Text style={styles.heading2}>  EDUCATION SOCIETY</Text>
       </View>
       <View style={styles.content}>
         <Image
           source={{ uri: 'https://i.imgur.com/b9YG5qM.png' }}
           style={styles.image}
         />
-         <View style={styles.coloredSection1}>
-        <Text style={styles.heading}>About Vivekanand Education Society’s Polytechnic</Text>
+        <View style={styles.coloredSection1}>
+          <Text style={styles.heading}>About Vivekanand Education Society’s Polytechnic</Text>
         </View>
         <Text style={styles.description}>
           Vivekanand Education Society’s Polytechnic, Mumbai is one of the highly reputed colleges for polytechnic in Maharashtra, India.
@@ -78,13 +75,13 @@ const AboutUs = () => {
           Diploma in Civil Engineering, Mechanical Engineering & Electrical Engineering are graded with "Very Good" remark by MSBTE.
         </Text>
         <View style={styles.coloredSection1}>
-        <Text style={styles.heading}>Vision</Text>
+          <Text style={styles.heading}>Vision</Text>
         </View>
         <Text style={styles.description}>
           To be a center of excellence in the field of technical education.
         </Text>
         <View style={styles.coloredSection1}>
-        <Text style={styles.heading}>Mission</Text>
+          <Text style={styles.heading}>Mission</Text>
         </View>
         <Text style={styles.description}>
           - Enable the students to excel in their academic pursuits, making them sensitive to the needs of the progressive industrial world.
@@ -96,55 +93,55 @@ const AboutUs = () => {
           - Impart ethical values and leadership qualities in students which would transform them into superior human beings.
         </Text>
         <View style={styles.coloredSection1}>
-        <Text style={styles.heading}>Quality Policy</Text>
+          <Text style={styles.heading}>Quality Policy</Text>
         </View>
         <Text style={styles.description}>
           VES Polytechnic is committed to imparting quality education in a disciplined environment with the help of competent and dedicated faculty.
           We continuously strive to improve the teaching-learning process to achieve academic excellence.
         </Text>
         <View style={styles.coloredSection1}>
-        <Text style={styles.heading}>Social Media and Websites</Text>
+          <Text style={styles.heading}>Social Media and Websites</Text>
         </View>
-        
-      
-        <View style={{flexDirection: 'row', justifyContent: 'center'}} >
-      <TouchableOpacity onPress={() => handleImagePress('https://www.instagram.com/vespolytechnic_0004/')}>
-        
-        <Image
-          source={require('../../assets/imgs/instagram.png')}
-          style={{ width: 50, height: 50, marginRight: 15,  }}
-        />
-      </TouchableOpacity>
-      
-      <TouchableOpacity onPress={() => handleImagePress('https://youtube.com/@VESPolytechnic')}>
-        <Image
-          source={require('../../assets/imgs/Youtube.png')}
-          style={{ width: 50, height: 50, marginRight: 15}}
-        />
-      </TouchableOpacity>
-        
-      <TouchableOpacity onPress={() => handleImagePress('https://www.facebook.com/profile.php?id=100063678624978&mibextid=ZbWKwL')}>
-        <Image
-          source={require('../../assets/imgs/facebook.png')}
-          style={{ width: 50, height: 50, marginRight: 15 }}
-        />
-      </TouchableOpacity>
 
-      <TouchableOpacity onPress={() =>  handleImagePress('https://www.linkedin.com/school/ves-polytechnic/') }>
-        <Image
-          source={require('../../assets/imgs/linkkedin.png')} 
-          style={{ width: 50, height: 50, marginRight: 15 }}
-        />
-      </TouchableOpacity>
-    </View>
-       
+
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }} >
+          <TouchableOpacity onPress={() => handleImagePress('https://www.instagram.com/vespolytechnic_0004/')}>
+
+            <Image
+              source={require('../../assets/imgs/instagram.png')}
+              style={{ width: 50, height: 50, marginRight: 15, }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => handleImagePress('https://youtube.com/@VESPolytechnic')}>
+            <Image
+              source={require('../../assets/imgs/Youtube.png')}
+              style={{ width: 50, height: 50, marginRight: 15 }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => handleImagePress('https://www.facebook.com/profile.php?id=100063678624978&mibextid=ZbWKwL')}>
+            <Image
+              source={require('../../assets/imgs/facebook.png')}
+              style={{ width: 50, height: 50, marginRight: 15 }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => handleImagePress('https://www.linkedin.com/school/ves-polytechnic/')}>
+            <Image
+              source={require('../../assets/imgs/linkkedin.png')}
+              style={{ width: 50, height: 50, marginRight: 15 }}
+            />
+          </TouchableOpacity>
+        </View>
+
       </View>
     </ScrollView>
   );
 };
 
 
-  
+
 
 export default AboutUs;
 

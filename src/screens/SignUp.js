@@ -49,6 +49,7 @@ const SignUp = ({ navigation }) => {
         { label: 'Parent', value: 'Parent' },
         { label: 'Faculty', value: 'Faculty' },
         { label: 'TPO', value: 'TPO' },
+        {label: 'Admin', value: 'Admin'},
     ]);
     const [child, setChild] = useState('');
 

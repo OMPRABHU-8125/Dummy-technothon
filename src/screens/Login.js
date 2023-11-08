@@ -10,7 +10,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { black, gray } from '../utils/color';
-import { teachermodule, studentmodule, guestmodule, parentmodule, TPOmodule} from './Modules';
+import { teachermodule, studentmodule, guestmodule, parentmodule, TPOmodule, Adminmodule } from './Modules';
 import { compare } from 'react-native-bcrypt';
 import auth from '@react-native-firebase/auth'
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
@@ -97,7 +97,15 @@ const Login = ({ navigation }) => {
                                 title: 'TPO Components',
                                 data: [...TPOmodule]
                             },
-                        ]));
+                        ]));    
+                    }
+                    else if (user.loginType == 'Admin') {
+                        dispatch(setModules([
+                            {
+                                id: '1',
+                                title: 'Admin Components',
+                                data: [...Adminmodule]
+                            }]))
                     }
 
                     navigation.navigate('HomeScreen');
@@ -207,6 +215,15 @@ const Login = ({ navigation }) => {
                             id: '1',
                             title: 'TPO Components',
                             data: [...TPOmodule]
+                        },
+                    ]));
+                }
+                else if (user.loginType == 'Admin') {
+                    dispatch(setModules([
+                        {
+                            id: '1',
+                            title: 'Admin Components',
+                            data: [...Adminmodule]
                         },
                     ]));
                 }

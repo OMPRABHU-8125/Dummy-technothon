@@ -21,6 +21,7 @@ import moment, { duration } from 'moment';
 import 'moment-timezone';
 import { useAppSelector } from '../../../store/hook';
 import firestore from '@react-native-firebase/firestore';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Information = ({ route }) => {
 
@@ -32,6 +33,8 @@ const Information = ({ route }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [booking, setBooking] = useState({});
   const [documents, setDocuments] = useState({});
+  const today = new Date();
+  const minDate = today.toISOString().split('T')[0];
 
   const generateTimeSlots = (startTime, endTime, duration) => {
     const slots = [];
@@ -63,7 +66,6 @@ const Information = ({ route }) => {
       return null;
     }
 
-    // Parse the time in "h:mm A" format using moment.js
     const parsedTime = moment(time, 'h:mm A');
 
     if (!parsedTime.isValid()) {
@@ -71,7 +73,6 @@ const Information = ({ route }) => {
       return null;
     }
 
-    // Create a new date with the given date and time
     const currentDate = moment(date)
       .hours(parsedTime.hours())
       .minutes(parsedTime.minutes())
@@ -83,10 +84,10 @@ const Information = ({ route }) => {
 
   useEffect(() => {
     const start = new Date();
-    start.setHours(9);
+    start.setHours(0);
     start.setMinutes(0);
     const end = new Date();
-    end.setHours(16);
+    end.setHours(24);
     end.setMinutes(0);
     const duration = 60;
     const slots = generateTimeSlots(start, end, duration);
@@ -199,14 +200,48 @@ const Information = ({ route }) => {
 
 
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => toggleItemSelection(item)}
-      style={[styles.timeSlot,{backgroundColor: selectedItems.includes(item) ? 'lightblue' : 'white',}]}        
-    >
-      <Text>{item.start} - {item.end}</Text>
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item }) => {
+    // Check if the current time slot is already booked
+    const isBooked = documents && documents.bookings && documents.bookings.some((booking) => {
+      const bookingStartTime = moment(booking.time.startTime.toDate());
+      const bookingEndTime = moment(booking.time.endTime.toDate());
+  
+      const timeSlotStartTime = moment(item.start, 'h:mm A');
+      const timeSlotEndTime = moment(item.end, 'h:mm A');
+  
+      // Check for overlapping time slots
+      return (
+        timeSlotStartTime.isBefore(bookingEndTime) && timeSlotEndTime.isAfter(bookingStartTime)
+      );
+    });
+  
+    // Parse the start time of the time slot
+    const slotStartTime = moment(item.start, 'h:mm A');
+    const currentTime = moment();
+    const isPastTimeSlot = slotStartTime.isBefore(currentTime);
+  
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          if (!isBooked && !isPastTimeSlot) {
+            toggleItemSelection(item);
+          }
+        }}
+        style={[
+          styles.timeSlot,
+          {
+            backgroundColor: selectedItems.includes(item) ? 'lightblue' : 'white',
+            opacity: isPastTimeSlot ? 0.5 : isBooked ? 0.5 : 1,
+          },
+        ]}
+        disabled={isBooked || isPastTimeSlot}
+      >
+        <Text>{item.start} - {item.end}</Text>
+      </TouchableOpacity>
+    );
+  };
+  
+  
 
 
   return (
@@ -258,6 +293,7 @@ const Information = ({ route }) => {
                   <Calendar
                     markedDates={selectedDates}
                     onDayPress={onDayPress}
+                    minDate={minDate}
                   />
                   <Text style={styles.selectText}>Select your Time Slots</Text>
                   <FlatList
@@ -270,31 +306,7 @@ const Information = ({ route }) => {
                   <TouchableOpacity onPress={bookRequest} style={styles.buttonContainer}>
                       <Text style={styles.buttonText}>Book</Text>
                     </TouchableOpacity>
-                  {/* <TouchableOpacity onPress={startTimeHandler} style={styles.buttonContainer}>
-                  <Text style={styles.buttonText}>Select Start Time</Text>
-                </TouchableOpacity>
-                {isStartTimePickerVisible && (
-                  <DateTimePicker
-                    value={startTime}
-                    mode="time"
-                    display="default"
-                    onChange={handleStartTimeConfirm}
-                    onCancel={() => setStartTimePickerVisible(false)}
-                  />
-                )} */}
-
-                  {/* <TouchableOpacity onPress={endTimeHandler} style={styles.buttonContainer}>
-                  <Text style={styles.buttonText}>Select End Time</Text>
-                </TouchableOpacity>
-                {isEndTimePickerVisible && (
-                  <DateTimePicker
-                    value={endTime}
-                    mode="time"
-                    display="default"
-                    onChange={handleEndTimeConfirm}
-                    onCancel={() => setEndTimePickerVisible(false)}
-                  />
-                )} */}
+                  
 
                   <View style={{ flexDirection: 'row' }}>
                     {selectedDateObjects.length > 0 && (
