@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, ScrollView, FlatList } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import DocumentPicker from 'react-native-document-picker';
 import storage from '@react-native-firebase/storage';
@@ -9,48 +9,72 @@ const Venue = () => {
   const [address, setAddress] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [isImagePicking, setIsImagePicking] = useState(false);
 
   const handleImagePicker = async () => {
+    try {
+      console.log('Picking image...');
+      setIsImagePicking(true);
+
+      const documentPickerResponse = await DocumentPicker.pick({
+        type: [DocumentPicker.types.images],
+      });
+
+      console.log('Selected image:', documentPickerResponse);
+      setImages([...images, documentPickerResponse]);
+    } catch (error) {
+      console.error('Error picking image:', error);
+    } finally {
+      setIsImagePicking(false);
+    }
+  };
+  const uploadImageToFirebase = async () => {
     try {
       const documentPickerResponse = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
       });
 
-      // Add the selected image to the images state
-      setImages([...images, documentPickerResponse]);
+      const uploadTasks = documentPickerResponse.map(async (image) => {
+        const fileName = image.name;
+        const storageRef = storage().ref().child(`images/${fileName}`);
+
+        const fileUri = image.uri;
+        const response = await fetch(fileUri);
+        const blob = await response.blob();
+
+        await storageRef.put(blob);
+
+        const downloadURL = await storageRef.getDownloadURL();
+        return downloadURL;
+      });
+
+      const imageUrls = await Promise.all(uploadTasks);
+
+      console.log('Image URLs:', imageUrls);
+
+      setImageUrls(imageUrls);
     } catch (error) {
-      console.error('Error picking image:', error);
+      console.log('Error uploading images:', error);
     }
   };
 
-  const uploadImageToFirebase = async (image) => {
-    const { uri, name } = image;
-
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    const storageRef = storage().ref(`images/${name}`);
-    await storageRef.put(blob);
-
-    // Get the download URL
-    const url = await storageRef.getDownloadURL();
-    return url;
-  };
 
   const handleSubmit = async () => {
+    if (isImagePicking) {
+      console.log('Image selection is still ongoing. Please wait.');
+      return;
+    }
+
     console.log('Name:', name);
     console.log('Address:', address);
 
-    // Upload images to Firebase Storage and get download URLs
     const urls = await Promise.all(images.map(uploadImageToFirebase));
     console.log('Image URLs:', urls);
-
-    // Set the image URLs state for rendering in the component
     setImageUrls(urls);
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TextInput
         label="Name"
         value={name}
@@ -66,23 +90,26 @@ const Venue = () => {
       <Button mode="contained" onPress={handleImagePicker} style={styles.button}>
         Select Images
       </Button>
-      {imageUrls.map((imageUrl, index) => (
-        <View key={index} style={styles.imageContainer}>
-          <Text style={styles.imageText}>Image {index + 1}</Text>
-          <Image source={{ uri: imageUrl }} style={styles.image} />
-        </View>
-      ))}
+      <FlatList
+        data={imageUrls}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => (
+          <View key={index} style={styles.imageContainer}>
+            <Text style={styles.imageText}>Image {index + 1}</Text>
+            <Image source={{ uri: item }} style={styles.image} />
+          </View>
+        )}
+      />
       <Button mode="contained" onPress={handleSubmit} style={styles.button}>
         Submit
       </Button>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     padding: 16,
   },
   input: {
