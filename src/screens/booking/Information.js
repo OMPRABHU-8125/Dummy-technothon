@@ -35,6 +35,7 @@ const Information = ({ route }) => {
   const [documents, setDocuments] = useState({});
   const today = new Date();
   const minDate = today.toISOString().split('T')[0];
+  const [allBookingIds, setAllBookingIds] = useState([]);
 
   const generateTimeSlots = (startTime, endTime, duration) => {
     const slots = [];
@@ -57,6 +58,32 @@ const Information = ({ route }) => {
       slotStart = slotEnd;
     }
     return slots;
+  };
+
+  const fetchAllBookingIds = async () => {
+    try {
+      const snapshot = await firestore()
+        .collection('Booking')
+        .get();
+
+      if (!snapshot.empty) {
+        const allVenueData = snapshot.docs.map((doc) => doc.data());
+        const allBookingIds = [];
+
+        allVenueData.forEach((venueData) => {
+          const venueBookings = venueData.bookings || [];
+          const venueIds = venueBookings.map((booking) => booking.bookingId);
+          allBookingIds.push(...venueIds);
+        });
+
+        setAllBookingIds(allBookingIds);
+        console.log(allBookingIds)
+      } else {
+        console.log('No documents found.');
+      }
+    } catch (error) {
+      console.error('Error fetching all booking IDs:', error);
+    }
   };
 
 
@@ -93,6 +120,16 @@ const Information = ({ route }) => {
     const slots = generateTimeSlots(start, end, duration);
     setTimeSlots(slots);
   }, []);
+
+
+  const generateId = async () => {
+    await fetchAllBookingIds();
+    allBookingIds.sort();
+    const newId = parseInt(allBookingIds[allBookingIds.length - 1]) + 1;
+    console.log(newId);
+    return newId;
+  };
+
 
 
   const onDayPress = (day) => {
@@ -135,7 +172,7 @@ const Information = ({ route }) => {
       setSelectedItems([...selectedItems, item]);
     }
   };
-  
+
   const bookRequest = async () => {
     try {
       const collectionRef = firestore().collection("Booking");
@@ -147,38 +184,44 @@ const Information = ({ route }) => {
         const bookingData = doc.data();
         setDocuments(bookingData);
 
-        const newBookings = [];
-        selectedDateObjects.forEach((date) => {
-          selectedItems.forEach((timeSlot) => {
-            const formattedStartTime = `${timeSlot.start}:00`;
-            const formattedEndTime = `${timeSlot.end}:00`;
+        const newBookings = await Promise.all(
+          selectedDateObjects.map(async (date) => {
+            return Promise.all(
+              selectedItems.map(async (timeSlot) => {
+                const formattedStartTime = `${timeSlot.start}:00`;
+                const formattedEndTime = `${timeSlot.end}:00`;
 
-            newBookings.push({
-              bookedBy: user.email,
-              date: date,
-              time: {
-                startTime: generateTime(formattedStartTime, date),
-                endTime: generateTime(formattedEndTime, date),
-              }
-            });
-          });
-        });
+                return {
+                  bookedBy: user.email,
+                  date: date,
+                  time: {
+                    startTime: await generateTime(formattedStartTime, date),
+                    endTime: await generateTime(formattedEndTime, date),
+                  },
+                  bookedOn: new Date(),
+                  bookingId: await generateId(),
+                };
+              })
+            );
+          })
+        );
 
-        const conflicts = newBookings.filter((newBooking) => {
+        const flatNewBookings = newBookings.flat();
+        fetchAllBookingIds();
+
+        const conflicts = flatNewBookings.filter((newBooking) => {
           return bookingData.bookings.some((existingBooking) => {
             const existingStartTime = existingBooking.time.startTime;
             const existingEndTime = existingBooking.time.endTime;
             const newStartTime = newBooking.time.startTime;
             const newEndTime = newBooking.time.endTime;
 
-            return (
-              newStartTime < existingEndTime && newEndTime > existingStartTime
-            );
+            return newStartTime < existingEndTime && newEndTime > existingStartTime;
           });
         });
 
         if (conflicts.length === 0) {
-          const updatedBookings = [...bookingData.bookings, ...newBookings];
+          const updatedBookings = [...bookingData.bookings, ...flatNewBookings];
           const updatedBookingData = {
             ...bookingData,
             bookings: updatedBookings,
@@ -186,12 +229,11 @@ const Information = ({ route }) => {
 
           await documentRef.set(updatedBookingData);
           Alert.alert("Booking Successful");
-
+          setSelectedDates([]);
+          setSelectedItems([]);
         } else {
           Alert.alert("Booking conflicts found. Please choose a different time slot.");
         }
-      } else {
-        console.log("Document does not exist");
       }
     } catch (error) {
       console.error('Error fetching and updating booking data from Firestore:', error);
@@ -205,21 +247,21 @@ const Information = ({ route }) => {
     const isBooked = documents && documents.bookings && documents.bookings.some((booking) => {
       const bookingStartTime = moment(booking.time.startTime.toDate());
       const bookingEndTime = moment(booking.time.endTime.toDate());
-  
+
       const timeSlotStartTime = moment(item.start, 'h:mm A');
       const timeSlotEndTime = moment(item.end, 'h:mm A');
-  
+
       // Check for overlapping time slots
       return (
         timeSlotStartTime.isBefore(bookingEndTime) && timeSlotEndTime.isAfter(bookingStartTime)
       );
     });
-  
+
     // Parse the start time of the time slot
     const slotStartTime = moment(item.start, 'h:mm A');
     const currentTime = moment();
     const isPastTimeSlot = slotStartTime.isBefore(currentTime);
-  
+
     return (
       <TouchableOpacity
         onPress={() => {
@@ -240,8 +282,8 @@ const Information = ({ route }) => {
       </TouchableOpacity>
     );
   };
-  
-  
+
+
 
 
   return (
@@ -304,9 +346,9 @@ const Information = ({ route }) => {
                     renderItem={renderItem}
                   />
                   <TouchableOpacity onPress={bookRequest} style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Book</Text>
-                    </TouchableOpacity>
-                  
+                    <Text style={styles.buttonText}>Book</Text>
+                  </TouchableOpacity>
+
 
                   <View style={{ flexDirection: 'row' }}>
                     {selectedDateObjects.length > 0 && (
@@ -331,9 +373,9 @@ const Information = ({ route }) => {
                             {time.start} - {time.end}
                           </Text>
                         ))}
-                 </View>
+                      </View>
                     )}
-                    
+
                   </View>
                 </View>
               </ScrollView>

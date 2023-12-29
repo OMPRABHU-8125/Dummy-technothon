@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Alert
 } from 'react-native';
 import styles from './previous.styles';
 import firestore from '@react-native-firebase/firestore';
@@ -16,44 +17,104 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 const Previous = ({ route }) => {
   const [documents, setDocuments] = useState([]);
   const user = useAppSelector((state) => state.profile.data);
-  useEffect(() => {
-    const fetchUserBookings = async () => {
-      try {
-        console.log('Fetching user bookings for:', user.email);
-        const fetchedUserBookings = [];
 
-        const snapshot = await firestore().collection('Booking').get();
+  const fetchUserBookings = async () => {
+    try {
+      const fetchedUserBookings = [];
 
-        if (snapshot.empty) {
-          console.log('No documents found.');
-          return;
-        }
+      const snapshot = await firestore().collection('Booking').get();
 
-        snapshot.forEach(doc => {
-          const bookingData = doc.data();
-          const filteredBookings = bookingData.bookings.filter(
-            booking => booking.bookedBy === user.email,
-          );
-
-          if (filteredBookings.length > 0) {
-            fetchedUserBookings.push({
-              id: doc.id,
-              ...bookingData,
-              bookings: filteredBookings,
-            });
-          }
-        });
-
-        console.log('Fetched user bookings:', fetchedUserBookings);
-        setDocuments(fetchedUserBookings)
-      } catch (error) {
-        console.error('Error fetching user bookings:', error);
+      if (snapshot.empty) {
+        console.log('No documents found.');
+        return;
       }
-    };
 
+      snapshot.forEach(doc => {
+        const bookingData = doc.data();
+        const filteredBookings = bookingData.bookings.filter(
+          booking => booking.bookedBy === user.email,
+        );
+
+        if (filteredBookings.length > 0) {
+          fetchedUserBookings.push({
+            id: doc.id,
+            ...bookingData,
+            bookings: filteredBookings,
+          });
+        }
+      });
+
+      setDocuments(fetchedUserBookings)
+    } catch (error) {
+      console.error('Error fetching user bookings:', error);
+    }
+  };
+
+  useEffect(() => {
     fetchUserBookings();
   }, [user.email]);
 
+  const deleteBooking = async (documentId, bookingToDelete) => {
+    const docRef = firestore().collection('Booking').doc(documentId);
+
+    try {
+      const doc = await docRef.get();
+
+      if (doc.exists) {
+        let bookingsArray = doc.data().bookings || [];
+
+        const indexToDelete = bookingsArray.findIndex(
+          (booking) => booking.bookingId === bookingToDelete.bookingId
+        );
+
+        if (indexToDelete !== -1) {
+          const bookingDate = bookingToDelete.bookedOn.toDate();
+          const currentDate = new Date();
+          const timeDifference = currentDate.getTime() - bookingDate.getTime();
+          const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+          if (daysDifference > 2) {
+            Alert.alert(
+              'Cannot Cancel Booking',
+              'You cannot cancel a booking made more than 2 days ago.'
+            );
+          } else {
+            Alert.alert(
+              'Cancel Booking',
+              'Are you sure you want to cancel this booking?',
+              [
+                {
+                  text: 'Cancel',
+                  style: 'cancel',
+                },
+                {
+                  text: 'OK',
+                  onPress: async () => {
+                    bookingsArray.splice(indexToDelete, 1);
+                    await docRef.update({
+                      bookings: bookingsArray,
+                    });
+                    await fetchUserBookings();
+                    Alert.alert(
+                      'Booking Canceled',
+                      'Your booking has been canceled successfully.'
+                    );
+                  },
+                },
+              ],
+              { cancelable: false }
+            );
+          }
+        } else {
+          console.log('Booking not found.');
+        }
+      } else {
+        console.log('Document does not exist.');
+      }
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+    }
+  };
 
   const dateOptions = {
     year: 'numeric',
@@ -67,7 +128,6 @@ const Previous = ({ route }) => {
   };
 
   return (
-    // <View><Text>HIIII</Text></View>
     <ScrollView style={{ margin: 1 }}>
       {documents.map((booking) => (
         <View key={booking.id}>
@@ -83,7 +143,10 @@ const Previous = ({ route }) => {
                   <View style={styles.textContainer}>
                     <Text style={styles.text}>Booked By: </Text>
                     <Text style={styles.record}>{user.firstName} {user.lastName}</Text>
-                    <TouchableOpacity style={styles.icon}>
+                    <TouchableOpacity
+                      style={styles.icon}
+                      onPress={() => deleteBooking(booking.id, individual)}
+                    >
                       <Icons name='delete' size={25} color='black' />
                     </TouchableOpacity>
                   </View>
