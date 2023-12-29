@@ -161,7 +161,7 @@ const Adminmodule = [
     },
     {
         id: 3,
-        title: 'Venues'
+        title: 'Venue'
     }
 ]
 

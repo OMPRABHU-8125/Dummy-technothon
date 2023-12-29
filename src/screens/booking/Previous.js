@@ -16,28 +16,44 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 const Previous = ({ route }) => {
   const [documents, setDocuments] = useState([]);
   const user = useAppSelector((state) => state.profile.data);
-
-  const getUserData = async () => {
-    try {
-      const snapshot = await firestore()
-        .collection('Booking')
-        .where('bookedBy', '==', user.email)
-        .get();
-
-      const fetchedDocuments = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      setDocuments(fetchedDocuments);
-    } catch (error) {
-      console.error('Error fetching documents:', error);
-    }
-  };
-
   useEffect(() => {
-    getUserData();
-  }, []);
+    const fetchUserBookings = async () => {
+      try {
+        console.log('Fetching user bookings for:', user.email);
+        const fetchedUserBookings = [];
+
+        const snapshot = await firestore().collection('Booking').get();
+
+        if (snapshot.empty) {
+          console.log('No documents found.');
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const bookingData = doc.data();
+          const filteredBookings = bookingData.bookings.filter(
+            booking => booking.bookedBy === user.email,
+          );
+
+          if (filteredBookings.length > 0) {
+            fetchedUserBookings.push({
+              id: doc.id,
+              ...bookingData,
+              bookings: filteredBookings,
+            });
+          }
+        });
+
+        console.log('Fetched user bookings:', fetchedUserBookings);
+        setDocuments(fetchedUserBookings)
+      } catch (error) {
+        console.error('Error fetching user bookings:', error);
+      }
+    };
+
+    fetchUserBookings();
+  }, [user.email]);
+
 
   const dateOptions = {
     year: 'numeric',
@@ -51,13 +67,14 @@ const Previous = ({ route }) => {
   };
 
   return (
+    // <View><Text>HIIII</Text></View>
     <ScrollView style={{ margin: 1 }}>
       {documents.map((booking) => (
         <View key={booking.id}>
           {booking.bookings.map((individual) => (
             <View key={individual.id} style={styles.card}>
               <LinearGradient
-                colors={['#BCE7FC', '#D7B8F3']}
+                colors={['#EFBF38', '#F5DE7A']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={{ ...styles.gradient }}
@@ -65,7 +82,10 @@ const Previous = ({ route }) => {
                 <View>
                   <View style={styles.textContainer}>
                     <Text style={styles.text}>Booked By: </Text>
-                    <Text style={styles.record}> {individual.bookedBy}</Text>
+                    <Text style={styles.record}>{user.firstName} {user.lastName}</Text>
+                    <TouchableOpacity style={styles.icon}>
+                      <Icons name='delete' size={25} color='black' />
+                    </TouchableOpacity>
                   </View>
                   <View style={styles.textContainer}>
                     <Text style={styles.text}>Venue: </Text>

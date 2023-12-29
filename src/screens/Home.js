@@ -20,7 +20,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import firestore from '@react-native-firebase/firestore';
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
 import { request, PERMISSIONS } from '@react-native-permissions/permissions';
 
@@ -109,7 +109,7 @@ const Home = ({ navigation }) => {
         case 'Booking':
           navigation.navigate('Booking');
           break;
-        case 'Venues':
+        case 'Venue':
           navigation.navigate('Venue');
           break;
         default:

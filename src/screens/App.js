@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, ImageBackground, Text} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, ImageBackground, Text } from 'react-native';
 import Login from './Login';
 import Home from './Home';
 import SignUp from './SignUp';
@@ -11,13 +11,13 @@ import AboutUs from './aboutus/AboutUs';
 import Facultyload from './facultyload/Facultyload';
 import Attendance from './attendance/Attendance';
 import DailyAttendance from './attendance/DailyAttendance';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Provider} from 'react-redux';
-import {store} from '../../store';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Provider } from 'react-redux';
+import { store } from '../../store';
 import Alumni from './alumni/Alumni';
-import Enquiry, {Feedback, Query} from './enquirymanagement/Enquirymanagement';
+import Enquiry, { Feedback, Query } from './enquirymanagement/Enquirymanagement';
 import StationarySupply from './stationarySupply/StationarySupply';
 import Details from './stationarySupply/Details';
 import Cart from './stationarySupply/Cart';
@@ -41,10 +41,10 @@ import DigitalAcademyDetail from './digitalAcademy/DigitalAcademyDetail';
 import Placement from './placement/Placement';
 import ImageGrid from './photoGallery';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {white} from '../utils/color';
+import { white } from '../utils/color';
 import Calendar from './holidayCalendar/HolidayCalendar';
 import Blog from './blog';
-import {useAppSelector} from '../../store/hook';
+import { useAppSelector } from '../../store/hook';
 import Exam from './examSchedule';
 import Counselling from './counselling/Counselling';
 import ViewAttendance from './attendance/ViewAttendance';
@@ -53,6 +53,8 @@ import WelcomeUser from './WelcomeUser';
 import Booking from './booking';
 import Information from './booking/Information';
 import Previous from './booking/Previous';
+import Venue from './Admin/venues/Venue';
+
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -73,7 +75,7 @@ const MyHome = () => {
 
   return (
     <tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         tabBarIcon: () => {
           let iconName;
           if (route.name === 'Home') {
@@ -98,22 +100,22 @@ const MyHome = () => {
           backgroundColor: 'rgb(145,40,41)',
         },
       })}>
-      <tab.Screen name="Home" component={Home} options={{headerShown: false}} />
+      <tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <tab.Screen
         name="Notifications"
         component={Notifications}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <tab.Screen
         name="ContactUs"
         component={ContactUs}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       {isVisible ? (
         <tab.Screen
           name="Profile"
           component={Profile}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       ) : null}
     </tab.Navigator>
@@ -129,17 +131,17 @@ const App = () => {
           <stack.Screen
             name="splash"
             component={Splash}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <stack.Screen
             name="Login"
             component={Login}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <stack.Screen
             name="HomeScreen"
             component={MyHome}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Home" />
@@ -149,7 +151,7 @@ const App = () => {
           <stack.Screen
             name="SignUp"
             component={SignUp}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader
@@ -162,7 +164,7 @@ const App = () => {
           <stack.Screen
             name="Alumni"
             component={Alumni}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Alumni" />
@@ -172,7 +174,7 @@ const App = () => {
           <stack.Screen
             name="AboutUs"
             component={AboutUs}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="About Us" />
@@ -182,7 +184,7 @@ const App = () => {
           <stack.Screen
             name="Attendance"
             component={Attendance}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Attendance" />
@@ -192,7 +194,7 @@ const App = () => {
           <stack.Screen
             name="DailyAttendance"
             component={DailyAttendance}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader
@@ -205,7 +207,7 @@ const App = () => {
           <stack.Screen
             name="ViewAttendance"
             component={ViewAttendance}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="View Attendance" />
@@ -215,7 +217,7 @@ const App = () => {
           <stack.Screen
             name="EventUpdate"
             component={EventUpdate}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Event Updates" />
@@ -225,7 +227,7 @@ const App = () => {
           <stack.Screen
             name="AddEvent"
             component={AddEvent}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Add Events" />
@@ -235,7 +237,7 @@ const App = () => {
           <stack.Screen
             name="Detail"
             component={Detail}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Details" />
@@ -245,7 +247,7 @@ const App = () => {
           <stack.Screen
             name="CompletedEvent"
             component={CompletedEvent}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader
@@ -258,7 +260,7 @@ const App = () => {
           <stack.Screen
             name="Queries/Feedback"
             component={Enquiry}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader
@@ -270,7 +272,7 @@ const App = () => {
           <stack.Screen
             name="Query"
             component={Query}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Query" />
@@ -279,7 +281,7 @@ const App = () => {
           <stack.Screen
             name="Feedback"
             component={Feedback}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Feedback" />
@@ -288,7 +290,7 @@ const App = () => {
           <stack.Screen
             name="Facultyload"
             component={Facultyload}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Faculty Load" />
@@ -297,7 +299,7 @@ const App = () => {
           <stack.Screen
             name="Stationary"
             component={StationarySupply}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader
@@ -309,7 +311,7 @@ const App = () => {
           <stack.Screen
             name="Details"
             component={Details}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Details" />
@@ -318,7 +320,7 @@ const App = () => {
           <stack.Screen
             name="Cart"
             component={Cart}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Cart" />
@@ -327,7 +329,7 @@ const App = () => {
           <stack.Screen
             name="Fees"
             component={Fees}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Fees" />
@@ -336,7 +338,7 @@ const App = () => {
           <stack.Screen
             name="Calendar"
             component={Calendar}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Calendar" />
@@ -346,7 +348,7 @@ const App = () => {
           <stack.Screen
             name="FAQ"
             component={FAQ}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="FAQs" />
@@ -355,16 +357,16 @@ const App = () => {
           <stack.Screen
             name="Checkout"
             component={Checkout}
-            options={{headershown: true}}></stack.Screen>
+            options={{ headershown: true }}></stack.Screen>
           <stack.Screen
             name="Orders"
             component={Orders}
-            options={{headershown: true}}></stack.Screen>
+            options={{ headershown: true }}></stack.Screen>
 
           <stack.Screen
             name="FitnessAndHealth"
             component={FitnessAndHealth}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader
@@ -377,7 +379,7 @@ const App = () => {
           <stack.Screen
             name="PhotoGallery"
             component={ImageGrid}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Photo Gallery" />
@@ -387,7 +389,7 @@ const App = () => {
           <stack.Screen
             name="Placement"
             component={Placement}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Placement" />
@@ -397,7 +399,7 @@ const App = () => {
           <stack.Screen
             name="JobDetails"
             component={JobDetails}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="JobDetails" />
@@ -407,7 +409,7 @@ const App = () => {
           <stack.Screen
             name="AddJob"
             component={AddJob}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="AddJob" />
@@ -418,7 +420,7 @@ const App = () => {
           <stack.Screen
             name="Blog"
             component={Blog}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="VES Blog" />
@@ -428,7 +430,7 @@ const App = () => {
           <stack.Screen
             name="DigitalAcademy"
             component={DigitalAcademy}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Digital Academy" />
@@ -438,7 +440,7 @@ const App = () => {
           <stack.Screen
             name="DigitalAcademyDetail"
             component={DigitalAcademyDetail}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader
@@ -451,7 +453,7 @@ const App = () => {
           <stack.Screen
             name="Chat"
             component={Chat}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="VES Chat" />
@@ -461,7 +463,7 @@ const App = () => {
           <stack.Screen
             name="Exam"
             component={Exam}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Exam Schedule" />
@@ -471,7 +473,7 @@ const App = () => {
           <stack.Screen
             name="Counselling"
             component={Counselling}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Counselling" />
@@ -481,7 +483,7 @@ const App = () => {
           <stack.Screen
             name="StudentAttendance"
             component={StudentAttendance}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="View Attendance" />
@@ -499,7 +501,7 @@ const App = () => {
           <stack.Screen
             name="Booking"
             component={Booking}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Booking" />
@@ -509,7 +511,7 @@ const App = () => {
           <stack.Screen
             name="Information"
             component={Information}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Infromation" />
@@ -520,10 +522,21 @@ const App = () => {
           <stack.Screen
             name="Previous Bookings"
             component={Previous}
-            options={({navigation}) => ({
+            options={({ navigation }) => ({
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Your Bookings" />
+              ),
+            })}
+          />
+
+          <stack.Screen
+            name="Venue"
+            component={Venue}
+            options={({ navigation }) => ({
+              headerShown: true,
+              header: () => (
+                <CustomHeader navigation={navigation} title="Venue" />
               ),
             })}
           />

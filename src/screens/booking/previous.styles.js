@@ -33,6 +33,12 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         paddingBottom: 5,
     },
+
+    icon: {
+        position: 'absolute',
+        right: 4,
+        bottom: 2,
+    }
 });
 
 export default styles;
