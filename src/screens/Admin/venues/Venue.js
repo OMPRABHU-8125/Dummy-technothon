@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { TextInput, Button, Text } from 'react-native-paper';
-import ImagePicker from 'react-native-image-picker';
+import { View, StyleSheet, Text, Image } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
+import DocumentPicker from 'react-native-document-picker';
+import storage from '@react-native-firebase/storage';
 
 const Venue = () => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
-  const [images, setImages] = useState([]); // Store selected images
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
 
-  const handleImagePicker = () => {
-    const options = {
-      title: 'Select Images',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
+  const handleImagePicker = async () => {
+    try {
+      const documentPickerResponse = await DocumentPicker.pick({
+        type: [DocumentPicker.types.images],
+      });
 
-    ImagePicker.showImagePicker(options, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        // Add the selected image to the images array
-        setImages([...images, response]);
-      }
-    });
+      // Add the selected image to the images state
+      setImages([...images, documentPickerResponse]);
+    } catch (error) {
+      console.error('Error picking image:', error);
+    }
   };
 
-  const handleSubmit = () => {
-    // Handle the submission, e.g., send the name, address, and images to a server
+  const uploadImageToFirebase = async (image) => {
+    const { uri, name } = image;
+
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    const storageRef = storage().ref(`images/${name}`);
+    await storageRef.put(blob);
+
+    // Get the download URL
+    const url = await storageRef.getDownloadURL();
+    return url;
+  };
+
+  const handleSubmit = async () => {
     console.log('Name:', name);
     console.log('Address:', address);
-    console.log('Selected Images:', images);
+
+    // Upload images to Firebase Storage and get download URLs
+    const urls = await Promise.all(images.map(uploadImageToFirebase));
+    console.log('Image URLs:', urls);
+
+    // Set the image URLs state for rendering in the component
+    setImageUrls(urls);
   };
 
   return (
@@ -53,8 +66,11 @@ const Venue = () => {
       <Button mode="contained" onPress={handleImagePicker} style={styles.button}>
         Select Images
       </Button>
-      {images.map((image, index) => (
-        <Text key={index}>Image {index + 1}: {image.fileName}</Text>
+      {imageUrls.map((imageUrl, index) => (
+        <View key={index} style={styles.imageContainer}>
+          <Text style={styles.imageText}>Image {index + 1}</Text>
+          <Image source={{ uri: imageUrl }} style={styles.image} />
+        </View>
       ))}
       <Button mode="contained" onPress={handleSubmit} style={styles.button}>
         Submit
@@ -75,7 +91,17 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 16,
   },
+  imageContainer: {
+    marginTop: 16,
+  },
+  imageText: {
+    marginBottom: 8,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'cover',
+  },
 });
 
 export default Venue;
-
