@@ -21,6 +21,7 @@ import { useAppSelector } from '../../../store/hook';
 import firestore from '@react-native-firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import 'react-native-get-random-values';
+import Loading from '../../components/header/loading';
 
 const Information = ({ route }) => {
   const user = useAppSelector((state) => state.profile.data);
@@ -36,6 +37,8 @@ const Information = ({ route }) => {
   const [selectedDateObjects, setSelectedDateObjects] = useState([]);
   const [disabledTimeSlots, setDisabledTimeSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null)
+  const [loading, setLoading] = useState(false);
+
 
   const generateTimeSlots = (startTime, endTime, duration) => {
     const slots = [];
@@ -205,7 +208,8 @@ const Information = ({ route }) => {
 
   const bookRequest = async () => {
     try {
-      const collectionRef = firestore().collection('Booking');
+      setLoading(true);
+      const collectionRef = firestore().collection("Booking");
       const documentRef = collectionRef.doc(data.id);
 
       const doc = await documentRef.get();
@@ -259,8 +263,8 @@ const Information = ({ route }) => {
           Alert.alert('Booking Successful');
           setSelectedDates([]);
           setSelectedItems([]);
+          setSelectedDate(null);
 
-          // Refresh booking data after a successful booking
           const refreshedDoc = await documentRef.get();
           setDocuments(refreshedDoc.data());
         } else {
@@ -272,6 +276,7 @@ const Information = ({ route }) => {
     } catch (error) {
       console.error('Error fetching and updating booking data from Firestore:', error);
     }
+    setLoading(false)
   };
 
   const doTimeSlotsOverlap = (slotA, slotB) => {
@@ -394,66 +399,71 @@ const Information = ({ route }) => {
               resetModalState()
             }}
           >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalHeader}>
-                <TouchableOpacity onPress={() => { setModalVisible(false), resetModalState() }} style={styles.closeButton}>
-                  <Ionicons name={'arrow-back-circle-outline'} size={25} color={COLORS.white} />
-                </TouchableOpacity>
-                <View style={styles.modalHeaderTextContainer}>
-                  <Text style={styles.modalHeaderText}>Booking Information</Text>
-                </View>
-              </View>
-              <ScrollView>
-                <View style={styles.inner}>
-                  <Text style={styles.selectText}>Select Date</Text>
-                  <Calendar
-                    onDayPress={onDayPress}
-                    minDate={minDate}
-                    disableAllTouchEventsForDisabledDays={true}
-                    markedDates={selectedDate ? { [selectedDate]: { selected: true } } : {}}
-                  />
-                  <Text style={styles.selectText}>Select your Time Slots</Text>
-                  <FlatList
-                    data={timeSlots}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={renderItem}
-                  />
-                  <TouchableOpacity onPress={bookRequest} style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Book</Text>
+            {!loading && (
+              <View style={styles.modalContainer}>
+                <View style={styles.modalHeader}>
+                  <TouchableOpacity onPress={() => { setModalVisible(false), resetModalState() }} style={styles.closeButton}>
+                    <Ionicons name={'arrow-back-circle-outline'} size={25} color={COLORS.white} />
                   </TouchableOpacity>
-
-                  <View style={{ flexDirection: 'row' }}>
-                    {Object.keys(selectedDates).length > 0 && (
-                      <View style={styles.table}>
-                        <View style={styles.tableHeading}>
-                          <Text>Selected Dates:</Text>
-                        </View>
-                        {Object.keys(selectedDates).map((date) => (
-                          <Text style={styles.rows} key={date}>
-                            {moment(date).format('YYYY-MM-DD')}
-                          </Text>
-                        ))}
-                      </View>
-                    )}
-                    {selectedItems.length > 0 && (
-                      <View style={styles.table}>
-                        <View style={styles.tableHeading}>
-                          <Text>Time:</Text>
-                        </View>
-                        {selectedItems.map((time) => (
-                          <Text style={styles.rows} key={time.start}>
-                            {time.start} - {time.end}
-                          </Text>
-                        ))}
-                      </View>
-                    )}
-
+                  <View style={styles.modalHeaderTextContainer}>
+                    <Text style={styles.modalHeaderText}>Booking Information</Text>
                   </View>
                 </View>
-              </ScrollView>
-            </View>
+                <ScrollView>
+                  <View style={styles.inner}>
+                    <Text style={styles.selectText}>Select Date</Text>
+                    <Calendar
+                      onDayPress={onDayPress}
+                      minDate={minDate}
+                      disableAllTouchEventsForDisabledDays={true}
+                      markedDates={selectedDate ? { [selectedDate]: { selected: true } } : {}}
+                    />
+                    <Text style={styles.selectText}>Select your Time Slots</Text>
+                    <FlatList
+                      data={timeSlots}
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      keyExtractor={(item, index) => index.toString()}
+                      renderItem={renderItem}
+                    />
+                    <TouchableOpacity onPress={bookRequest} style={styles.buttonContainer}>
+                      <Text style={styles.buttonText}>Book</Text>
+                    </TouchableOpacity>
+
+                    <View style={{ flexDirection: 'row' }}>
+                      {Object.keys(selectedDates).length > 0 && (
+                        <View style={styles.table}>
+                          <View style={styles.tableHeading}>
+                            <Text>Selected Dates:</Text>
+                          </View>
+                          {Object.keys(selectedDates).map((date) => (
+                            <Text style={styles.rows} key={date}>
+                              {moment(date).format('YYYY-MM-DD')}
+                            </Text>
+                          ))}
+                        </View>
+                      )}
+                      {selectedItems.length > 0 && (
+                        <View style={styles.table}>
+                          <View style={styles.tableHeading}>
+                            <Text>Time:</Text>
+                          </View>
+                          {selectedItems.map((time) => (
+                            <Text style={styles.rows} key={time.start}>
+                              {time.start} - {time.end}
+                            </Text>
+                          ))}
+                        </View>
+                      )}
+
+                    </View>
+                  </View>
+                </ScrollView>
+              </View>
+            )}
+            {loading && (
+              <Loading />
+            )}
           </Modal>
         </View>
       </View>
