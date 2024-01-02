@@ -12,19 +12,21 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 
 const CustomHeader = ({ title, navigation }) => {
     const [isVisible, setIsVisible] = useState(false)
-    const [chatvisibile, setChatvisibile] = useState(false)
+    const [chatvisible, setChatvisible] = useState(false)
+    const [bookingvisible, setBookingvisible] = useState(false);
     const user = useAppSelector(state => state.profile.data);
     useEffect(() => {
         checkvisibility();
         checkUser();
+        checkadmin();
 
     }, [user]);
 
     const checkvisibility = () => {
         if (user.loginType === 'Parent' || user.loginType === 'Teacher') {
-            setChatvisibile(true);
+            setChatvisible(true);
         } else {
-            setChatvisibile(false);
+            setChatvisible(false);
         }
     }
 
@@ -35,6 +37,14 @@ const CustomHeader = ({ title, navigation }) => {
             setIsVisible(false);
         }
     };
+
+    const checkadmin = () => {
+        if (user.loginType == 'Admin') {
+            setBookingvisible(true);
+        } else {
+            setBookingvisible(false);
+        }
+    }
 
     const renderHeader = () => {
         if (title === 'Home') {
@@ -48,7 +58,15 @@ const CustomHeader = ({ title, navigation }) => {
                     <Image source={require('../../assets/imgs/ves_logo_name.png')} style={{ height: responsiveHeight(4), width: responsiveWidth(40) }} />
                     <TouchableOpacity onPress={() => { navigation.navigate('Chat') }} style={styles.chaticon}>
                         {/* <Icon name="chat" size={26} color='rgb(145, 41, 40)' /> */}
-                        {chatvisibile ? (
+                        {bookingvisible ? (
+
+                            <Icon name="clipboard" size={26} color='rgb(145, 41, 40)' />
+                        ) :
+                            (
+                                null
+                            )
+                        }
+                        {chatvisible ? (
 
                             <Icon name="chat" size={26} color='rgb(145, 41, 40)' />
                         ) :

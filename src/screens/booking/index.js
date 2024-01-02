@@ -4,15 +4,16 @@ import {
     Text,
     FlatList,
     TouchableOpacity,
-    Image
+    Image,
 } from 'react-native';
 import styles from './booking.styles';
 import firestore from '@react-native-firebase/firestore';
 import { useAppSelector } from '../../../store/hook';
-import Icons from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 const Booking = ({ navigation }) => {
-
+    const user = useAppSelector(state => state.profile.data);
     const [documents, setDocuments] = useState([]);
 
     const getData = async () => {
@@ -42,9 +43,9 @@ const Booking = ({ navigation }) => {
             ]}
             onPress={() => navigation.navigate('Information', { data: item })}
         >
-            <Image style={styles.productImage} source={{ uri: item.images[0]}} />
+            <Image style={styles.productImage} source={{ uri: item.images[0] }} />
             <Text style={styles.productName}>{item.name}</Text>
-            
+
         </TouchableOpacity>
     );
 
@@ -52,7 +53,6 @@ const Booking = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.headingview}>
                 <Text style={styles.heading}>Venues</Text>
-                
             </View>
             <FlatList
                 data={documents}
@@ -61,9 +61,15 @@ const Booking = ({ navigation }) => {
                 numColumns={2}
                 contentContainerStyle={styles.productList}
             />
+            <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("Previous Bookings") }}>
+                <Text style={styles.buttonText}>{user.loginType == 'Admin'
+                    ? "View Bookings"
+                    : "View Your Bookings"}
+                </Text>
+                {/* <Icon name="pending_actions" size={30} color="white" /> */}
+            </TouchableOpacity>
         </View>
     );
 };
-
 
 export default Booking;

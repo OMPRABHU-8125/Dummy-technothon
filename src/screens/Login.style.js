@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: blue
     },
-
+    
     logo: {
         width: responsiveWidth(100),
         height: responsiveHeight(50),
