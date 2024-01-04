@@ -23,16 +23,16 @@ const Venue = ({ navigation }) => {
         multiple: true,
         mediaType: 'photo',
         minFiles: 2,
-        maxFiles: 6
+        maxFiles: 6,
       });
 
 
       console.log('Selected images:', selectedImages);
       setImages(selectedImages);
       setSelectedImages(selectedImages);
-      uploadImagesToFirebase(selectedImages);
       setTimeout(() => {
         setIsLoading(true);
+        uploadImagesToFirebase(selectedImages);
       }, 1000);
     } catch (error) {
       console.error('Error picking images:', error);
@@ -70,12 +70,14 @@ const Venue = ({ navigation }) => {
       setImageUrls([...imageUrls, ...uploadedUrls]);
       setIsImagePicking(false);
       setIsLoading(false);
-      if (!isLoading) {
-        alert("Images uploaded successfully!");
-      }
+  
+        Alert.alert("Images uploaded successfully!");
+      
     } catch (error) {
       console.error('Error uploading images:', error);
       setIsImagePicking(false);
+    }finally{
+      setIsLoading(false);
     }
   };
 
@@ -96,7 +98,7 @@ const Venue = ({ navigation }) => {
       };
 
       if (selectedImages.length === 0) {
-        alert('Please select at least one image before submitting.');
+        Alert.alert('Please select at least one image before submitting.');
         return;
       }
 
@@ -108,8 +110,9 @@ const Venue = ({ navigation }) => {
           {
             text: 'OK',
           }, {
-            text: 'Next',
-            onPress: () => navigation.navigate('Booking'),
+            // text: 'Next',
+            // onPress: () => navigation.navigate('Booking'),
+            //uncomment this line when it is useful
           }
         ],
         { cancelable: false }

@@ -51,7 +51,7 @@ import WelcomeUser from './WelcomeUser';
 import Booking from './booking';
 import Information from './booking/Information';
 import Previous from './booking/Previous';
-import Venue from './Admin/venues/Venue/Venue';
+import Venue from './Admin/Venue';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
