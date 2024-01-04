@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { white, shadowcolor, titletext, desctext, black } from '../../../../utils/color';
+import { white, shadowcolor, titletext, desctext, black } from '../../../utils/color';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 const styles = StyleSheet.create({
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black overlay
         justifyContent: 'center',
         alignItems: 'center',
-      },
-      loaderContainer: {
+    },
+    loaderContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-      },
+    },
     button: {
         backgroundColor: 'rgb(145,41,40)',
         paddingVertical: 10,
