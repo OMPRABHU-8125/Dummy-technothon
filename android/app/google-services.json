@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "983810721651",
+    "firebase_url": "https://vesapp-e6a7d-default-rtdb.firebaseio.com",
     "project_id": "vesapp-e6a7d",
     "storage_bucket": "vesapp-e6a7d.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "983810721651-cgqkil0o17i1ba151m5g6ct1s8ct880q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ves_app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
         {
           "client_id": "983810721651-o4qh8brda8kiakg0utgo62ji5vurdo1f.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +38,13 @@
             {
               "client_id": "983810721651-o4qh8brda8kiakg0utgo62ji5vurdo1f.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "983810721651-ddd0qd83g9u18rra4lb85gqtu2lu0a8o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.VES-App"
+              }
             }
           ]
         }

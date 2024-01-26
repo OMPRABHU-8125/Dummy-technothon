@@ -1,203 +1,222 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
+
 import {
-    View,
-    Text,
-    Button,
-    FlatList,
-    StyleSheet,
-    Alert,
-    ImageBackground,
-    TouchableOpacity
+  View,
+  Text,
+  SectionList,
+  Alert,
+  ImageBackground,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Touchable,
 } from 'react-native';
-import { useAppSelector } from '../store/hook';
+import { useAppSelector } from '../../store/hook';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './Home.styles';
+import { red, white, black, gray, maroon } from '../utils/color';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import firestore from '@react-native-firebase/firestore';
+// import messaging from '@react-native-firebase/messaging';
+import PushNotification from 'react-native-push-notification';
+import { request, PERMISSIONS } from '@react-native-permissions/permissions';
+
+const Card = ({ title }) => {
+  return (
+    <View style={styles.outercard}>
+      <View style={styles.card1}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </View>
+  );
+};
 
 const Home = ({ navigation }) => {
+  const user = useAppSelector(state => state.profile.data);
+  const data = useAppSelector(state => state.profile.modules);
+  const [eventName, setEventName] = useState('');
+  const [eventDesc, setEventDesc] = useState('');
+  const [eventDetail, setEventDetail] = useState('');
 
-    const user = useAppSelector(state => state.profile.data);
-    const [apiData, setData] = useState([]);
+  useEffect(() => {
+    getEvent();
+  }, []);
 
-
-    useEffect(() => {
-        console.log(user)
-    }, []);
-
-    // const getData = () => {
-    //     fetch('https://myjsons.com/v/39e41248')
-    //         .then(data => data.json())
-    //         .then(response => {
-    //             setData(response)
-    //         })
-    //         .catch(error => {
-    //             Alert.alert("Warning")
-    //         })
-    // }
+  const renderCard = ({ item }) => {
+    const navigateToScreen = () => {
+      switch (item.title) {
+        case 'Attendance':
+          if (user.loginType === 'Teacher') {
+            navigation.navigate('Attendance');
+          } else if (user.loginType === 'Student') {
+            navigation.navigate('StudentAttendance');
+          }
+          break;
+        case 'Events Update':
+          navigation.navigate('EventUpdate');
+          break;
+        case 'About Us':
+          navigation.navigate('AboutUs');
+          break;
+        case 'Enquiry Management':
+          navigation.navigate('Queries/Feedback');
+          break;
+        case 'Faculty Load':
+          navigation.navigate('Facultyload');
+          break;
+        case 'Stationary Supply Hub':
+          navigation.navigate('Stationary');
+          break;
+        case 'Alumni and Mentorship':
+          navigation.navigate('Alumni');
+          break;
+        case 'Fees':
+          navigation.navigate('Fees');
+          break;
+        case 'Holiday Calender':
+          navigation.navigate('Calendar');
+          break;
+        case 'FAQs':
+          navigation.navigate('FAQ');
+          break;
+        case 'Fitness And Health':
+          navigation.navigate('FitnessAndHealth');
+          break;
+        case 'Digital Academy':
+          navigation.navigate('DigitalAcademy');
+          break;
+        case 'Photo Gallery':
+          navigation.navigate('PhotoGallery');
+          break;
+        case 'Placement':
+          navigation.navigate('Placement');
+          break;
+        case 'Blog':
+          navigation.navigate('Blog');
+          break;
+        case 'Chat':
+          navigation.navigate('Chat');
+          break;
+        case 'Exam Schedule':
+          navigation.navigate('Exam');
+          break;
+        case 'Counselling':
+          navigation.navigate('Counselling');
+          break;
+        case 'Booking':
+          navigation.navigate('Booking');
+          break;
+        case 'Venue':
+          navigation.navigate('Venue');
+          break;
+          case 'Campus Contact':
+            navigation.navigate('Campus Contact')
+        default:
+          break;
+      }
+    };
 
     return (
-        <View style={styles.body}>
-            <ImageBackground
-                source={require("../imgs/campus.png")}
-                style={styles.image}
-            >
-                <Text style={styles.heading}>
-                    Welcome {user.firstName}
-                </Text>
+      <TouchableOpacity onPress={navigateToScreen}>
+        <Card title={item.title} />
+      </TouchableOpacity>
+    );
+  };
 
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        navigation.navigate('Login')
-                    }}
-                >
-                    <Text style={styles.smallText}>Logout</Text>
-                </TouchableOpacity>
-            </ImageBackground>
-            <View style={styles.body}>
-                <View style={styles.main}>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Name</Text>
-                        <Text style={styles.description}>{user.firstName} {user.lastName}</Text>
-                    </View>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Email</Text>
-                        <Text style={styles.description}>{user.email}</Text>
-                    </View>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Contact No</Text>
-                        <Text style={styles.description}>{user.phoneNo}</Text>
-                    </View>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>Gender</Text>
-                        <Text style={styles.description}>{user.gender}</Text>
-                    </View>
+  const getEvent = async () => {
+    const collectionRef = firestore().collection('EventUpdate');
+    const querySnapshot = await collectionRef.orderBy('Date', 'desc').get();
+    const fetchedEventDesc = querySnapshot.docs.map(doc => doc.data().Desc);
+    const fetchedEventTitle = querySnapshot.docs.map(doc => doc.data().Title);
+    const fetchedEventDetail = querySnapshot.docs.map(doc => doc.data().Detail);
+    setEventDetail(fetchedEventDetail[0]);
+    setEventName(fetchedEventTitle[0]);
+    setEventDesc(fetchedEventDesc[0]);
+  };
 
-
-                </View>
-            </View>
+  return (
+    <View style={{ backgroundColor: '#F4F4F4' }}>
+      <View style={styles.heading}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: responsiveHeight(1),
+          }}>
+          <Image
+            source={require('../assets/imgs/user_profile.png')}
+            style={{ height: responsiveHeight(7), width: responsiveWidth(14.5) }}
+          />
+        </TouchableOpacity>
+        <View style={{ justifyContent: 'center' }}>
+          <Text style={styles.greeting}>Hello {user.firstName},</Text>
+          <Text style={styles.mail}>{user.email}</Text>
         </View>
-    )
-}
+      </View>
+      <View
+        style={{
+          height: responsiveHeight(25),
+          margin: responsiveWidth(2),
+          borderRadius: 20,
+          backgroundColor: maroon,
+        }}>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: white,
+            height: responsiveHeight(23),
+            borderRadius: 20,
+            margin: 5,
+          }}>
+          <View
+            style={{ margin: responsiveWidth(2), height: responsiveHeight(21) }}>
+            <Text style={{ fontSize: 16, fontWeight: 900, color: white }}>
+              Newsfeed/Upcoming Events
+            </Text>
+            <View style={{ borderWidth: 1, borderColor: white }}></View>
+            <Text></Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('EventUpdate');
+              }}>
+              <Text style={{ color: white, fontSize: 18 }}>{eventName}</Text>
+              <Text
+                style={{
+                  textDecorationLine: 'underline',
+                  color: white,
+                  fontSize: 12,
+                  textAlign: 'justify',
+                }}>
+                {eventDesc}
+              </Text>
+              <Text
+                style={{
+                  textDecorationLine: 'underline',
+                  color: white,
+                  fontSize: 12,
+                  textAlign: 'justify',
+                }}>
+                {eventDetail}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
 
-const styles = StyleSheet.create({
-    body: {
-        flex: 1,
-        backgroundColor: '#dad7cd',
-    },
-
-    main: {
-        margin: 20
-    },
-
-    title: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        marginBottom: 8,
-        color: 'white'
-    },
-
-    description: {
-        fontSize: 18,
-        color: '#e9d8a6',
-    },
-
-    card: {
-        backgroundColor: '#344e41',
-        borderRadius: 8,
-        padding: 16,
-        marginBottom: 16,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-        elevation: 2,
-        width: '80%'
-    },
-
-    container: {
-        flexDirection: 'column',
-        flex: 1
-    },
-
-    smallText: {
-        color: 'white',
-        fontSize: 10,
-    },
-
-    image: {
-        width: 400,
-        height: 200,
-        resizeMode: 'stretch',
-        flexDirection: 'row'
-    },
-
-    inner: {
-        borderColor: 'black',
-        padding: 10,
-        margin: 20,
-        borderWidth: 1,
-        borderRadius: 10
-    },
-
-    logo: {
-        width: 100,
-        height: 100,
-        margin: 20
-    },
-
-    text: {
-        color: 'white',
-        fontSize: 20,
-        textAlign: 'center',
-        borderColor: 'black',
-    },
-
-    heading: {
-        color: '#700000',
-        fontSize: 33
-    },
-
-    input: {
-        width: 300,
-        borderWidth: 1,
-        borderColor: '#555',
-        backgroundColor: "#ffffff",
-        marginTop: 130,
-        marginBottom: 10,
-        textAlign: 'center',
-        fontSize: 20,
-        borderRadius: 10,
-        color: 'black'
-    },
-
-    input1: {
-        width: 300,
-        borderWidth: 1,
-        borderColor: '#555',
-        backgroundColor: "#ffffff",
-        marginTop: 10,
-        marginBottom: 10,
-        textAlign: 'center',
-        fontSize: 20,
-        borderRadius: 10,
-        color: 'black'
-    },
-
-    button: {
-        backgroundColor: 'red',
-        width: 55,
-        height: 30,
-        borderRadius: 5,
-        marginLeft: 27,
-        marginRight: 10,
-        paddingHorizontal: 10,
-        paddingTop: 5,
-        marginTop: 10
-    },
-
-    buttonText: {
-        color: '#F0F0F0'
-    }
-});
-
-
+      <SectionList
+        sections={data}
+        renderItem={renderCard}
+        keyExtractor={(item, index) => item + index}
+        contentContainerStyle={styles.contentContainer}
+      />
+    </View>
+  );
+};
 
 export default Home;
