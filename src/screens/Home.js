@@ -113,7 +113,11 @@ const Home = ({ navigation }) => {
           navigation.navigate('Venue');
           break;
           case 'Campus Contact':
-            navigation.navigate('Campus Contact')
+            navigation.navigate('Campus Contact');
+            break;
+          case 'Assignment Dashboard':
+            navigation.navigate('Assignment Dashboard')
+            break;
         default:
           break;
       }

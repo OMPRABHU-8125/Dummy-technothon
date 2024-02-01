@@ -54,6 +54,7 @@ import Previous from './booking/Previous';
 import Venue from './Admin/Venue';
 import Contact from './campusContact';
 import AddContact from './campusContact/addContact';
+import AssignmentDashboard from './assignmentDashboard';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -556,6 +557,16 @@ const App = () => {
               headerShown: true,
               header: () => (
                 <CustomHeader navigation={navigation} title="Add Contact" />
+              ),
+            })}
+          />
+          <stack.Screen
+            name="Assignment Dashboard"
+            component={AssignmentDashboard}
+            options={({ navigation }) => ({
+              headerShown: true,
+              header: () => (
+                <CustomHeader navigation={navigation} title="Assignment Dashboard" />
               ),
             })}
           />
