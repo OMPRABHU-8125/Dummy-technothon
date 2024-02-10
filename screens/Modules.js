@@ -59,6 +59,10 @@ const teachermodule = [
     {
         id: 7,
         title: "Booking",
+    },
+    {
+        id: 8,
+        title: "Assignment Dashboard",
     }
 ]
 
@@ -98,6 +102,10 @@ const studentmodule = [
     {
         id: 9,
         title: 'Fitness And Health',
+    },
+    {
+        id: 12,
+        title: 'Assignment Dashboard',
     },
 ]
 const parentmodule = [
